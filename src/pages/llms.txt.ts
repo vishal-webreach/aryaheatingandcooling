@@ -1,13 +1,14 @@
 import type { APIRoute } from 'astro';
 import { site } from '../data/site';
-import { getOrdered } from '../lib/content';
+import { getFaqs, getOrdered, getServiceGroups } from '../lib/content';
 
 // Plain-text summary of the business for AI assistants and crawlers.
 export const GET: APIRoute = async ({ site: siteUrl }) => {
-  const [services, areas, faqs] = await Promise.all([
-    getOrdered('services'),
+  const [serviceGroups, areas, faqs] = await Promise.all([
+    getServiceGroups(),
     getOrdered('areas'),
-    getOrdered('faqs'),
+    // Only the general questions; page-specific FAQs stay on their own pages.
+    getFaqs('home'),
   ]);
 
   const home = new URL('/', siteUrl).href;
@@ -20,6 +21,8 @@ export const GET: APIRoute = async ({ site: siteUrl }) => {
     '## Pages',
     '',
     `- [Home](${home}): Services, service areas, FAQs and free quote request`,
+    `- [About](${new URL('/about/', siteUrl).href}): Company background, what to expect and how the process works`,
+    `- [Services](${new URL('/services/', siteUrl).href}): Residential HVAC, commercial HVAC and HVAC contracts`,
     `- [Sitemap](${new URL('/sitemap-index.xml', siteUrl).href}): All pages on the site`,
     '',
     '## Contact',
@@ -32,8 +35,14 @@ export const GET: APIRoute = async ({ site: siteUrl }) => {
     '',
     '## Services',
     '',
-    ...services.map((service) => `- ${service.data.title}: ${service.data.summary}`),
-    '',
+    ...serviceGroups.flatMap(({ category, services }) => [
+      `### ${category.data.title}`,
+      '',
+      category.data.summary,
+      '',
+      ...services.map((service) => `- ${service.data.title}: ${service.data.summary}`),
+      '',
+    ]),
     '## Service areas',
     '',
     `${areas.map((area) => area.data.name).join(', ')} (all in Virginia).`,

@@ -1,17 +1,19 @@
 ---
+import { site } from '../../data/site';
 import { getOrdered } from '../../lib/content';
 import Button from '../ui/Button.astro';
 import Icon from '../ui/Icon.astro';
 import SectionHeading from '../ui/SectionHeading.astro';
 
-// PLACEHOLDER REVIEWS: replace src/content/reviews.json with real Google reviews before launch.
-const reviews = await getOrdered('reviews');
+// Real Google reviews, copied from the review widget on the previous website.
+// They are ordered newest first; only the latest three are shown.
+const reviews = (await getOrdered('reviews')).slice(0, 3);
 ---
 
 <section class="bg-soft py-17 md:py-24" id="reviews">
   <div class="wrap">
     <SectionHeading eyebrow="Testimonials" title="What Our Customers Say About Us">
-      <Button href="/review/" variant="dark">Review Us</Button>
+      <Button href={site.reviewHref} external variant="dark">Review Us</Button>
     </SectionHeading>
 
     <div class="grid gap-5.5 md:grid-cols-3">
@@ -25,13 +27,44 @@ const reviews = await getOrdered('reviews');
             >
               {'★'.repeat(review.data.rating)}
             </div>
-            <p class="mb-3.5 flex-1 text-ink">{review.data.text}</p>
+            <div class="mb-3.5 flex-1" data-review>
+              <p class="line-clamp-4 text-ink data-expanded:line-clamp-none" data-review-text>
+                {review.data.text}
+              </p>
+              <button
+                type="button"
+                data-review-toggle
+                aria-expanded="false"
+                hidden
+                class="mt-1.5 cursor-pointer text-[15px] font-bold text-brand hover:underline"
+              >
+                More
+              </button>
+            </div>
             <div class="flex items-center gap-3 border-t border-line pt-4.5 text-sm leading-[1.35]">
               <Icon name="user" class="size-10.5 rounded-full bg-brand-soft p-2.75 text-brand" />
-              <span>
+              <span class="flex-1">
                 <strong class="block text-[15px] text-ink">{review.data.author}</strong>
-                {review.data.location}
+                Google review
               </span>
+              <svg viewBox="0 0 48 48" class="size-6 flex-none" role="img" aria-label="Google">
+                <path
+                  fill="#EA4335"
+                  d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"
+                ></path>
+                <path
+                  fill="#4285F4"
+                  d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"
+                ></path>
+                <path
+                  fill="#FBBC05"
+                  d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"
+                ></path>
+                <path
+                  fill="#34A853"
+                  d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"
+                ></path>
+              </svg>
             </div>
           </div>
         ))
@@ -39,3 +72,7 @@ const reviews = await getOrdered('reviews');
     </div>
   </div>
 </section>
+
+<script>
+  import '../../scripts/reviews.ts';
+</script>

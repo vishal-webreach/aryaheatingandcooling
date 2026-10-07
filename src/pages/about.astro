@@ -1,0 +1,60 @@
+---
+import aboutImage from '../assets/images/about/about.png';
+import Contact from '../components/sections/Contact.astro';
+import CtaBanner from '../components/sections/CtaBanner.astro';
+import Faq from '../components/sections/Faq.astro';
+import PageHero from '../components/sections/PageHero.astro';
+import Process from '../components/sections/Process.astro';
+import Reviews from '../components/sections/Reviews.astro';
+import ServiceAreas from '../components/sections/ServiceAreas.astro';
+import Stats from '../components/sections/Stats.astro';
+import Story from '../components/sections/Story.astro';
+import WhyChooseUs from '../components/sections/WhyChooseUs.astro';
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data/site';
+import { getFaqs } from '../lib/content';
+import { breadcrumbSchema, faqSchema } from '../lib/seo';
+
+const title = `About Us | ${site.name}`;
+const description =
+  'Learn about ARYA Heating & Cooling: Master Licensed HVAC technicians with over 10 years in business, serving Ashburn and Northern Virginia 24/7.';
+
+const trail = [
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/about/' },
+];
+
+const faqs = await getFaqs('about');
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+const schema = [
+  breadcrumbSchema(
+    trail.map((item) => ({ name: item.name, url: new URL(item.href, Astro.site).href })),
+    pageUrl
+  ),
+  faqSchema(faqs, pageUrl),
+];
+---
+
+<Layout
+  title={title}
+  description={description}
+  image={aboutImage}
+  imageAlt="ARYA Heating & Cooling technician installing an air conditioning unit"
+  pageType="AboutPage"
+  schema={schema}
+>
+  <PageHero
+    title="About ARYA Heating & Cooling"
+    description="Master Licensed HVAC experts serving Ashburn and Northern Virginia, 24 hours a day, 7 days a week."
+    trail={trail}
+  />
+  <Stats />
+  <Story />
+  <WhyChooseUs />
+  <Process />
+  <Reviews />
+  <ServiceAreas />
+  <Faq faqs={faqs} />
+  <Contact />
+  <CtaBanner />
+</Layout>

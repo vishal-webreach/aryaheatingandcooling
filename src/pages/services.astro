@@ -1,0 +1,44 @@
+---
+import Contact from '../components/sections/Contact.astro';
+import CtaBanner from '../components/sections/CtaBanner.astro';
+import Faq from '../components/sections/Faq.astro';
+import PageHero from '../components/sections/PageHero.astro';
+import Process from '../components/sections/Process.astro';
+import ServiceGroups from '../components/sections/ServiceGroups.astro';
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data/site';
+import { getFaqs } from '../lib/content';
+import { breadcrumbSchema, faqSchema } from '../lib/seo';
+
+const title = `HVAC Services in Ashburn, VA | ${site.name}`;
+const description =
+  'Residential HVAC, commercial HVAC and HVAC contracts from Master Licensed technicians in Ashburn and Northern Virginia. Open 24/7 with free estimates.';
+
+const trail = [
+  { name: 'Home', href: '/' },
+  { name: 'Services', href: '/services/' },
+];
+
+const faqs = await getFaqs('services');
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+const schema = [
+  breadcrumbSchema(
+    trail.map((item) => ({ name: item.name, url: new URL(item.href, Astro.site).href })),
+    pageUrl
+  ),
+  faqSchema(faqs, pageUrl),
+];
+---
+
+<Layout title={title} description={description} pageType="CollectionPage" schema={schema}>
+  <PageHero
+    title="Our Heating and Cooling Services"
+    description="Residential and commercial HVAC service, plus contracts that keep every system maintained."
+    trail={trail}
+  />
+  <ServiceGroups />
+  <Process />
+  <Faq faqs={faqs} />
+  <Contact />
+  <CtaBanner />
+</Layout>

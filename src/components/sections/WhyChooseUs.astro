@@ -1,0 +1,50 @@
+---
+import type { IconName } from '../../data/site';
+import Icon from '../ui/Icon.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+
+const reasons: { icon: IconName; title: string; text: string }[] = [
+  {
+    icon: 'shield',
+    title: 'Master Licensed Technicians',
+    text: 'Your system is in the hands of Master Licensed technicians who focus on quality work.',
+  },
+  {
+    icon: 'clock',
+    title: 'Open 24/7',
+    text: "Heating and cooling problems don't keep office hours. We're available 24 hours a day, 7 days a week.",
+  },
+  {
+    icon: 'check',
+    title: 'All Major Brands',
+    text: 'We repair and maintain every type of unit and all major brands.',
+  },
+  {
+    icon: 'user',
+    title: 'Free Estimates',
+    text: 'We visit your property and give you an in-person estimate with no obligation.',
+  },
+];
+---
+
+<section class="bg-soft py-17 md:py-24" id="why-us">
+  <div class="wrap">
+    <SectionHeading
+      eyebrow="Why Choose Us"
+      title="What You Can Expect From ARYA"
+      description="The same standards on every job, whether it's an emergency call or a routine visit."
+    />
+
+    <ul class="grid gap-5.5 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        reasons.map((reason) => (
+          <li class="rounded-card border border-line bg-white p-6">
+            <Icon name={reason.icon} class="mb-5 size-12 rounded-xl bg-brand-soft p-3 text-brand" />
+            <h3 class="mb-3">{reason.title}</h3>
+            <p class="text-[15px]">{reason.text}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

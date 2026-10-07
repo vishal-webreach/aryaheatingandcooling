@@ -37,6 +37,8 @@ export const site = {
   },
   // Point this at the CRM / form handler
   formAction: '#',
+  // Google "write a review" page for the business
+  reviewHref: 'https://g.page/r/CehQZc4BOKckEAE/review',
   termsHref: '/terms/',
   privacyHref: '/privacy-policy-682915/',
 } as const;

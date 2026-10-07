@@ -1,11 +1,16 @@
 ---
 import { site } from '../../data/site';
-import { getOrdered } from '../../lib/content';
+import type { CollectionEntry } from 'astro:content';
 import Button from '../ui/Button.astro';
 import Eyebrow from '../ui/Eyebrow.astro';
 import Icon from '../ui/Icon.astro';
 
-const faqs = await getOrdered('faqs');
+interface Props {
+  /** The page's questions; pass the same list to `faqSchema`. */
+  faqs: CollectionEntry<'faqs'>[];
+}
+
+const { faqs } = Astro.props;
 ---
 
 <section class="py-17 md:py-24" id="faq">

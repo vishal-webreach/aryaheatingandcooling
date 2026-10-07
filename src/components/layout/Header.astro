@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import logo from '../../assets/images/brand/logo.png';
 import { site } from '../../data/site';
-import { getOrdered } from '../../lib/content';
+import { getOrdered, getServiceGroups } from '../../lib/content';
 import Button from '../ui/Button.astro';
 import Icon from '../ui/Icon.astro';
 import SocialLinks from '../ui/SocialLinks.astro';
@@ -11,27 +11,38 @@ interface NavLink {
   label: string;
   href: string;
   /** Sub-links shown in a dropdown. */
-  children?: { label: string; href: string }[];
+  children?: SubLink[];
+  /** Sub-links shown in a dropdown, one headed column per group. */
+  groups?: { label: string; children: SubLink[] }[];
   toggleLabel?: string;
   /** Lays the dropdown out in columns. */
   columns?: boolean;
 }
 
-const services = await getOrdered('services');
+interface SubLink {
+  label: string;
+  href: string;
+}
+
+const serviceGroups = await getServiceGroups();
 const areas = await getOrdered('areas');
 
 const navLinks: NavLink[] = [
   { label: 'Home', href: '/' },
-  { label: 'About', href: '#about' },
+  { label: 'About', href: '/about/' },
   {
     label: 'Services',
-    href: '#services',
+    href: '/services/',
     toggleLabel: 'Show services',
-    children: services.map((service) => ({ label: service.data.title, href: `/${service.id}/` })),
+    // The main services have no page of their own, so they are headings, not links.
+    groups: serviceGroups.map(({ category, services }) => ({
+      label: category.data.title,
+      children: services.map((service) => ({ label: service.data.title, href: `/${service.id}/` })),
+    })),
   },
   {
     label: 'Service Areas',
-    href: '#areas',
+    href: '/#areas',
     toggleLabel: 'Show service areas',
     columns: true,
     children: areas.map((area) => ({ label: area.data.name, href: `/${area.id}/` })),
@@ -40,10 +51,21 @@ const navLinks: NavLink[] = [
   { label: 'Contact', href: '#contact' },
 ];
 
+const { pathname } = Astro.url;
+const isCurrent = (href: string) => href === pathname;
+/** True when the link, or any link in its dropdown, is the current page. */
+const isActive = (link: NavLink) =>
+  isCurrent(link.href) ||
+  (link.children ?? []).some((child) => isCurrent(child.href)) ||
+  (link.groups ?? []).some((group) => group.children.some((child) => isCurrent(child.href)));
+const current = (href: string) => (isCurrent(href) ? 'page' : undefined);
+
 const linkClass =
   'rounded-xl px-3.5 py-3 text-[15px] font-semibold text-ink transition-colors duration-200 hover:bg-brand-soft hover:text-brand md:rounded-full md:px-2.5 md:py-2 md:whitespace-nowrap lg:px-3.5';
 const subLinkClass =
-  'block rounded-[10px] px-3 py-2.25 text-[14.5px] font-medium text-ink transition-colors duration-200 hover:bg-brand-soft hover:text-brand md:px-2.5 md:py-2 md:text-[15px] md:font-semibold md:whitespace-nowrap lg:px-3.5';
+  'block rounded-[10px] px-3 py-2.25 text-[14.5px] font-medium text-ink transition-colors duration-200 hover:bg-brand-soft hover:text-brand aria-[current=page]:bg-brand-soft aria-[current=page]:text-brand md:px-2.5 md:py-2 md:text-[15px] md:font-semibold md:whitespace-nowrap lg:px-3.5';
+const groupLabelClass =
+  'block px-3 py-2.25 text-[14.5px] font-extrabold tracking-[0.04em] text-brand uppercase md:px-2.5 md:py-2 md:text-[15px] md:whitespace-nowrap lg:px-3.5';
 const contactClass = 'group/contact flex items-center gap-2.5 p-1 text-[13px] font-semibold text-ink wrap-anywhere';
 const contactIconClass =
   'grid size-7 flex-none place-items-center rounded-full bg-soft text-ink transition-colors duration-200 group-hover/contact:bg-accent group-hover/contact:text-white';
@@ -101,12 +123,20 @@ const contactIconClass =
 
       {
         navLinks.map((link) =>
-          link.children ? (
+          link.children || link.groups ? (
             <div
               data-nav-item
-              class="group/item relative flex items-center rounded-xl transition-colors duration-200 max-md:flex-wrap md:rounded-full md:hover:bg-brand-soft"
+              data-active={isActive(link) || undefined}
+              class="group/item relative flex items-center rounded-xl transition-colors duration-200 max-md:flex-wrap md:rounded-full md:hover:bg-brand-soft md:data-active:bg-brand-soft"
             >
-              <a href={link.href} class:list={[linkClass, 'max-md:flex-1 md:group-hover/item:text-brand']}>
+              <a
+                href={link.href}
+                aria-current={current(link.href)}
+                class:list={[
+                  linkClass,
+                  'group-data-active/item:text-brand max-md:flex-1 max-md:group-data-active/item:bg-brand-soft md:group-hover/item:text-brand',
+                ]}
+              >
                 {link.label}
               </a>
               <button
@@ -114,7 +144,7 @@ const contactIconClass =
                 data-nav-toggle
                 aria-expanded="false"
                 aria-label={link.toggleLabel}
-                class="grid cursor-pointer place-items-center text-ink max-md:size-11 max-md:rounded-xl max-md:bg-soft md:mr-2 md:-ml-1.5 md:h-8.5 md:w-6 md:group-hover/item:text-brand lg:-ml-2.5"
+                class="grid cursor-pointer place-items-center text-ink max-md:size-11 max-md:rounded-xl max-md:bg-soft md:mr-2 md:-ml-1.5 md:h-8.5 md:w-6 md:group-hover/item:text-brand md:group-data-active/item:text-brand lg:-ml-2.5"
               >
                 <Icon
                   name="chevron"
@@ -128,18 +158,31 @@ const contactIconClass =
                   'md:invisible md:absolute md:top-full md:z-5 md:translate-y-2 md:pt-3.5 md:opacity-0 md:transition-[opacity,translate,visibility] md:duration-200',
                   'md:group-hover/item:visible md:group-hover/item:translate-y-0 md:group-hover/item:opacity-100',
                   'md:group-data-open/item:visible md:group-data-open/item:translate-y-0 md:group-data-open/item:opacity-100',
-                  link.columns ? 'md:left-1/2 md:-translate-x-1/2' : 'md:left-0',
+                  link.columns || link.groups ? 'md:left-1/2 md:-translate-x-1/2' : 'md:left-0',
+                  link.groups && 'md:w-max',
                 ]}
               >
                 <div
                   class:list={[
                     'max-md:invisible max-md:ml-3.5 max-md:min-h-0 max-md:overflow-hidden max-md:border-l-2 max-md:border-line max-md:pl-2 max-md:transition-[visibility] max-md:duration-300 max-md:group-data-open/item:visible',
                     'md:grid md:rounded-2xl md:border md:border-line md:bg-white md:p-2 md:shadow-card',
-                    link.columns ? 'max-md:grid max-md:grid-cols-2 md:min-w-120 md:grid-cols-3' : 'md:min-w-57.5',
+                    link.columns && 'max-md:grid max-md:grid-cols-2 md:min-w-120 md:grid-cols-3',
+                    link.groups && 'md:grid-cols-[repeat(3,max-content)] md:gap-x-2',
+                    !link.columns && !link.groups && 'md:min-w-57.5',
                   ]}
                 >
-                  {link.children.map((child) => (
-                    <a href={child.href} class={subLinkClass}>
+                  {link.groups?.map((group) => (
+                    <div class="max-md:pb-1.5">
+                      <span class={groupLabelClass}>{group.label}</span>
+                      {group.children.map((child) => (
+                        <a href={child.href} aria-current={current(child.href)} class={subLinkClass}>
+                          {child.label}
+                        </a>
+                      ))}
+                    </div>
+                  ))}
+                  {link.children?.map((child) => (
+                    <a href={child.href} aria-current={current(child.href)} class={subLinkClass}>
                       {child.label}
                     </a>
                   ))}
@@ -147,7 +190,11 @@ const contactIconClass =
               </div>
             </div>
           ) : (
-            <a href={link.href} class={linkClass}>
+            <a
+              href={link.href}
+              aria-current={current(link.href)}
+              class:list={[linkClass, 'aria-[current=page]:bg-brand-soft aria-[current=page]:text-brand']}
+            >
               {link.label}
             </a>
           )

@@ -1,0 +1,42 @@
+---
+import { Image } from 'astro:assets';
+import storyImage from '../../assets/images/about/story.png';
+import Button from '../ui/Button.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import Icon from '../ui/Icon.astro';
+---
+
+<section class="py-17 md:py-24" id="story">
+  <div class="wrap grid items-center gap-10 md:grid-cols-2 md:gap-18">
+    <div>
+      <Eyebrow>Our Story</Eyebrow>
+      <h2 class="mb-3.5">Built on Experience, Trust and Hands-On Service</h2>
+      <p class="mb-3.5">
+        With over 10 years in business, ARYA Heating &amp; Cooling is built on experience, trust, and hands-on service.
+        Our Master Licensed Technicians focus on quality work and reliable emergency HVAC to keep your home comfortable
+        year-round.
+      </p>
+      <p class="mb-7.5">
+        From urgent repairs to routine maintenance, we look after homes and businesses in Ashburn and across Northern
+        Virginia. More than 10,000 completed jobs later, we still treat every call the same way: show up, find the real
+        problem and fix it properly.
+      </p>
+      <Button href="#contact">Get Free Quote <Icon name="arrow" /></Button>
+    </div>
+
+    <div class="relative pr-7 pb-7">
+      <div
+        class="absolute right-0 bottom-0 h-[70%] w-[62%] rounded-3xl bg-linear-135 from-brand to-navy-light"
+        aria-hidden="true"
+      >
+      </div>
+      <Image
+        src={storyImage}
+        alt="Heating equipment installed by ARYA Heating & Cooling"
+        widths={[320, storyImage.width]}
+        sizes="(min-width: 901px) 520px, 100vw"
+        class="relative aspect-[4/3.4] w-full rounded-3xl object-cover"
+      />
+    </div>
+  </div>
+</section>

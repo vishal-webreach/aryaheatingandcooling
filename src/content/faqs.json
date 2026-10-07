@@ -1,26 +1,100 @@
 [
   {
     "id": "services-offered",
+    "page": "home",
     "question": "What types of services do you offer?",
     "answer": "ARYA Heating & Cooling offers reliable solutions like Emergency HVAC, AC Repair, and HVAC Maintenance. With over 10 years of experience, our licensed team delivers quality work you can count on.",
     "order": 1
   },
   {
     "id": "estimate-fee",
+    "page": "home",
     "question": "Is there a fee for a consultation or estimate?",
     "answer": "No. ARYA Heating & Cooling offers complimentary estimates to all prospective clients.",
     "order": 2
   },
   {
     "id": "what-sets-you-apart",
+    "page": "home",
     "question": "What sets you apart from other contractors in the area?",
     "answer": "We distinguish ourselves through meticulous attention to detail, a dedication to quality, and a personalized approach, with clear communication on every job.",
     "order": 3
   },
   {
     "id": "references",
+    "page": "home",
     "question": "Can you provide references from past clients?",
     "answer": "Absolutely. You can read reviews from our customers on our website, and we are happy to provide references on request.",
     "order": 4
+  },
+  {
+    "id": "about-years-in-business",
+    "page": "about",
+    "question": "How long has ARYA Heating & Cooling been in business?",
+    "answer": "ARYA Heating & Cooling has been in business for over 10 years. In that time we have completed more than 10,000 jobs across Northern Virginia.",
+    "order": 1
+  },
+  {
+    "id": "about-licensed",
+    "page": "about",
+    "question": "Are your technicians licensed?",
+    "answer": "Yes. Our technicians are Master Licensed and focus on quality work on every job.",
+    "order": 2
+  },
+  {
+    "id": "about-areas",
+    "page": "about",
+    "question": "Which areas do you serve?",
+    "answer": "We serve Ashburn and communities across Northern Virginia, including Leesburg, Sterling, Reston, Fairfax and Vienna.",
+    "order": 3
+  },
+  {
+    "id": "about-hours",
+    "page": "about",
+    "question": "Are you available outside normal business hours?",
+    "answer": "Yes. We are open 24 hours a day, 7 days a week, including for emergency heating and cooling service.",
+    "order": 4
+  },
+  {
+    "id": "about-brands",
+    "page": "about",
+    "question": "Which brands and systems do you work on?",
+    "answer": "We work on all major brands and every type of unit.",
+    "order": 5
+  },
+  {
+    "id": "services-what-we-offer",
+    "page": "services",
+    "question": "What HVAC services do you offer?",
+    "answer": "We offer residential HVAC, commercial HVAC and HVAC contracts. That includes emergency HVAC, AC repair, heating and cooling, commercial design build, commercial emergency service and HVAC maintenance.",
+    "order": 1
+  },
+  {
+    "id": "services-emergency",
+    "page": "services",
+    "question": "Do you offer emergency HVAC service?",
+    "answer": "Yes. We are available 24 hours a day, 7 days a week for urgent heating and cooling repairs, for both homes and commercial buildings.",
+    "order": 2
+  },
+  {
+    "id": "services-commercial",
+    "page": "services",
+    "question": "Do you work on commercial buildings as well as homes?",
+    "answer": "Yes. We handle residential and commercial HVAC, from repairs and maintenance to design build projects.",
+    "order": 3
+  },
+  {
+    "id": "services-brands",
+    "page": "services",
+    "question": "Can you service my brand of equipment?",
+    "answer": "We work on all major brands and every type of unit.",
+    "order": 4
+  },
+  {
+    "id": "services-quote",
+    "page": "services",
+    "question": "How do I get a quote for a service?",
+    "answer": "Complete the free quote form or call us at (703) 420-5038. We arrange a property visit at a time that works for you and give an in-person estimate at no charge.",
+    "order": 5
   }
 ]

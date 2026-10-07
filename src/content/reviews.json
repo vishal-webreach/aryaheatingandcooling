@@ -1,26 +1,50 @@
 [
   {
-    "id": "review-1",
-    "author": "Customer Name",
-    "location": "Ashburn, VA",
+    "id": "john-nasibi",
+    "author": "John Nasibi",
     "rating": 5,
-    "text": "[Sample text — replace with a real Google review.]",
+    "date": "2026-05-21",
+    "text": "Very professional, Excellent job.",
     "order": 1
   },
   {
-    "id": "review-2",
-    "author": "Customer Name",
-    "location": "Leesburg, VA",
+    "id": "manha-ahmed",
+    "author": "Manha Ahmed",
     "rating": 5,
-    "text": "[Sample text — replace with a real Google review.]",
+    "date": "2026-05-17",
+    "text": "ARYA Cooling & Heating exceeded all expectations! My AC randomly stopped working during a hot day, and within just two hours of my call, a technician was at my door. They quickly diagnosed the issue, replaced the capacitor and starter, and even cleaned the fan—everything was done efficiently and professionally. The tech was courteous, knowledgeable, and had everything running smoothly again in no time. Fast, reliable, and honest service—this is exactly the kind of company you want to have on speed dial. Highly recommend!",
     "order": 2
   },
   {
-    "id": "review-3",
-    "author": "Customer Name",
-    "location": "Sterling, VA",
+    "id": "anya-shaikh",
+    "author": "Anya Shaikh",
     "rating": 5,
-    "text": "[Sample text — replace with a real Google review.]",
+    "date": "2026-05-15",
+    "text": "Excellent Service! The technician arrived right on time and worked quickly and efficiently. Everything was done neatly, and he offered helpful advice about maintaining my unit and water heater. Very professional and friendly staff — I highly recommend their service.",
     "order": 3
+  },
+  {
+    "id": "hamnah-arshad",
+    "author": "Hamnah Arshad",
+    "rating": 5,
+    "date": "2026-05-15",
+    "text": "I highly recommend ARYA Heating & Cooling. They had the cheapest quote and also provided high quality work, they were very thorough with everything from the initial consultation through service completion and follow up. I am highly satisfied with the quality of work and value I received. Highly recommend.",
+    "order": 4
+  },
+  {
+    "id": "laney-voloshin",
+    "author": "Laney Voloshin",
+    "rating": 5,
+    "date": "2026-05-15",
+    "text": "Wonderful experience, Carlos troubleshooted the system and got it to full working order. This is after another company rewired my capacitor incorrectly during an inspection in a way that would eventually destroy my compressor after telling me I needed a whole new system for 20k. Honest and high integrity company.",
+    "order": 5
+  },
+  {
+    "id": "inayah-malik",
+    "author": "Inayah Malik",
+    "rating": 5,
+    "date": "2026-05-15",
+    "text": "Arya Cooling and Heating has been a lifesaver for me many years over now. I cannot say enough good things about this group who are timely, kind, and courteous. They have helped mitigate HVAC issues in both my condo and single-family home and are my go-to for any HVAC needs. I trust them wholeheartedly and would recommend them to anyone looking for a company to help service their home.",
+    "order": 6
   }
 ]

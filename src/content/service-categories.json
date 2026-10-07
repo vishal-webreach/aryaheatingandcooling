@@ -1,0 +1,26 @@
+[
+  {
+    "id": "residential-hvac",
+    "title": "Residential HVAC",
+    "summary": "Heating and cooling repair, replacement and emergency service to keep your home comfortable year-round.",
+    "image": "../assets/images/services/heating-cooling.png",
+    "imageAlt": "Residential HVAC service in Ashburn, VA",
+    "order": 1
+  },
+  {
+    "id": "commercial-hvac",
+    "title": "Commercial HVAC",
+    "summary": "Design, installation, maintenance and emergency service for offices, retail and other commercial buildings.",
+    "image": "../assets/images/services/hvac-maintenance.png",
+    "imageAlt": "Commercial HVAC service in Northern Virginia",
+    "order": 2
+  },
+  {
+    "id": "hvac-contracts",
+    "title": "HVAC Contracts",
+    "summary": "Ongoing service plans that keep your equipment maintained and put you first in line when something breaks.",
+    "image": "../assets/images/services/ac-repair.png",
+    "imageAlt": "HVAC service contract visit in Northern Virginia",
+    "order": 3
+  }
+]

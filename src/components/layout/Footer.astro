@@ -6,16 +6,16 @@ import { getOrdered } from '../../lib/content';
 import Icon from '../ui/Icon.astro';
 import SocialLinks from '../ui/SocialLinks.astro';
 
-const services = await getOrdered('services');
+const services = await getOrdered('serviceCategories');
 
-const quickLinks = [
+const quickLinks: { label: string; href: string; external?: boolean }[] = [
   { label: 'Home', href: '/' },
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'Service Areas', href: '#areas' },
+  { label: 'About', href: '/about/' },
+  { label: 'Services', href: '/services/' },
+  { label: 'Service Areas', href: '/#areas' },
   { label: 'Gallery', href: '/gallery/' },
   { label: 'Contact', href: '/contact-us/' },
-  { label: 'Review Us', href: '/review/' },
+  { label: 'Review Us', href: site.reviewHref, external: true },
 ];
 
 const year = new Date().getFullYear();
@@ -51,7 +51,7 @@ const contactIconClass =
         {
           services.map((service) => (
             <li class="mb-2.25">
-              <a href={`/${service.id}/`} class={linkClass}>
+              <a href={`/services/#${service.id}`} class={linkClass}>
                 {service.data.title}
               </a>
             </li>
@@ -66,7 +66,12 @@ const contactIconClass =
         {
           quickLinks.map((link) => (
             <li class="mb-2.25">
-              <a href={link.href} class={linkClass}>
+              <a
+                href={link.href}
+                target={link.external ? '_blank' : undefined}
+                rel={link.external ? 'noopener' : undefined}
+                class={linkClass}
+              >
                 {link.label}
               </a>
             </li>

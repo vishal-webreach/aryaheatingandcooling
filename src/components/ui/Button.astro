@@ -9,11 +9,13 @@ interface Props {
   size?: Size;
   /** Renders a link when set, otherwise a button. */
   href?: string;
+  /** Opens the link in a new tab. */
+  external?: boolean;
   type?: HTMLAttributes<'button'>['type'];
   class?: string;
 }
 
-const { variant = 'primary', size = 'md', href, type = 'button', class: className } = Astro.props;
+const { variant = 'primary', size = 'md', href, external = false, type = 'button', class: className } = Astro.props;
 
 const variants: Record<Variant, string> = {
   primary: 'bg-accent text-white shadow-cta hover:bg-accent-dark',
@@ -39,7 +41,7 @@ const classes = [
 
 {
   href ? (
-    <a href={href} class:list={classes}>
+    <a href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener' : undefined} class:list={classes}>
       <slot />
     </a>
   ) : (

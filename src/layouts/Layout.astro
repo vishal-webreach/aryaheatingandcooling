@@ -1,5 +1,6 @@
 ---
 import { Font, getImage } from 'astro:assets';
+import { ClientRouter } from 'astro:transitions';
 import heroImage from '../assets/images/hero/hero.png';
 import BackToTop from '../components/layout/BackToTop.astro';
 import Footer from '../components/layout/Footer.astro';
@@ -20,6 +21,8 @@ interface Props {
   imageAlt?: string;
   /** Keeps the page out of search results. */
   noindex?: boolean;
+  /** schema.org type of the page, e.g. AboutPage or ContactPage. Defaults to WebPage. */
+  pageType?: string;
   /** Page-specific structured data, e.g. FAQPage or BreadcrumbList. */
   schema?: SchemaNode[];
 }
@@ -30,6 +33,7 @@ const {
   image = heroImage,
   imageAlt = `${site.name} technician servicing an HVAC system`,
   noindex = false,
+  pageType,
   schema,
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
@@ -75,6 +79,7 @@ const robots = noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview
       description={description}
       canonical={canonical}
       image={shareImageUrl}
+      pageType={pageType}
       schema={schema}
     />
 
@@ -86,6 +91,7 @@ const robots = noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview
     <link rel="manifest" href="/site.webmanifest" />
 
     <Font cssVariable="--font-manrope" preload />
+    <ClientRouter />
   </head>
   <body class="bg-white font-sans leading-[1.7] text-body antialiased max-md:pb-16.5">
     <IconSprite />

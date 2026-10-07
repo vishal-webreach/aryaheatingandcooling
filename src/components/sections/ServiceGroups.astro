@@ -1,0 +1,49 @@
+---
+import { Image } from 'astro:assets';
+import { getServiceGroups } from '../../lib/content';
+import Button from '../ui/Button.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import Icon from '../ui/Icon.astro';
+
+const serviceGroups = await getServiceGroups();
+---
+
+{
+  serviceGroups.map(({ category, services }, index) => (
+    <section class:list={['py-17 md:py-24', index % 2 === 1 && 'bg-soft']} id={category.id}>
+      <div class="wrap grid items-start gap-10 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
+        <div>
+          <Eyebrow>Service {String(index + 1).padStart(2, '0')}</Eyebrow>
+          <h2 class="mb-3.5">{category.data.title}</h2>
+          <p class="mb-6.5">{category.data.summary}</p>
+          <Image
+            src={category.data.image}
+            alt={category.data.imageAlt}
+            widths={[320, category.data.image.width]}
+            sizes="(min-width: 901px) 480px, 100vw"
+            class="mb-6.5 aspect-16/10 w-full rounded-3xl object-cover"
+          />
+          <Button href="#contact">
+            Get Free Quote <Icon name="arrow" />
+          </Button>
+        </div>
+
+        <ul class="grid gap-4">
+          {services.map((service) => (
+            <li class="group relative rounded-card border border-line bg-white p-6 transition duration-250 hover:-translate-y-1 hover:border-transparent hover:shadow-card">
+              <h3 class="mb-2.5">{service.data.title}</h3>
+              <p class="mb-3.5 text-[15px]">{service.data.summary}</p>
+              <a
+                href={`/${service.id}/`}
+                class="inline-flex items-center gap-2 text-[15px] font-bold text-ink transition-colors duration-200 after:absolute after:inset-0 hover:text-brand"
+              >
+                Learn more<span class="sr-only"> about {service.data.title}</span>
+                <Icon name="arrow" class="size-4.5 transition-transform duration-200 group-hover:translate-x-1" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  ))
+}
