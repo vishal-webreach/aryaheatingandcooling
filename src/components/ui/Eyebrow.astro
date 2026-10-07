@@ -1,0 +1,16 @@
+---
+interface Props {
+  tone?: 'accent' | 'glow';
+}
+
+const { tone = 'accent' } = Astro.props;
+---
+
+<span
+  class:list={[
+    'mb-3.5 inline-flex items-center gap-2.5 text-[13px] font-extrabold tracking-[0.14em] uppercase before:h-0.5 before:w-7 before:bg-current',
+    tone === 'glow' ? 'text-glow' : 'text-accent',
+  ]}
+>
+  <slot />
+</span>

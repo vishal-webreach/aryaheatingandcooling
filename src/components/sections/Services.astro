@@ -1,0 +1,53 @@
+---
+import { Image } from 'astro:assets';
+import { getOrdered } from '../../lib/content';
+import Button from '../ui/Button.astro';
+import Icon from '../ui/Icon.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+
+const services = await getOrdered('services');
+---
+
+<section class="py-17 md:py-24" id="services">
+  <div class="wrap">
+    <SectionHeading
+      eyebrow="What We Do"
+      title="Our Heating and Cooling Services"
+      description="Expert repair and maintenance for every type of unit and all major brands."
+    >
+      <Button href="#contact" variant="dark">View Services</Button>
+    </SectionHeading>
+
+    <div class="grid gap-5.5 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        services.map((service, index) => (
+          <div class="group relative flex flex-col overflow-hidden rounded-card border border-line bg-white transition duration-250 hover:-translate-y-1.5 hover:border-transparent hover:shadow-card">
+            <div class="relative overflow-hidden">
+              <Image
+                src={service.data.image}
+                alt={service.data.imageAlt}
+                widths={[320, service.data.image.width]}
+                sizes="(min-width: 1081px) 276px, (min-width: 561px) 50vw, 100vw"
+                class="aspect-4/3 w-full object-cover transition-transform duration-500 group-hover:scale-106"
+              />
+              <span class="absolute top-4 left-4 rounded-full bg-white px-3 py-1 text-[13px] font-extrabold text-ink">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+            </div>
+            <div class="flex flex-1 flex-col p-6">
+              <h3 class="mb-3.5">{service.data.title}</h3>
+              <p class="mb-3.5 flex-1 text-[15px]">{service.data.summary}</p>
+              <a
+                href={`/${service.id}/`}
+                class="inline-flex items-center gap-2 text-[15px] font-bold text-ink transition-colors duration-200 after:absolute after:inset-0 hover:text-brand"
+              >
+                Learn more<span class="sr-only"> about {service.data.title}</span>
+                <Icon name="arrow" class="size-4.5 transition-transform duration-200 group-hover:translate-x-1" />
+              </a>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

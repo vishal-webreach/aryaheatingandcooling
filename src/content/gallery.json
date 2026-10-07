@@ -1,0 +1,10 @@
+[
+  { "id": "gallery-1", "image": "../assets/images/gallery/gallery-1.png", "alt": "HVAC project by ARYA Heating & Cooling", "order": 1 },
+  { "id": "gallery-2", "image": "../assets/images/gallery/gallery-2.png", "alt": "Air conditioning service in Northern Virginia", "order": 2 },
+  { "id": "gallery-3", "image": "../assets/images/gallery/gallery-3.png", "alt": "Heating system service", "order": 3 },
+  { "id": "gallery-4", "image": "../assets/images/gallery/gallery-4.png", "alt": "HVAC installation work", "order": 4 },
+  { "id": "gallery-5", "image": "../assets/images/gallery/gallery-5.png", "alt": "HVAC repair in progress", "order": 5 },
+  { "id": "gallery-6", "image": "../assets/images/gallery/gallery-6.png", "alt": "Cooling system maintenance", "order": 6 },
+  { "id": "gallery-7", "image": "../assets/images/gallery/gallery-7.png", "alt": "Technician servicing an HVAC unit", "order": 7 },
+  { "id": "gallery-8", "image": "../assets/images/gallery/gallery-8.png", "alt": "Completed heating and cooling job", "order": 8 }
+]

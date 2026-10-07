@@ -1,0 +1,19 @@
+---
+import Icon from '../ui/Icon.astro';
+---
+
+<!-- The button appears once this top-of-page marker scrolls out of view -->
+<div data-to-top-sentinel class="pointer-events-none absolute top-0 left-0 h-150 w-px" aria-hidden="true"></div>
+
+<button
+  type="button"
+  data-to-top
+  aria-label="Back to top"
+  class="invisible fixed right-3.5 bottom-20 z-45 grid size-10.5 translate-y-2.5 cursor-pointer place-items-center rounded-full bg-accent text-white opacity-0 shadow-cta transition-[opacity,translate,visibility,background-color] duration-250 hover:bg-accent-dark data-show:visible data-show:translate-y-0 data-show:opacity-100 md:right-5.5 md:bottom-5.5 md:size-11.5"
+>
+  <Icon name="arrow" class="size-5 -rotate-90" />
+</button>
+
+<script>
+  import '../../scripts/back-to-top.ts';
+</script>

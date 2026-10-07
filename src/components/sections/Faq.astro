@@ -1,0 +1,43 @@
+---
+import { site } from '../../data/site';
+import { getOrdered } from '../../lib/content';
+import Button from '../ui/Button.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+import Icon from '../ui/Icon.astro';
+
+const faqs = await getOrdered('faqs');
+---
+
+<section class="py-17 md:py-24" id="faq">
+  <div class="wrap grid items-start gap-10 md:grid-cols-[0.8fr_1.2fr] md:gap-16">
+    <div>
+      <Eyebrow>FAQ</Eyebrow>
+      <h2>Frequently Asked Questions</h2>
+      <div class="mt-7 rounded-card border border-line bg-soft p-6">
+        <strong class="block text-[17px] text-ink">Still have a question?</strong>
+        <p class="mb-3.5 text-[15px]">Call us any time, day or night.</p>
+        <Button href={site.phone.href} variant="dark"><Icon name="phone" /> {site.phone.display}</Button>
+      </div>
+    </div>
+
+    <div>
+      {
+        faqs.map((faq, index) => (
+          <details class="group border-b border-line first:border-t" open={index === 0}>
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-5 py-5.5 text-[17.5px] font-bold text-ink [&::-webkit-details-marker]:hidden">
+              {faq.data.question}
+              <span
+                class="grid size-8.5 flex-none place-items-center rounded-full bg-soft text-[22px] leading-none font-medium text-ink transition duration-200 group-open:rotate-180 group-open:bg-accent group-open:text-white"
+                aria-hidden="true"
+              >
+                <span class="group-open:hidden">+</span>
+                <span class="hidden group-open:inline">&minus;</span>
+              </span>
+            </summary>
+            <p class="pb-5.5 md:pr-13.5">{faq.data.answer}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

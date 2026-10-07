@@ -1,0 +1,35 @@
+---
+import About from '../components/sections/About.astro';
+import Contact from '../components/sections/Contact.astro';
+import CtaBanner from '../components/sections/CtaBanner.astro';
+import Faq from '../components/sections/Faq.astro';
+import Gallery from '../components/sections/Gallery.astro';
+import Hero from '../components/sections/Hero.astro';
+import Process from '../components/sections/Process.astro';
+import QuickQuote from '../components/sections/QuickQuote.astro';
+import Reviews from '../components/sections/Reviews.astro';
+import ServiceAreas from '../components/sections/ServiceAreas.astro';
+import Services from '../components/sections/Services.astro';
+import Stats from '../components/sections/Stats.astro';
+import Layout from '../layouts/Layout.astro';
+import { getOrdered } from '../lib/content';
+import { faqSchema } from '../lib/seo';
+
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+const schema = [faqSchema(await getOrdered('faqs'), pageUrl)];
+---
+
+<Layout schema={schema}>
+  <Hero />
+  <QuickQuote />
+  <Stats />
+  <Services />
+  <About />
+  <Process />
+  <Gallery />
+  <Reviews />
+  <ServiceAreas />
+  <Faq />
+  <Contact />
+  <CtaBanner />
+</Layout>

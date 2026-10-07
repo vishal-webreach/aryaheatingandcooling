@@ -1,0 +1,37 @@
+---
+import { socialLinks } from '../../data/site';
+import Icon from './Icon.astro';
+
+type Variant = 'topbar' | 'nav' | 'footer';
+
+interface Props {
+  variant: Variant;
+  class?: string;
+}
+
+const { variant, class: className } = Astro.props;
+
+const linkStyles: Record<Variant, string> = {
+  topbar: 'size-7.5 bg-white/10 text-white hover:bg-accent',
+  nav: 'size-7.5 bg-soft text-ink hover:bg-accent hover:text-white',
+  footer: 'size-9.5 bg-white/10 text-white hover:bg-accent',
+};
+
+const iconSize = variant === 'footer' ? 'size-4.5' : 'size-3.75';
+---
+
+<div class:list={['flex items-center gap-2', className]}>
+  {
+    socialLinks.map((link) => (
+      <a
+        href={link.href}
+        target="_blank"
+        rel="noopener"
+        aria-label={link.label}
+        class:list={['grid place-items-center rounded-full transition-colors duration-200', linkStyles[variant]]}
+      >
+        <Icon name={link.icon} class={iconSize} />
+      </a>
+    ))
+  }
+</div>

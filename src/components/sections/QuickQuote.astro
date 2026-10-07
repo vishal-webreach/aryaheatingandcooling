@@ -1,0 +1,40 @@
+---
+import { site } from '../../data/site';
+import { getOrdered } from '../../lib/content';
+import Button from '../ui/Button.astro';
+import ConsentCheckbox from '../ui/ConsentCheckbox.astro';
+import FormField from '../ui/FormField.astro';
+import Icon from '../ui/Icon.astro';
+
+const services = await getOrdered('services');
+---
+
+<section class="relative z-2 -mt-18" id="quote" aria-label="Quick quote">
+  <div class="wrap">
+    <form
+      action={site.formAction}
+      method="post"
+      class="rounded-card border border-line bg-white px-4.5 py-5.5 shadow-card sm:px-7 sm:py-6.5"
+    >
+      <div class="mb-4 flex flex-wrap items-baseline gap-x-3.5 gap-y-1">
+        <h2 class="text-[22px]">Get a Quick Quote</h2>
+        <p class="text-[14.5px]">Free estimate. We call you back fast, 24/7.</p>
+      </div>
+      <div class="grid items-end gap-3 sm:grid-cols-2 md:grid-cols-[1fr_1fr_1fr_auto]">
+        <FormField id="q-name" name="name" label="Full Name" autocomplete="name" required />
+        <FormField id="q-phone" name="phone" label="Phone" type="tel" autocomplete="tel" required />
+        <FormField
+          id="q-service"
+          name="service"
+          label="Service Needed"
+          as="select"
+          placeholder="Select a service"
+          options={services.map((service) => service.data.title)}
+          class="sm:max-md:col-span-2"
+        />
+        <Button type="submit" size="field" class="sm:max-md:col-span-2">Get Free Quote <Icon name="arrow" /></Button>
+      </div>
+      <ConsentCheckbox class="mt-3.5" />
+    </form>
+  </div>
+</section>

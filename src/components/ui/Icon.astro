@@ -1,0 +1,23 @@
+---
+import type { IconName } from '../../data/site';
+
+interface Props {
+  name: IconName;
+  /** Size and colour utilities. Defaults to a 20px icon. */
+  class?: string;
+}
+
+const { name, class: className = 'size-5' } = Astro.props;
+---
+
+<svg
+  class:list={['flex-none', className]}
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+>
+  <use href={`#i-${name}`}></use>
+</svg>

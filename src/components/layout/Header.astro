@@ -1,0 +1,187 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../../assets/images/brand/logo.png';
+import { site } from '../../data/site';
+import { getOrdered } from '../../lib/content';
+import Button from '../ui/Button.astro';
+import Icon from '../ui/Icon.astro';
+import SocialLinks from '../ui/SocialLinks.astro';
+
+interface NavLink {
+  label: string;
+  href: string;
+  /** Sub-links shown in a dropdown. */
+  children?: { label: string; href: string }[];
+  toggleLabel?: string;
+  /** Lays the dropdown out in columns. */
+  columns?: boolean;
+}
+
+const services = await getOrdered('services');
+const areas = await getOrdered('areas');
+
+const navLinks: NavLink[] = [
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '#about' },
+  {
+    label: 'Services',
+    href: '#services',
+    toggleLabel: 'Show services',
+    children: services.map((service) => ({ label: service.data.title, href: `/${service.id}/` })),
+  },
+  {
+    label: 'Service Areas',
+    href: '#areas',
+    toggleLabel: 'Show service areas',
+    columns: true,
+    children: areas.map((area) => ({ label: area.data.name, href: `/${area.id}/` })),
+  },
+  { label: 'Gallery', href: '/gallery/' },
+  { label: 'Contact', href: '#contact' },
+];
+
+const linkClass =
+  'rounded-xl px-3.5 py-3 text-[15px] font-semibold text-ink transition-colors duration-200 hover:bg-brand-soft hover:text-brand md:rounded-full md:px-2.5 md:py-2 md:whitespace-nowrap lg:px-3.5';
+const subLinkClass =
+  'block rounded-[10px] px-3 py-2.25 text-[14.5px] font-medium text-ink transition-colors duration-200 hover:bg-brand-soft hover:text-brand md:px-2.5 md:py-2 md:text-[15px] md:font-semibold md:whitespace-nowrap lg:px-3.5';
+const contactClass = 'group/contact flex items-center gap-2.5 p-1 text-[13px] font-semibold text-ink wrap-anywhere';
+const contactIconClass =
+  'grid size-7 flex-none place-items-center rounded-full bg-soft text-ink transition-colors duration-200 group-hover/contact:bg-accent group-hover/contact:text-white';
+---
+
+<header class="sticky top-0 z-70 border-b border-line bg-white md:z-50 md:bg-white/92 md:backdrop-blur-md">
+  <div class="wrap flex flex-wrap items-center justify-between gap-6 py-3 md:h-19 md:flex-nowrap md:py-0">
+    <a href="/" class="flex-none">
+      <Image
+        src={logo}
+        alt="ARYA Heating & Cooling logo"
+        width={131}
+        height={52}
+        densities={[1, 2]}
+        loading="eager"
+        class="h-13 w-auto"
+      />
+    </a>
+
+    <button
+      type="button"
+      data-menu-btn
+      aria-controls="nav"
+      aria-expanded="false"
+      class="inline-flex cursor-pointer items-center gap-2 rounded-full bg-soft px-4 py-2.5 text-sm font-bold text-ink md:hidden"
+    >
+      <Icon name="menu" />Menu
+    </button>
+
+    <div
+      data-nav-overlay
+      class="invisible fixed inset-0 bg-navy/55 opacity-0 transition-[opacity,visibility] duration-300 data-open:visible data-open:opacity-100 md:hidden"
+    >
+    </div>
+
+    <nav
+      id="nav"
+      data-nav
+      aria-label="Main"
+      class="flex gap-0.5 max-md:invisible max-md:fixed max-md:inset-y-0 max-md:right-0 max-md:z-2 max-md:w-[min(86vw,340px)] max-md:translate-x-full max-md:flex-col max-md:overflow-y-auto max-md:overscroll-contain max-md:bg-white max-md:px-4 max-md:pb-7 max-md:shadow-[-18px_0_40px_-18px_rgb(11_31_51/0.4)] max-md:transition-[translate,visibility] max-md:duration-300 max-md:data-open:visible max-md:data-open:translate-x-0 lg:gap-1.5"
+    >
+      <div
+        class="sticky top-0 z-1 -mx-4 mb-2 flex items-center justify-between border-b border-line bg-white px-4 py-3.5 font-extrabold text-ink md:hidden"
+      >
+        <span>Menu</span>
+        <button
+          type="button"
+          data-nav-close
+          aria-label="Close menu"
+          class="grid size-10 cursor-pointer place-items-center rounded-full bg-soft text-ink"
+        >
+          <Icon name="close" />
+        </button>
+      </div>
+
+      {
+        navLinks.map((link) =>
+          link.children ? (
+            <div
+              data-nav-item
+              class="group/item relative flex items-center rounded-xl transition-colors duration-200 max-md:flex-wrap md:rounded-full md:hover:bg-brand-soft"
+            >
+              <a href={link.href} class:list={[linkClass, 'max-md:flex-1 md:group-hover/item:text-brand']}>
+                {link.label}
+              </a>
+              <button
+                type="button"
+                data-nav-toggle
+                aria-expanded="false"
+                aria-label={link.toggleLabel}
+                class="grid cursor-pointer place-items-center text-ink max-md:size-11 max-md:rounded-xl max-md:bg-soft md:mr-2 md:-ml-1.5 md:h-8.5 md:w-6 md:group-hover/item:text-brand lg:-ml-2.5"
+              >
+                <Icon
+                  name="chevron"
+                  class="size-4.5 transition-transform duration-250 group-data-open/item:rotate-180 md:size-3.75 md:group-hover/item:rotate-180"
+                />
+              </button>
+
+              <div
+                class:list={[
+                  'max-md:grid max-md:w-full max-md:grid-rows-[0fr] max-md:transition-[grid-template-rows] max-md:duration-300 max-md:group-data-open/item:grid-rows-[1fr]',
+                  'md:invisible md:absolute md:top-full md:z-5 md:translate-y-2 md:pt-3.5 md:opacity-0 md:transition-[opacity,translate,visibility] md:duration-200',
+                  'md:group-hover/item:visible md:group-hover/item:translate-y-0 md:group-hover/item:opacity-100',
+                  'md:group-data-open/item:visible md:group-data-open/item:translate-y-0 md:group-data-open/item:opacity-100',
+                  link.columns ? 'md:left-1/2 md:-translate-x-1/2' : 'md:left-0',
+                ]}
+              >
+                <div
+                  class:list={[
+                    'max-md:invisible max-md:ml-3.5 max-md:min-h-0 max-md:overflow-hidden max-md:border-l-2 max-md:border-line max-md:pl-2 max-md:transition-[visibility] max-md:duration-300 max-md:group-data-open/item:visible',
+                    'md:grid md:rounded-2xl md:border md:border-line md:bg-white md:p-2 md:shadow-card',
+                    link.columns ? 'max-md:grid max-md:grid-cols-2 md:min-w-120 md:grid-cols-3' : 'md:min-w-57.5',
+                  ]}
+                >
+                  {link.children.map((child) => (
+                    <a href={child.href} class={subLinkClass}>
+                      {child.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : (
+            <a href={link.href} class={linkClass}>
+              {link.label}
+            </a>
+          )
+        )
+      }
+
+      <div class="mt-auto pt-3.5 md:hidden">
+        <div class="border-t border-line pt-2.5">
+          <a href={site.phone.href} class={contactClass}>
+            <span class={contactIconClass}><Icon name="phone" class="size-3.5" /></span>
+            {site.phone.display}
+          </a>
+          <a href={site.email.href} class={contactClass}>
+            <span class={contactIconClass}><Icon name="mail" class="size-3.5" /></span>
+            {site.email.display}
+          </a>
+          <SocialLinks variant="nav" class="mx-1 mt-2.5" />
+        </div>
+      </div>
+    </nav>
+
+    <div class="flex items-center gap-4.5 max-md:hidden">
+      <a href={site.phone.href} class="flex items-center gap-2.5 text-[15px] leading-[1.2] font-extrabold text-ink max-lg:hidden">
+        <Icon name="phone" class="size-9.5 rounded-full bg-brand-soft p-2.5 text-brand" />
+        <span>
+          <small class="block text-[11.5px] font-semibold tracking-[0.04em] text-body uppercase">Call 24/7</small>
+          {site.phone.display}
+        </span>
+      </a>
+      <Button href="#contact" size="sm">Get Free Quote</Button>
+    </div>
+  </div>
+</header>
+
+<script>
+  import '../../scripts/nav.ts';
+</script>

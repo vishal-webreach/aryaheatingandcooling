@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import { getOrdered } from '../../lib/content';
+import Button from '../ui/Button.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+
+const photos = await getOrdered('gallery');
+
+// The first photo is a large feature tile; the sixth is wide on desktop.
+const tileClass = (index: number): string | undefined => {
+  if (index === 0) return 'col-span-2 row-span-2';
+  if (index === 5) return 'md:col-span-2';
+  return undefined;
+};
+---
+
+<section class="py-17 md:py-24" id="gallery">
+  <div class="wrap">
+    <SectionHeading eyebrow="Recent Work" title="Photo Gallery" description="Some of our recent heating and cooling work.">
+      <Button href="/gallery/" variant="dark">View Gallery</Button>
+    </SectionHeading>
+
+    <div class="grid auto-rows-[160px] grid-cols-2 gap-3.5 md:auto-rows-[210px] md:grid-cols-4">
+      {
+        photos.map((photo, index) => (
+          <Image
+            src={photo.data.image}
+            alt={photo.data.alt}
+            widths={[320, photo.data.image.width]}
+            sizes={
+              index === 0 || index === 5
+                ? '(min-width: 901px) 580px, 100vw'
+                : '(min-width: 901px) 280px, 50vw'
+            }
+            class:list={['size-full rounded-2xl object-cover', tileClass(index)]}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>

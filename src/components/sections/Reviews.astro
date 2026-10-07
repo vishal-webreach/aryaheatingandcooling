@@ -1,0 +1,41 @@
+---
+import { getOrdered } from '../../lib/content';
+import Button from '../ui/Button.astro';
+import Icon from '../ui/Icon.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+
+// PLACEHOLDER REVIEWS: replace src/content/reviews.json with real Google reviews before launch.
+const reviews = await getOrdered('reviews');
+---
+
+<section class="bg-soft py-17 md:py-24" id="reviews">
+  <div class="wrap">
+    <SectionHeading eyebrow="Testimonials" title="What Our Customers Say About Us">
+      <Button href="/review/" variant="dark">Review Us</Button>
+    </SectionHeading>
+
+    <div class="grid gap-5.5 md:grid-cols-3">
+      {
+        reviews.map((review) => (
+          <div class="flex flex-col rounded-card border border-line bg-white p-7.5">
+            <div
+              class="mb-3.5 text-[18px] tracking-[3px] text-[#f5a623]"
+              role="img"
+              aria-label={`${review.data.rating} out of 5 stars`}
+            >
+              {'★'.repeat(review.data.rating)}
+            </div>
+            <p class="mb-3.5 flex-1 text-ink">{review.data.text}</p>
+            <div class="flex items-center gap-3 border-t border-line pt-4.5 text-sm leading-[1.35]">
+              <Icon name="user" class="size-10.5 rounded-full bg-brand-soft p-2.75 text-brand" />
+              <span>
+                <strong class="block text-[15px] text-ink">{review.data.author}</strong>
+                {review.data.location}
+              </span>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,116 @@
+---
+import { getImage } from 'astro:assets';
+import logo from '../../assets/images/brand/logo.png';
+import { site, socialLinks } from '../../data/site';
+import { getOrdered } from '../../lib/content';
+import type { SchemaNode } from '../../lib/seo';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Absolute canonical URL of the page. */
+  canonical: string;
+  /** Absolute URL of the page's share image. */
+  image: string;
+  /** Page-specific nodes, e.g. FAQPage or BreadcrumbList. */
+  schema?: SchemaNode[];
+}
+
+const { title, description, canonical, image, schema = [] } = Astro.props;
+
+const [services, areas, logoImage] = await Promise.all([
+  getOrdered('services'),
+  getOrdered('areas'),
+  getImage({ src: logo, width: 512, format: 'png' }),
+]);
+
+const origin = new URL('/', Astro.site).href;
+const businessId = `${origin}#business`;
+const websiteId = `${origin}#website`;
+const logoUrl = new URL(logoImage.src, Astro.site).href;
+const telephone = site.phone.href.replace('tel:', '');
+const areaServed = areas.map((area) => ({ '@type': 'City', name: `${area.data.name}, VA` }));
+const everyDay = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+// Only real profile URLs are published; "#" placeholders are skipped.
+const sameAs = socialLinks.map((link) => link.href).filter((href) => href.startsWith('http'));
+
+const graph: SchemaNode[] = [
+  {
+    '@type': 'HVACBusiness',
+    '@id': businessId,
+    name: site.name,
+    alternateName: site.shortName,
+    url: origin,
+    description: site.description,
+    telephone,
+    email: site.email.display,
+    image,
+    logo: { '@type': 'ImageObject', '@id': `${origin}#logo`, url: logoUrl, caption: site.name },
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Ashburn',
+      addressRegion: 'VA',
+      addressCountry: 'US',
+    },
+    areaServed,
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: everyDay,
+      opens: '00:00',
+      closes: '23:59',
+    },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone,
+      email: site.email.display,
+      contactType: 'customer service',
+      areaServed: 'US',
+      availableLanguage: 'English',
+    },
+    ...(sameAs.length > 0 && { sameAs }),
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Heating and cooling services',
+      itemListElement: services.map((service) => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          '@id': `${origin}${service.id}/#service`,
+          name: service.data.title,
+          description: service.data.summary,
+          serviceType: service.data.title,
+          provider: { '@id': businessId },
+          areaServed,
+        },
+      })),
+    },
+  },
+  {
+    '@type': 'WebSite',
+    '@id': websiteId,
+    url: origin,
+    name: site.name,
+    alternateName: site.shortName,
+    description: site.description,
+    inLanguage: 'en-US',
+    publisher: { '@id': businessId },
+  },
+  {
+    '@type': 'WebPage',
+    '@id': `${canonical}#webpage`,
+    url: canonical,
+    name: title,
+    description,
+    inLanguage: 'en-US',
+    isPartOf: { '@id': websiteId },
+    about: { '@id': businessId },
+    primaryImageOfPage: { '@type': 'ImageObject', url: image },
+  },
+  ...schema,
+];
+
+const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph });
+---
+
+<script type="application/ld+json" is:inline set:html={jsonLd} />

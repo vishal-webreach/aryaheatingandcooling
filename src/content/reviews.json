@@ -1,0 +1,26 @@
+[
+  {
+    "id": "review-1",
+    "author": "Customer Name",
+    "location": "Ashburn, VA",
+    "rating": 5,
+    "text": "[Sample text — replace with a real Google review.]",
+    "order": 1
+  },
+  {
+    "id": "review-2",
+    "author": "Customer Name",
+    "location": "Leesburg, VA",
+    "rating": 5,
+    "text": "[Sample text — replace with a real Google review.]",
+    "order": 2
+  },
+  {
+    "id": "review-3",
+    "author": "Customer Name",
+    "location": "Sterling, VA",
+    "rating": 5,
+    "text": "[Sample text — replace with a real Google review.]",
+    "order": 3
+  }
+]

@@ -1,0 +1,17 @@
+---
+import { site } from '../../data/site';
+import Button from '../ui/Button.astro';
+import Icon from '../ui/Icon.astro';
+---
+
+<section class="bg-linear-100 from-accent-dark to-accent py-11.5 text-white">
+  <div class="wrap flex flex-wrap items-center justify-between gap-7">
+    <div>
+      <h2 class="mb-1.5 text-[clamp(24px,3vw,32px)] text-white">Need Heating or Cooling Help Right Now?</h2>
+      <p class="font-medium text-[#ffe7dc]">We are available 24/7 for emergency HVAC service.</p>
+    </div>
+    <Button href={site.phone.href} variant="white" class="max-sm:w-full">
+      <Icon name="phone" /> Call {site.phone.display}
+    </Button>
+  </div>
+</section>

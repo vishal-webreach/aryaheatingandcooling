@@ -1,0 +1,26 @@
+[
+  {
+    "id": "services-offered",
+    "question": "What types of services do you offer?",
+    "answer": "ARYA Heating & Cooling offers reliable solutions like Emergency HVAC, AC Repair, and HVAC Maintenance. With over 10 years of experience, our licensed team delivers quality work you can count on.",
+    "order": 1
+  },
+  {
+    "id": "estimate-fee",
+    "question": "Is there a fee for a consultation or estimate?",
+    "answer": "No. ARYA Heating & Cooling offers complimentary estimates to all prospective clients.",
+    "order": 2
+  },
+  {
+    "id": "what-sets-you-apart",
+    "question": "What sets you apart from other contractors in the area?",
+    "answer": "We distinguish ourselves through meticulous attention to detail, a dedication to quality, and a personalized approach, with clear communication on every job.",
+    "order": 3
+  },
+  {
+    "id": "references",
+    "question": "Can you provide references from past clients?",
+    "answer": "Absolutely. You can read reviews from our customers on our website, and we are happy to provide references on request.",
+    "order": 4
+  }
+]

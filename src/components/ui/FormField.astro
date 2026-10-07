@@ -1,0 +1,60 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+interface Props {
+  id: string;
+  name: string;
+  label: string;
+  as?: 'input' | 'select' | 'textarea';
+  type?: 'text' | 'tel' | 'email';
+  autocomplete?: HTMLAttributes<'input'>['autocomplete'];
+  required?: boolean;
+  /** Options for `as="select"`. */
+  options?: string[];
+  placeholder?: string;
+  class?: string;
+}
+
+const {
+  id,
+  name,
+  label,
+  as = 'input',
+  type = 'text',
+  autocomplete,
+  required = false,
+  options = [],
+  placeholder,
+  class: className,
+} = Astro.props;
+
+const control =
+  'w-full rounded-xl border border-[#cdd6e0] bg-soft px-3.75 text-[15px] text-ink transition duration-200 focus:border-brand focus:bg-white focus:ring-4 focus:ring-brand/16 focus:outline-none';
+---
+
+<div class={className}>
+  <label for={id} class="mb-1.5 block text-[13px] font-bold text-ink">
+    {label}{required && ' *'}
+  </label>
+  {
+    as === 'select' ? (
+      <select id={id} name={name} required={required} class:list={[control, 'h-12.5']}>
+        <option value="">{placeholder}</option>
+        {options.map((option) => (
+          <option>{option}</option>
+        ))}
+      </select>
+    ) : as === 'textarea' ? (
+      <textarea id={id} name={name} required={required} class:list={[control, 'block min-h-26 resize-y py-3.25']} />
+    ) : (
+      <input
+        id={id}
+        name={name}
+        type={type}
+        autocomplete={autocomplete}
+        required={required}
+        class:list={[control, 'h-12.5']}
+      />
+    )
+  }
+</div>

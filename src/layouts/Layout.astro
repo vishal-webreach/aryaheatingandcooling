@@ -1,0 +1,101 @@
+---
+import { Font, getImage } from 'astro:assets';
+import heroImage from '../assets/images/hero/hero.png';
+import BackToTop from '../components/layout/BackToTop.astro';
+import Footer from '../components/layout/Footer.astro';
+import Header from '../components/layout/Header.astro';
+import MobileCallBar from '../components/layout/MobileCallBar.astro';
+import TopBar from '../components/layout/TopBar.astro';
+import StructuredData from '../components/seo/StructuredData.astro';
+import IconSprite from '../components/ui/IconSprite.astro';
+import { site } from '../data/site';
+import type { SchemaNode } from '../lib/seo';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Share image for social previews and search. Defaults to the hero photo. */
+  image?: ImageMetadata;
+  imageAlt?: string;
+  /** Keeps the page out of search results. */
+  noindex?: boolean;
+  /** Page-specific structured data, e.g. FAQPage or BreadcrumbList. */
+  schema?: SchemaNode[];
+}
+
+const {
+  title = site.title,
+  description = site.description,
+  image = heroImage,
+  imageAlt = `${site.name} technician servicing an HVAC system`,
+  noindex = false,
+  schema,
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+
+const shareImage = await getImage({ src: image, width: 1200, height: 630, fit: 'cover', format: 'jpg' });
+const shareImageUrl = new URL(shareImage.src, Astro.site).href;
+const robots = noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content={robots} />
+    <meta name="author" content={site.name} />
+    <meta name="geo.region" content="US-VA" />
+    <meta name="geo.placename" content="Ashburn" />
+    <meta name="theme-color" content="#0b1f33" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={shareImageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={shareImageUrl} />
+    <meta name="twitter:image:alt" content={imageAlt} />
+
+    <StructuredData
+      title={title}
+      description={description}
+      canonical={canonical}
+      image={shareImageUrl}
+      schema={schema}
+    />
+
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content={site.shortName} />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <Font cssVariable="--font-manrope" preload />
+  </head>
+  <body class="bg-white font-sans leading-[1.7] text-body antialiased max-md:pb-16.5">
+    <IconSprite />
+    <TopBar />
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <BackToTop />
+    <MobileCallBar />
+  </body>
+</html>

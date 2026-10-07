@@ -1,0 +1,107 @@
+---
+import { Image } from 'astro:assets';
+import logo from '../../assets/images/brand/logo.png';
+import { site } from '../../data/site';
+import { getOrdered } from '../../lib/content';
+import Icon from '../ui/Icon.astro';
+import SocialLinks from '../ui/SocialLinks.astro';
+
+const services = await getOrdered('services');
+
+const quickLinks = [
+  { label: 'Home', href: '/' },
+  { label: 'About', href: '#about' },
+  { label: 'Services', href: '#services' },
+  { label: 'Service Areas', href: '#areas' },
+  { label: 'Gallery', href: '/gallery/' },
+  { label: 'Contact', href: '/contact-us/' },
+  { label: 'Review Us', href: '/review/' },
+];
+
+const year = new Date().getFullYear();
+
+const headingClass = 'mb-4.5 text-sm tracking-[0.12em] text-white uppercase';
+const linkClass = 'transition-colors duration-200 hover:text-white';
+const contactClass = 'group mb-3 flex items-center gap-3 wrap-anywhere';
+const contactIconClass =
+  'grid size-9.5 flex-none place-items-center rounded-full bg-white/10 text-white transition-colors duration-200 group-hover:bg-accent';
+---
+
+<footer class="bg-[#07182a] pt-18 text-[15px] text-[#9fb0c2]">
+  <div class="wrap grid gap-10 sm:grid-cols-2 md:grid-cols-[1.4fr_1fr_1fr_1.3fr]">
+    <div>
+      <a href="/" class="mb-4.5 inline-block">
+        <Image
+          src={logo}
+          alt="ARYA Heating & Cooling"
+          width={161}
+          height={64}
+          densities={[1, 2]}
+          loading="lazy"
+          class="h-16 w-auto"
+        />
+      </a>
+      <p>Master Licensed HVAC experts serving Ashburn and Northern Virginia.</p>
+      <SocialLinks variant="footer" class="mt-4.5" />
+    </div>
+
+    <div>
+      <h3 class={headingClass}>Services</h3>
+      <ul>
+        {
+          services.map((service) => (
+            <li class="mb-2.25">
+              <a href={`/${service.id}/`} class={linkClass}>
+                {service.data.title}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div>
+      <h3 class={headingClass}>Quick Links</h3>
+      <ul>
+        {
+          quickLinks.map((link) => (
+            <li class="mb-2.25">
+              <a href={link.href} class={linkClass}>
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div>
+      <h3 class={headingClass}>Contact &amp; Hours</h3>
+      <ul>
+        <li class={contactClass}>
+          <span class={contactIconClass}><Icon name="phone" class="size-4.5" /></span>
+          <a href={site.phone.href} class={linkClass}>{site.phone.display}</a>
+        </li>
+        <li class={contactClass}>
+          <span class={contactIconClass}><Icon name="mail" class="size-4.5" /></span>
+          <a href={site.email.href} class={linkClass}>{site.email.display}</a>
+        </li>
+        <li class={contactClass}>
+          <span class={contactIconClass}><Icon name="clock" class="size-4.5" /></span>
+          <span>Monday &ndash; Sunday &middot; Open 24 Hours</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="mt-13 border-t border-white/10 py-5.5 text-sm">
+    <div class="wrap flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
+      <span>&copy; {year} {site.name}. All rights reserved.</span>
+      <span>
+        <a href={site.privacyHref} class={linkClass}>Privacy Policy</a>
+        <span class="mx-1.5">|</span>
+        <a href={site.termsHref} class={linkClass}>Terms &amp; Conditions</a>
+      </span>
+    </div>
+  </div>
+</footer>

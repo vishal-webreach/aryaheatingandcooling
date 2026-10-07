@@ -1,0 +1,44 @@
+---
+import SectionHeading from '../ui/SectionHeading.astro';
+
+const steps = [
+  {
+    title: 'Contact Us',
+    text: 'Complete the free quote form or call us to share your heating and cooling needs.',
+  },
+  {
+    title: 'Schedule Your Estimate',
+    text: "We'll arrange a property visit at a time that works for you and give an in-person estimate.",
+  },
+  {
+    title: 'Get The Job Done',
+    text: 'After you approve the estimate, we schedule a date and complete the job.',
+  },
+];
+---
+
+<section class="bg-navy py-17 text-[#b9c7d6] md:py-24" id="process">
+  <div class="wrap">
+    <SectionHeading eyebrow="How It Works" title="Our Simple 3 Step Process" dark />
+
+    <div class="grid gap-5.5 md:grid-cols-3">
+      {
+        steps.map((step, index) => (
+          <div class="relative rounded-card bg-white/4 px-7.5 py-8.5 inset-ring inset-ring-white/10">
+            <span class="mb-5.5 block text-[64px] leading-none font-extrabold tracking-[-0.04em] text-transparent [-webkit-text-stroke:1.5px_var(--color-glow)]">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <h3 class="mb-3.5 text-white">{step.title}</h3>
+            <p class="text-[15px]">{step.text}</p>
+            {index < steps.length - 1 && (
+              <span
+                class="absolute top-16 -right-5.5 w-5.5 border-t-2 border-dashed border-white/28 max-md:hidden"
+                aria-hidden="true"
+              />
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

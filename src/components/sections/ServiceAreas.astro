@@ -1,0 +1,41 @@
+---
+import { site } from '../../data/site';
+import { getOrdered } from '../../lib/content';
+import Eyebrow from '../ui/Eyebrow.astro';
+import Icon from '../ui/Icon.astro';
+
+const areas = await getOrdered('areas');
+---
+
+<section class="bg-navy py-17 text-[#b9c7d6] md:py-24" id="areas">
+  <div class="wrap grid items-start gap-10 md:grid-cols-[0.8fr_1.2fr] md:gap-16">
+    <div>
+      <Eyebrow>Where We Work</Eyebrow>
+      <h2 class="mb-3.5 text-white">Service Areas</h2>
+      <p class="mb-3.5">We serve Ashburn and the surrounding Northern Virginia communities.</p>
+      <a
+        href={site.phone.href}
+        class="group inline-flex items-center gap-2 text-[15px] font-bold text-white transition-colors duration-200 hover:text-glow"
+      >
+        Call {site.phone.display}
+        <Icon name="arrow" class="size-4.5 transition-transform duration-200 group-hover:translate-x-1" />
+      </a>
+    </div>
+
+    <ul class="flex flex-wrap gap-2.5">
+      {
+        areas.map((area) => (
+          <li>
+            <a
+              href={`/${area.id}/`}
+              class="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/4 px-4 py-2.25 text-[14.5px] font-semibold text-white transition-colors duration-200 hover:border-accent hover:bg-accent"
+            >
+              <span class="size-1.75 rounded-full bg-accent transition-colors duration-200 group-hover:bg-white" />
+              {area.data.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

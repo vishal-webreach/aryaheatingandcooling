@@ -1,0 +1,78 @@
+---
+import { Picture } from 'astro:assets';
+import heroImage from '../../assets/images/hero/hero.png';
+import { site } from '../../data/site';
+import Button from '../ui/Button.astro';
+import Icon from '../ui/Icon.astro';
+
+const trustPoints = ['Master Licensed Technicians', 'All Major Brands', 'Free Estimates'];
+
+const floatClass =
+  'absolute flex items-center gap-3 rounded-2xl bg-white px-3 py-2.5 text-[12.5px] leading-[1.3] font-semibold text-ink shadow-card sm:px-4.5 sm:py-3.5 sm:text-[13.5px]';
+const floatTitleClass = 'block text-[15px] font-extrabold sm:text-[17px]';
+const floatIconClass = 'size-8.5 rounded-xl p-2 sm:size-10.5 sm:p-2.75';
+---
+
+<section class="bg-hero relative overflow-hidden pt-14 pb-30 text-white md:pt-21 md:pb-37.5">
+  <div class="bg-hero-grid absolute inset-0" aria-hidden="true"></div>
+
+  <div class="wrap relative grid items-center gap-10 md:grid-cols-[1.08fr_0.92fr] md:gap-16">
+    <div>
+      <span
+        class="mb-5.5 inline-flex items-center gap-2.5 rounded-full bg-white/8 py-1.75 pr-4 pl-2 text-[13.5px] font-semibold text-[#dbe7f2] inset-ring inset-ring-white/16"
+      >
+        <b class="rounded-full bg-accent px-2.5 py-0.75 text-xs tracking-[0.04em] text-white">24/7</b>
+        Emergency HVAC in Northern Virginia
+      </span>
+      <h1 class="mb-5 text-[clamp(34px,4.7vw,58px)] leading-[1.06] text-white">
+        Master Licensed HVAC Experts for Reliable, <span class="text-glow">Year-Round Comfort</span>
+      </h1>
+      <p class="mb-8 max-w-135 text-[18px] text-[#c3d1df]">
+        Heating and cooling services you can rely on in Ashburn and across Northern Virginia. Available 24 hours a day, 7
+        days a week.
+      </p>
+      <div class="mb-8.5 flex flex-wrap gap-3">
+        <Button href="#contact" class="max-sm:w-full">Get Free Quote <Icon name="arrow" /></Button>
+        <Button href={site.phone.href} variant="ghost" class="max-sm:w-full">
+          <Icon name="phone" /> Call {site.phone.display}
+        </Button>
+      </div>
+      <ul class="flex flex-wrap gap-x-6.5 gap-y-2.5 text-[14.5px] font-semibold text-[#dbe7f2]">
+        {
+          trustPoints.map((point) => (
+            <li class="flex items-center gap-2">
+              <Icon name="check" class="size-4.5 text-glow" />
+              {point}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="relative">
+      <div
+        class="absolute top-4.5 -right-4.5 -bottom-4.5 left-4.5 rounded-[28px] border border-white/20 max-md:hidden"
+        aria-hidden="true"
+      >
+      </div>
+      <Picture
+        src={heroImage}
+        alt="ARYA Heating & Cooling technician servicing an HVAC system"
+        formats={['avif', 'webp']}
+        fallbackFormat="jpg"
+        widths={[480, 768, 1080, 1440, heroImage.width]}
+        sizes="(min-width: 901px) 1000px, 100vw"
+        priority
+        class="aspect-16/11 w-full rounded-[28px] object-cover shadow-[0_40px_70px_-30px_rgb(0_0_0/0.7)] md:aspect-[5/5.4]"
+      />
+      <div class:list={[floatClass, 'bottom-3.5 left-3.5 md:bottom-10.5 md:-left-7']}>
+        <Icon name="shield" class:list={[floatIconClass, 'bg-brand-soft text-brand']} />
+        <span><strong class={floatTitleClass}>Master Licensed</strong>HVAC technicians</span>
+      </div>
+      <div class:list={[floatClass, 'top-3.5 right-3.5 md:top-8.5 md:-right-3.5']}>
+        <Icon name="clock" class:list={[floatIconClass, 'bg-[#fdeee6] text-accent']} />
+        <span><strong class={floatTitleClass}>Open 24/7</strong>Emergency service</span>
+      </div>
+    </div>
+  </div>
+</section>
