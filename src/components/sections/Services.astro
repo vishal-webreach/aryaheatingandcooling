@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import { getServiceGroups } from '../../lib/content';
+import { categoryPath, getServiceGroups, servicePath } from '../../lib/content';
 import Button from '../ui/Button.astro';
 import Icon from '../ui/Icon.astro';
 import SectionHeading from '../ui/SectionHeading.astro';
@@ -41,17 +41,21 @@ const serviceGroups = await getServiceGroups();
                 {services.map((service) => (
                   <li class="mb-1.5 flex items-center gap-2 text-[15px] font-semibold">
                     <Icon name="check" class="size-4 flex-none text-brand" />
-                    <a
-                      href={`/${service.id}/`}
-                      class="relative z-1 text-ink transition-colors duration-200 hover:text-brand"
-                    >
-                      {service.data.title}
-                    </a>
+                    {servicePath(category, service) ? (
+                      <a
+                        href={servicePath(category, service)}
+                        class="relative z-1 text-ink transition-colors duration-200 hover:text-brand"
+                      >
+                        {service.data.title}
+                      </a>
+                    ) : (
+                      <span class="text-ink">{service.data.title}</span>
+                    )}
                   </li>
                 ))}
               </ul>
               <a
-                href={`/services/#${category.id}`}
+                href={categoryPath(category)}
                 class="inline-flex items-center gap-2 text-[15px] font-bold text-ink transition-colors duration-200 after:absolute after:inset-0 hover:text-brand"
               >
                 Learn more<span class="sr-only"> about {category.data.title}</span>

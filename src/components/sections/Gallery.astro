@@ -1,7 +1,6 @@
 ---
 import { Image } from 'astro:assets';
 import { getOrdered } from '../../lib/content';
-import Button from '../ui/Button.astro';
 import SectionHeading from '../ui/SectionHeading.astro';
 
 const photos = await getOrdered('gallery');
@@ -16,9 +15,7 @@ const tileClass = (index: number): string | undefined => {
 
 <section class="py-17 md:py-24" id="gallery">
   <div class="wrap">
-    <SectionHeading eyebrow="Recent Work" title="Photo Gallery" description="Some of our recent heating and cooling work.">
-      <Button href="/gallery/" variant="dark">View Gallery</Button>
-    </SectionHeading>
+    <SectionHeading eyebrow="Recent Work" title="Photo Gallery" description="Some of our recent heating and cooling work." />
 
     <div class="grid auto-rows-[160px] grid-cols-2 gap-3.5 md:auto-rows-[210px] md:grid-cols-4">
       {

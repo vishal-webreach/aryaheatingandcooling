@@ -7,11 +7,20 @@ const serviceCategories = defineCollection({
   loader: file('src/content/service-categories.json'),
   schema: ({ image }) =>
     z.object({
+      /** URL segment for this category, e.g. "residential-hvac" in /services/residential-hvac/. */
+      slug: z.string(),
       title: z.string(),
       summary: z.string(),
       image: image(),
       imageAlt: z.string(),
       order: z.number(),
+      seoTitle: z.string(),
+      seoDescription: z.string(),
+      /** Heading and paragraphs of the overview on the category's page. */
+      heading: z.string(),
+      intro: z.array(z.string()),
+      /** Dummy content: the page is kept out of search, the sitemap, schema and llms.txt. */
+      placeholder: z.boolean().default(false),
     }),
 });
 
@@ -26,6 +35,18 @@ const services = defineCollection({
       imageAlt: z.string().optional(),
       /** Position within its category. */
       order: z.number(),
+      /**
+       * Last URL segment of the service's own page. Leave out until the page is ready.
+       * Not named `slug`, which the loader would use as the entry id.
+       */
+      pageSlug: z.string().optional(),
+      /** Page heading; defaults to the title. */
+      heading: z.string().optional(),
+      seoTitle: z.string().optional(),
+      seoDescription: z.string().optional(),
+      /** Checklist shown on the service's page. */
+      includesTitle: z.string().optional(),
+      includes: z.array(z.string()).optional(),
     }),
 });
 

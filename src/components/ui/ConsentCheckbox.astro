@@ -11,7 +11,16 @@ const { class: className } = Astro.props;
 <label class:list={['flex gap-2.5 text-[12.5px] leading-[1.55] font-medium text-body', className]}>
   <input type="checkbox" name="consent" required class="mt-0.75 size-4 flex-none accent-brand" />
   <span>
-    I agree to the <a href={site.termsHref} class="text-brand underline">terms &amp; conditions</a>. By providing my
+    I agree to the{' '}
+    {
+      site.termsHref ? (
+        <a href={site.termsHref} class="text-brand underline">
+          terms &amp; conditions
+        </a>
+      ) : (
+        <Fragment>terms &amp; conditions</Fragment>
+      )
+    }. By providing my
     phone number, I agree to receive text messages from the business.
   </span>
 </label>

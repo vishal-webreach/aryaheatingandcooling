@@ -2,7 +2,7 @@
 import { getImage } from 'astro:assets';
 import logo from '../../assets/images/brand/logo.png';
 import { site, socialLinks } from '../../data/site';
-import { getOrdered, getServiceGroups } from '../../lib/content';
+import { categoryPath, getOrdered, getServiceGroups, servicePath } from '../../lib/content';
 import type { SchemaNode } from '../../lib/seo';
 
 interface Props {
@@ -14,19 +14,30 @@ interface Props {
   image: string;
   /** schema.org type of the page, e.g. AboutPage. */
   pageType?: string;
+  /** `@id` of the thing the page is mainly about, e.g. a Service in the business catalogue. */
+  mainEntity?: string;
   /** Page-specific nodes, e.g. FAQPage or BreadcrumbList. */
   schema?: SchemaNode[];
 }
 
-const { title, description, canonical, image, pageType = 'WebPage', schema = [] } = Astro.props;
+const { title, description, canonical, image, pageType = 'WebPage', mainEntity, schema = [] } = Astro.props;
+const breadcrumb = schema.find((node) => node['@type'] === 'BreadcrumbList');
 
-const [serviceGroups, areas, logoImage] = await Promise.all([
+const [allServiceGroups, areas, logoImage] = await Promise.all([
   getServiceGroups(),
   getOrdered('areas'),
   getImage({ src: logo, width: 512, format: 'png' }),
 ]);
 
+// Categories with dummy content are left out of the published catalogue.
+const serviceGroups = allServiceGroups.filter(({ category }) => !category.data.placeholder);
+
 const origin = new URL('/', Astro.site).href;
+/** Absolute URL of a service's own page, if it has one. */
+const serviceUrl = (...args: Parameters<typeof servicePath>) => {
+  const path = servicePath(...args);
+  return path && new URL(path, Astro.site).href;
+};
 const businessId = `${origin}#business`;
 const websiteId = `${origin}#website`;
 const logoUrl = new URL(logoImage.src, Astro.site).href;
@@ -51,9 +62,11 @@ const graph: SchemaNode[] = [
     logo: { '@type': 'ImageObject', '@id': `${origin}#logo`, url: logoUrl, caption: site.name },
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'Ashburn',
-      addressRegion: 'VA',
-      addressCountry: 'US',
+      streetAddress: site.address.street,
+      addressLocality: site.address.city,
+      addressRegion: site.address.region,
+      postalCode: site.address.postalCode,
+      addressCountry: site.address.country,
     },
     areaServed,
     openingHoursSpecification: {
@@ -73,17 +86,24 @@ const graph: SchemaNode[] = [
     ...(sameAs.length > 0 && { sameAs }),
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
+      '@id': `${origin}services/#catalog`,
       name: 'Heating and cooling services',
+      url: `${origin}services/`,
       itemListElement: serviceGroups.map(({ category, services }) => ({
         '@type': 'OfferCatalog',
+        '@id': `${new URL(categoryPath(category), Astro.site).href}#catalog`,
         name: category.data.title,
         description: category.data.summary,
+        url: new URL(categoryPath(category), Astro.site).href,
         itemListElement: services.map((service) => ({
           '@type': 'Offer',
           itemOffered: {
             '@type': 'Service',
-            '@id': `${origin}${service.id}/#service`,
+            '@id': serviceUrl(category, service)
+              ? `${serviceUrl(category, service)}#service`
+              : `${origin}services/#service-${service.id}`,
             name: service.data.title,
+            ...(serviceUrl(category, service) && { url: serviceUrl(category, service) }),
             description: service.data.summary,
             serviceType: service.data.title,
             category: category.data.title,
@@ -114,6 +134,8 @@ const graph: SchemaNode[] = [
     isPartOf: { '@id': websiteId },
     about: { '@id': businessId },
     primaryImageOfPage: { '@type': 'ImageObject', url: image },
+    ...(breadcrumb && { breadcrumb: { '@id': breadcrumb['@id'] } }),
+    ...(mainEntity && { mainEntity: { '@id': mainEntity } }),
   },
   ...schema,
 ];

@@ -1,0 +1,125 @@
+---
+import { Image } from 'astro:assets';
+import { render } from 'astro:content';
+import Contact from '../../../components/sections/Contact.astro';
+import CtaBanner from '../../../components/sections/CtaBanner.astro';
+import Faq from '../../../components/sections/Faq.astro';
+import PageHero from '../../../components/sections/PageHero.astro';
+import Process from '../../../components/sections/Process.astro';
+import Reviews from '../../../components/sections/Reviews.astro';
+import Button from '../../../components/ui/Button.astro';
+import Eyebrow from '../../../components/ui/Eyebrow.astro';
+import Icon from '../../../components/ui/Icon.astro';
+import SectionHeading from '../../../components/ui/SectionHeading.astro';
+import Layout from '../../../layouts/Layout.astro';
+import { site } from '../../../data/site';
+import { categoryPath, getFaqs, getServiceGroups } from '../../../lib/content';
+import { breadcrumbSchema, faqSchema } from '../../../lib/seo';
+
+// One page per service that has a `pageSlug`, at /services/<category slug>/<service slug>/.
+export async function getStaticPaths() {
+  const serviceGroups = await getServiceGroups();
+  return serviceGroups.flatMap(({ category, services }) =>
+    services
+      .filter((service) => service.data.pageSlug)
+      .map((service) => ({
+        params: { category: category.data.slug, service: service.data.pageSlug },
+        props: { category, service },
+      }))
+  );
+}
+
+const { category, service } = Astro.props;
+const { Content } = await render(service);
+
+const heading = service.data.heading ?? service.data.title;
+const title = service.data.seoTitle ?? `${heading} | ${site.name}`;
+const description = service.data.seoDescription ?? service.data.summary;
+const image = service.data.image ?? category.data.image;
+const imageAlt = service.data.imageAlt ?? category.data.imageAlt;
+
+const trail = [
+  { name: 'Home', href: '/' },
+  { name: 'Services', href: '/services/' },
+  { name: category.data.title, href: categoryPath(category) },
+  { name: heading, href: Astro.url.pathname },
+];
+
+// Each service has its own questions, stored under the service's id.
+const faqs = await getFaqs(service.id);
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+const schema = [
+  breadcrumbSchema(
+    trail.map((item) => ({ name: item.name, url: new URL(item.href, Astro.site).href })),
+    pageUrl
+  ),
+  faqSchema(faqs, pageUrl),
+];
+---
+
+<Layout
+  title={title}
+  description={description}
+  image={image}
+  imageAlt={imageAlt}
+  noindex={category.data.placeholder}
+  mainEntity={category.data.placeholder ? undefined : `${pageUrl}#service`}
+  schema={schema}
+>
+  <PageHero title={heading} description={service.data.summary} trail={trail} />
+
+  <section class="py-17 md:py-24" id="overview">
+    <div class="wrap grid items-center gap-10 md:grid-cols-2 md:gap-18">
+      <div>
+        <Eyebrow>{category.data.title}</Eyebrow>
+        <div class="[&_h2]:mb-3.5 [&_p]:mb-3.5">
+          <Content />
+        </div>
+        <div class="mt-7.5 flex flex-wrap gap-3">
+          <Button href="#contact">Get Free Quote <Icon name="arrow" /></Button>
+          <Button href={site.phone.href} variant="dark"><Icon name="phone" /> Call {site.phone.display}</Button>
+        </div>
+      </div>
+
+      <div class="relative pr-7 pb-7">
+        <div
+          class="absolute right-0 bottom-0 h-[70%] w-[62%] rounded-3xl bg-linear-135 from-brand to-navy-light"
+          aria-hidden="true"
+        >
+        </div>
+        <Image
+          src={image}
+          alt={imageAlt}
+          widths={[320, image.width]}
+          sizes="(min-width: 901px) 520px, 100vw"
+          loading="eager"
+          class="relative aspect-[4/3.4] w-full rounded-3xl object-cover"
+        />
+      </div>
+    </div>
+  </section>
+
+  {
+    service.data.includes && (
+      <section class="bg-soft py-17 md:py-24" id="includes">
+        <div class="wrap">
+          <SectionHeading eyebrow="What We Handle" title={service.data.includesTitle ?? `${heading} Includes`} />
+          <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {service.data.includes.map((item) => (
+              <li class="flex items-start gap-3 rounded-[14px] border border-line bg-white px-4 py-3.5 text-[14.5px] leading-[1.45] font-semibold text-ink">
+                <Icon name="check" class="size-5.5 flex-none rounded-full bg-brand stroke-3 p-1 text-white" />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
+
+  <Process />
+  <Reviews />
+  <Faq faqs={faqs} />
+  <Contact />
+  <CtaBanner />
+</Layout>

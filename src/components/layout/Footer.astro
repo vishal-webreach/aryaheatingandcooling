@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import logo from '../../assets/images/brand/logo.png';
 import { site } from '../../data/site';
-import { getOrdered } from '../../lib/content';
+import { categoryPath, getOrdered } from '../../lib/content';
 import Icon from '../ui/Icon.astro';
 import SocialLinks from '../ui/SocialLinks.astro';
 
@@ -13,8 +13,8 @@ const quickLinks: { label: string; href: string; external?: boolean }[] = [
   { label: 'About', href: '/about/' },
   { label: 'Services', href: '/services/' },
   { label: 'Service Areas', href: '/#areas' },
-  { label: 'Gallery', href: '/gallery/' },
-  { label: 'Contact', href: '/contact-us/' },
+  { label: 'Gallery', href: '/#gallery' },
+  { label: 'Contact', href: '#contact' },
   { label: 'Review Us', href: site.reviewHref, external: true },
 ];
 
@@ -51,7 +51,7 @@ const contactIconClass =
         {
           services.map((service) => (
             <li class="mb-2.25">
-              <a href={`/services/#${service.id}`} class={linkClass}>
+              <a href={categoryPath(service)} class={linkClass}>
                 {service.data.title}
               </a>
             </li>
@@ -103,9 +103,9 @@ const contactIconClass =
     <div class="wrap flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
       <span>&copy; {year} {site.name}. All rights reserved.</span>
       <span>
-        <a href={site.privacyHref} class={linkClass}>Privacy Policy</a>
+        {site.privacyHref ? <a href={site.privacyHref} class={linkClass}>Privacy Policy</a> : 'Privacy Policy'}
         <span class="mx-1.5">|</span>
-        <a href={site.termsHref} class={linkClass}>Terms &amp; Conditions</a>
+        {site.termsHref ? <a href={site.termsHref} class={linkClass}>Terms &amp; Conditions</a> : <Fragment>Terms &amp; Conditions</Fragment>}
       </span>
     </div>
   </div>

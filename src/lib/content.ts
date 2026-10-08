@@ -1,4 +1,4 @@
-import { getCollection, type CollectionKey } from 'astro:content';
+import { getCollection, type CollectionEntry, type CollectionKey } from 'astro:content';
 
 /** Loads a collection sorted by its `order` field. */
 export async function getOrdered<K extends CollectionKey>(collection: K) {
@@ -10,6 +10,16 @@ export async function getOrdered<K extends CollectionKey>(collection: K) {
 export async function getFaqs(page: string) {
   const faqs = await getOrdered('faqs');
   return faqs.filter((faq) => faq.data.page === page);
+}
+
+/** Path of a main service's page, e.g. /services/residential-hvac/. */
+export function categoryPath(category: CollectionEntry<'serviceCategories'>) {
+  return `/services/${category.data.slug}/`;
+}
+
+/** Path of a service's own page, or undefined while it has none. */
+export function servicePath(category: CollectionEntry<'serviceCategories'>, service: CollectionEntry<'services'>) {
+  return service.data.pageSlug ? `/services/${category.data.slug}/${service.data.pageSlug}/` : undefined;
 }
 
 /** Loads the main services, each with the services that belong to it. */

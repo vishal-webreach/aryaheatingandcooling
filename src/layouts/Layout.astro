@@ -23,6 +23,8 @@ interface Props {
   noindex?: boolean;
   /** schema.org type of the page, e.g. AboutPage or ContactPage. Defaults to WebPage. */
   pageType?: string;
+  /** `@id` of the thing the page is mainly about, e.g. a Service in the business catalogue. */
+  mainEntity?: string;
   /** Page-specific structured data, e.g. FAQPage or BreadcrumbList. */
   schema?: SchemaNode[];
 }
@@ -34,6 +36,7 @@ const {
   imageAlt = `${site.name} technician servicing an HVAC system`,
   noindex = false,
   pageType,
+  mainEntity,
   schema,
 } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
@@ -80,6 +83,7 @@ const robots = noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview
       canonical={canonical}
       image={shareImageUrl}
       pageType={pageType}
+      mainEntity={mainEntity}
       schema={schema}
     />
 

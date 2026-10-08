@@ -30,7 +30,13 @@ const schema = [
 ];
 ---
 
-<Layout title={title} description={description} pageType="CollectionPage" schema={schema}>
+<Layout
+  title={title}
+  description={description}
+  pageType="CollectionPage"
+  mainEntity={`${pageUrl}#catalog`}
+  schema={schema}
+>
   <PageHero
     title="Our Heating and Cooling Services"
     description="Residential and commercial HVAC service, plus contracts that keep every system maintained."

@@ -10,7 +10,13 @@ export default defineConfig({
   // Every page URL ends with a slash, e.g. /about/
   trailingSlash: 'always',
   build: { format: 'directory' },
-  integrations: [react(), sitemap()],
+  integrations: [
+    react(),
+    sitemap({
+      // Pages marked `placeholder` in service-categories.json are noindex, so keep them out.
+      filter: (page) => !page.includes('/services/hvac-contracts/'),
+    }),
+  ],
   fonts: [
     {
       provider: fontProviders.google(),

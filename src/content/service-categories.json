@@ -1,26 +1,51 @@
 [
   {
     "id": "residential-hvac",
+    "slug": "residential-hvac",
     "title": "Residential HVAC",
     "summary": "Heating and cooling repair, replacement and emergency service to keep your home comfortable year-round.",
     "image": "../assets/images/services/heating-cooling.png",
     "imageAlt": "Residential HVAC service in Ashburn, VA",
-    "order": 1
+    "order": 1,
+    "seoTitle": "Residential HVAC Services in Ashburn, VA | ARYA Heating & Cooling",
+    "seoDescription": "Home heating and cooling repair, AC repair and 24/7 emergency HVAC from Master Licensed technicians in Ashburn and Northern Virginia. Free estimates.",
+    "heading": "Heating and Cooling Service for Your Home",
+    "intro": [
+      "Your home's heating and cooling should simply work. ARYA Heating & Cooling repairs and maintains residential HVAC systems in Ashburn and across Northern Virginia, with Master Licensed technicians available 24 hours a day, 7 days a week.",
+      "We work on all major brands and every type of unit, and every job starts with a free in-person estimate."
+    ]
   },
   {
     "id": "commercial-hvac",
+    "slug": "commercial-hvac",
     "title": "Commercial HVAC",
     "summary": "Design, installation, maintenance and emergency service for offices, retail and other commercial buildings.",
     "image": "../assets/images/services/hvac-maintenance.png",
     "imageAlt": "Commercial HVAC service in Northern Virginia",
-    "order": 2
+    "order": 2,
+    "seoTitle": "Commercial HVAC Services in Ashburn, VA | ARYA Heating & Cooling",
+    "seoDescription": "Commercial HVAC design build, maintenance and 24/7 emergency service for offices, retail and other buildings in Ashburn and Northern Virginia.",
+    "heading": "HVAC Service for Commercial Buildings",
+    "intro": [
+      "A heating or cooling failure can stop a business. We design, install, maintain and repair commercial HVAC systems for offices, retail and other commercial buildings in Ashburn and across Northern Virginia.",
+      "Our Master Licensed technicians are available 24 hours a day, 7 days a week for emergency calls, and work on all major brands and every type of unit."
+    ]
   },
   {
     "id": "hvac-contracts",
+    "placeholder": true,
+    "slug": "hvac-contracts",
     "title": "HVAC Contracts",
     "summary": "Ongoing service plans that keep your equipment maintained and put you first in line when something breaks.",
     "image": "../assets/images/services/ac-repair.png",
     "imageAlt": "HVAC service contract visit in Northern Virginia",
-    "order": 3
+    "order": 3,
+    "seoTitle": "HVAC Service Contracts in Ashburn, VA | ARYA Heating & Cooling",
+    "seoDescription": "HVAC maintenance plans, service agreements and priority response for homes and businesses in Ashburn and Northern Virginia.",
+    "heading": "Service Contracts That Keep Your System Running",
+    "intro": [
+      "An HVAC contract puts your equipment on a regular service schedule, so problems are caught early instead of turning into breakdowns.",
+      "Contracts are available for homes and commercial buildings in Ashburn and across Northern Virginia. Call us to talk through what your system needs."
+    ]
   }
 ]

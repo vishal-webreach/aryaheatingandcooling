@@ -96,5 +96,348 @@
     "question": "How do I get a quote for a service?",
     "answer": "Complete the free quote form or call us at (703) 420-5038. We arrange a property visit at a time that works for you and give an in-person estimate at no charge.",
     "order": 5
+  },
+  {
+    "id": "emergency-hvac-availability",
+    "page": "emergency-hvac",
+    "question": "Are you really available 24 hours a day?",
+    "answer": "Yes. We are open 24 hours a day, 7 days a week, so you can call us for emergency heating and cooling repair at any time.",
+    "order": 1
+  },
+  {
+    "id": "emergency-hvac-what-counts",
+    "page": "emergency-hvac",
+    "question": "What counts as an HVAC emergency?",
+    "answer": "Any heating or cooling problem that cannot safely wait: no heat in cold weather, no cooling in extreme heat, a system that will not turn on, or anything that seems unsafe such as a burning smell. If you smell gas, leave the house and call your gas company first. If you are not sure, call us and we will help you decide.",
+    "order": 2
+  },
+  {
+    "id": "emergency-hvac-areas",
+    "page": "emergency-hvac",
+    "question": "Which areas do you cover for emergency calls?",
+    "answer": "We cover Ashburn and communities across Northern Virginia, including Leesburg, Sterling, Reston, Fairfax and Vienna.",
+    "order": 3
+  },
+  {
+    "id": "emergency-hvac-brands",
+    "page": "emergency-hvac",
+    "question": "Can you repair my brand of system in an emergency?",
+    "answer": "Yes. Our Master Licensed technicians work on all major brands and every type of unit.",
+    "order": 4
+  },
+  {
+    "id": "emergency-hvac-request",
+    "page": "emergency-hvac",
+    "question": "How do I request emergency service?",
+    "answer": "Call us at (703) 420-5038 at any time of day or night.",
+    "order": 5
+  },
+  {
+    "id": "residential-hvac-faq-1",
+    "page": "residential-hvac",
+    "question": "What residential HVAC services do you offer?",
+    "answer": "We offer emergency HVAC, AC repair, and heating and cooling service for homes in Ashburn and across Northern Virginia.",
+    "order": 1
+  },
+  {
+    "id": "residential-hvac-faq-2",
+    "page": "residential-hvac",
+    "question": "Do you offer emergency service for homes?",
+    "answer": "Yes. We are available 24 hours a day, 7 days a week for urgent heating and cooling repairs.",
+    "order": 2
+  },
+  {
+    "id": "residential-hvac-faq-3",
+    "page": "residential-hvac",
+    "question": "Do you work on my brand of home system?",
+    "answer": "We work on all major brands and every type of unit.",
+    "order": 3
+  },
+  {
+    "id": "residential-hvac-faq-4",
+    "page": "residential-hvac",
+    "question": "Is the estimate for home HVAC work free?",
+    "answer": "Yes. We visit your home and give you an in-person estimate with no obligation.",
+    "order": 4
+  },
+  {
+    "id": "commercial-hvac-faq-1",
+    "page": "commercial-hvac",
+    "question": "What commercial HVAC services do you offer?",
+    "answer": "We offer commercial design build, emergency service and HVAC maintenance.",
+    "order": 1
+  },
+  {
+    "id": "commercial-hvac-faq-2",
+    "page": "commercial-hvac",
+    "question": "What types of buildings do you work on?",
+    "answer": "We work on offices, retail spaces and other commercial buildings in Ashburn and across Northern Virginia.",
+    "order": 2
+  },
+  {
+    "id": "commercial-hvac-faq-3",
+    "page": "commercial-hvac",
+    "question": "Do you offer emergency service for businesses?",
+    "answer": "Yes. We are available 24 hours a day, 7 days a week for commercial heating and cooling failures.",
+    "order": 3
+  },
+  {
+    "id": "commercial-hvac-faq-4",
+    "page": "commercial-hvac",
+    "question": "How do I get a quote for a commercial project?",
+    "answer": "Complete the free quote form or call us at (703) 420-5038. We arrange a visit to your property and give an in-person estimate at no charge.",
+    "order": 4
+  },
+  {
+    "id": "hvac-contracts-faq-1",
+    "page": "hvac-contracts",
+    "question": "What is an HVAC contract?",
+    "answer": "An HVAC contract is an ongoing agreement for regular service on your heating and cooling equipment, so it stays maintained through the year.",
+    "order": 1
+  },
+  {
+    "id": "hvac-contracts-faq-2",
+    "page": "hvac-contracts",
+    "question": "What contract options do you offer?",
+    "answer": "We offer maintenance plans, service agreements and priority response.",
+    "order": 2
+  },
+  {
+    "id": "hvac-contracts-faq-3",
+    "page": "hvac-contracts",
+    "question": "Are contracts available for both homes and businesses?",
+    "answer": "Yes. Contracts are available for homes and commercial buildings in Ashburn and across Northern Virginia.",
+    "order": 3
+  },
+  {
+    "id": "hvac-contracts-faq-4",
+    "page": "hvac-contracts",
+    "question": "How do I set up a contract?",
+    "answer": "Call us at (703) 420-5038 or complete the free quote form, and we will go through the options for your system.",
+    "order": 4
+  },
+  {
+    "id": "ac-repair-faq-1",
+    "page": "ac-repair",
+    "question": "Why is my AC running but not cooling the house?",
+    "answer": "Common causes include a dirty filter, low refrigerant, a frozen coil or a failing part such as a capacitor. A technician needs to inspect the system to confirm the cause, so call us and we will take a look.",
+    "order": 1
+  },
+  {
+    "id": "ac-repair-faq-2",
+    "page": "ac-repair",
+    "question": "Do you repair all air conditioner brands?",
+    "answer": "Yes. We work on all major brands and every type of unit.",
+    "order": 2
+  },
+  {
+    "id": "ac-repair-faq-3",
+    "page": "ac-repair",
+    "question": "Can you repair my AC at night or on a weekend?",
+    "answer": "Yes. We are open 24 hours a day, 7 days a week.",
+    "order": 3
+  },
+  {
+    "id": "ac-repair-faq-4",
+    "page": "ac-repair",
+    "question": "Is the estimate for an AC repair free?",
+    "answer": "Yes. We give a free in-person estimate with no obligation.",
+    "order": 4
+  },
+  {
+    "id": "heating-and-cooling-faq-1",
+    "page": "heating-and-cooling",
+    "question": "What heating and cooling services do you offer for homes?",
+    "answer": "We repair and maintain home heating and cooling systems, including furnaces, heat pumps and air conditioners.",
+    "order": 1
+  },
+  {
+    "id": "heating-and-cooling-faq-2",
+    "page": "heating-and-cooling",
+    "question": "How often should my heating and cooling system be serviced?",
+    "answer": "Most manufacturers recommend a check once a year for heating and once a year for cooling, ideally before each season starts.",
+    "order": 2
+  },
+  {
+    "id": "heating-and-cooling-faq-3",
+    "page": "heating-and-cooling",
+    "question": "Do you work on both furnaces and heat pumps?",
+    "answer": "Yes. We work on all major brands and every type of unit.",
+    "order": 3
+  },
+  {
+    "id": "heating-and-cooling-faq-4",
+    "page": "heating-and-cooling",
+    "question": "Which areas do you serve?",
+    "answer": "We serve Ashburn and communities across Northern Virginia, including Leesburg, Sterling, Reston, Fairfax and Vienna.",
+    "order": 4
+  },
+  {
+    "id": "design-build-faq-1",
+    "page": "design-build",
+    "question": "What does design build mean for HVAC?",
+    "answer": "Design build means one team is responsible for both designing the HVAC system and installing it, instead of splitting the work between separate companies.",
+    "order": 1
+  },
+  {
+    "id": "design-build-faq-2",
+    "page": "design-build",
+    "question": "What kinds of commercial projects do you take on?",
+    "answer": "We handle new construction, build-outs and system replacements for offices, retail spaces and other commercial buildings.",
+    "order": 2
+  },
+  {
+    "id": "design-build-faq-3",
+    "page": "design-build",
+    "question": "Which equipment brands do you install?",
+    "answer": "We work with all major brands and every type of unit.",
+    "order": 3
+  },
+  {
+    "id": "design-build-faq-4",
+    "page": "design-build",
+    "question": "How do I get a quote for a design build project?",
+    "answer": "Complete the free quote form or call us at (703) 420-5038. We arrange a visit to your property and give an in-person estimate at no charge.",
+    "order": 4
+  },
+  {
+    "id": "commercial-emergency-service-faq-1",
+    "page": "commercial-emergency-service",
+    "question": "Are you available for commercial emergencies outside business hours?",
+    "answer": "Yes. We are open 24 hours a day, 7 days a week.",
+    "order": 1
+  },
+  {
+    "id": "commercial-emergency-service-faq-2",
+    "page": "commercial-emergency-service",
+    "question": "What types of commercial buildings do you cover?",
+    "answer": "We cover offices, retail spaces and other commercial buildings in Ashburn and across Northern Virginia.",
+    "order": 2
+  },
+  {
+    "id": "commercial-emergency-service-faq-3",
+    "page": "commercial-emergency-service",
+    "question": "Can you repair my brand of commercial equipment?",
+    "answer": "Yes. We work on all major brands and every type of unit.",
+    "order": 3
+  },
+  {
+    "id": "commercial-emergency-service-faq-4",
+    "page": "commercial-emergency-service",
+    "question": "How do I request emergency service for my building?",
+    "answer": "Call us at (703) 420-5038 at any time of day or night.",
+    "order": 4
+  },
+  {
+    "id": "hvac-maintenance-faq-1",
+    "page": "hvac-maintenance",
+    "question": "How often should a commercial HVAC system be maintained?",
+    "answer": "It depends on the equipment and how hard it works. Many commercial systems are serviced at least twice a year, and more often in demanding settings.",
+    "order": 1
+  },
+  {
+    "id": "hvac-maintenance-faq-2",
+    "page": "hvac-maintenance",
+    "question": "What does a maintenance visit include?",
+    "answer": "A visit typically covers filters, coils, electrical connections, belts and motors, thermostats and controls, and a check of how the system is performing.",
+    "order": 2
+  },
+  {
+    "id": "hvac-maintenance-faq-3",
+    "page": "hvac-maintenance",
+    "question": "Do you maintain all brands of commercial equipment?",
+    "answer": "Yes. We work on all major brands and every type of unit.",
+    "order": 3
+  },
+  {
+    "id": "hvac-maintenance-faq-4",
+    "page": "hvac-maintenance",
+    "question": "How do I arrange a maintenance visit?",
+    "answer": "Complete the free quote form or call us at (703) 420-5038, and we will arrange a visit at a time that works for you.",
+    "order": 4
+  },
+  {
+    "id": "maintenance-plans-faq-1",
+    "page": "maintenance-plans",
+    "question": "What is an HVAC maintenance plan?",
+    "answer": "A maintenance plan is an agreement for scheduled tune-ups and inspections of your heating and cooling equipment through the year.",
+    "order": 1
+  },
+  {
+    "id": "maintenance-plans-faq-2",
+    "page": "maintenance-plans",
+    "question": "How often is the system serviced under a plan?",
+    "answer": "Most systems are checked once before the heating season and once before the cooling season. We will recommend a schedule for your equipment.",
+    "order": 2
+  },
+  {
+    "id": "maintenance-plans-faq-3",
+    "page": "maintenance-plans",
+    "question": "Are maintenance plans available for businesses?",
+    "answer": "Yes. Plans are available for homes and commercial buildings in Ashburn and across Northern Virginia.",
+    "order": 3
+  },
+  {
+    "id": "maintenance-plans-faq-4",
+    "page": "maintenance-plans",
+    "question": "How do I sign up for a maintenance plan?",
+    "answer": "Call us at (703) 420-5038 or complete the free quote form, and we will go through the options for your system.",
+    "order": 4
+  },
+  {
+    "id": "service-agreements-faq-1",
+    "page": "service-agreements",
+    "question": "What is an HVAC service agreement?",
+    "answer": "A service agreement is a fixed arrangement that covers routine service and repairs for your heating and cooling system under agreed terms.",
+    "order": 1
+  },
+  {
+    "id": "service-agreements-faq-2",
+    "page": "service-agreements",
+    "question": "How is a service agreement different from a maintenance plan?",
+    "answer": "A maintenance plan covers scheduled tune-ups and inspections. A service agreement also sets terms for repairs.",
+    "order": 2
+  },
+  {
+    "id": "service-agreements-faq-3",
+    "page": "service-agreements",
+    "question": "Can a business take out a service agreement?",
+    "answer": "Yes. Agreements are available for homes and commercial buildings in Ashburn and across Northern Virginia.",
+    "order": 3
+  },
+  {
+    "id": "service-agreements-faq-4",
+    "page": "service-agreements",
+    "question": "How do I set up a service agreement?",
+    "answer": "Call us at (703) 420-5038 or complete the free quote form, and we will go through the options for your system.",
+    "order": 4
+  },
+  {
+    "id": "priority-response-faq-1",
+    "page": "priority-response",
+    "question": "What is priority response?",
+    "answer": "Priority response means contract customers are moved to the front of the line on urgent service calls.",
+    "order": 1
+  },
+  {
+    "id": "priority-response-faq-2",
+    "page": "priority-response",
+    "question": "Is priority response available at night and on weekends?",
+    "answer": "Yes. We are open 24 hours a day, 7 days a week.",
+    "order": 2
+  },
+  {
+    "id": "priority-response-faq-3",
+    "page": "priority-response",
+    "question": "Who can get priority response?",
+    "answer": "It is available to contract customers, for homes and commercial buildings in Ashburn and across Northern Virginia.",
+    "order": 3
+  },
+  {
+    "id": "priority-response-faq-4",
+    "page": "priority-response",
+    "question": "How do I add priority response?",
+    "answer": "Call us at (703) 420-5038 or complete the free quote form, and we will go through the options for your system.",
+    "order": 4
   }
 ]

@@ -1,16 +1,18 @@
 import type { APIRoute } from 'astro';
 import { site } from '../data/site';
-import { getFaqs, getOrdered, getServiceGroups } from '../lib/content';
+import { categoryPath, getFaqs, getOrdered, getServiceGroups, servicePath } from '../lib/content';
 
 // Plain-text summary of the business for AI assistants and crawlers.
 export const GET: APIRoute = async ({ site: siteUrl }) => {
-  const [serviceGroups, areas, faqs] = await Promise.all([
+  const [allServiceGroups, areas, faqs] = await Promise.all([
     getServiceGroups(),
     getOrdered('areas'),
     // Only the general questions; page-specific FAQs stay on their own pages.
     getFaqs('home'),
   ]);
 
+  // Categories with dummy content are left out.
+  const serviceGroups = allServiceGroups.filter(({ category }) => !category.data.placeholder);
   const home = new URL('/', siteUrl).href;
 
   const lines = [
@@ -22,7 +24,7 @@ export const GET: APIRoute = async ({ site: siteUrl }) => {
     '',
     `- [Home](${home}): Services, service areas, FAQs and free quote request`,
     `- [About](${new URL('/about/', siteUrl).href}): Company background, what to expect and how the process works`,
-    `- [Services](${new URL('/services/', siteUrl).href}): Residential HVAC, commercial HVAC and HVAC contracts`,
+    `- [Services](${new URL('/services/', siteUrl).href}): Residential and commercial HVAC services`,
     `- [Sitemap](${new URL('/sitemap-index.xml', siteUrl).href}): All pages on the site`,
     '',
     '## Contact',
@@ -36,11 +38,15 @@ export const GET: APIRoute = async ({ site: siteUrl }) => {
     '## Services',
     '',
     ...serviceGroups.flatMap(({ category, services }) => [
-      `### ${category.data.title}`,
+      `### [${category.data.title}](${new URL(categoryPath(category), siteUrl).href})`,
       '',
       category.data.summary,
       '',
-      ...services.map((service) => `- ${service.data.title}: ${service.data.summary}`),
+      ...services.map((service) => {
+        const path = servicePath(category, service);
+        const name = path ? `[${service.data.title}](${new URL(path, siteUrl).href})` : service.data.title;
+        return `- ${name}: ${service.data.summary}`;
+      }),
       '',
     ]),
     '## Service areas',

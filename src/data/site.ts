@@ -24,9 +24,9 @@ export interface SocialLink {
 export const site = {
   name: 'ARYA Heating & Cooling',
   shortName: 'ARYA HVAC',
-  title: 'HVAC Repair & Installation in Ashburn, VA | ARYA Heating & Cooling',
+  title: 'Ashburn HVAC Repair & Installation | ARYA Heating & Cooling',
   description:
-    'Master Licensed HVAC technicians serving Ashburn and Northern Virginia. 24/7 emergency HVAC, AC repair, heating and maintenance. Call (703) 420-5038 for a free quote.',
+    'Master Licensed HVAC technicians serving Ashburn and Northern Virginia. 24/7 emergency HVAC, AC repair, heating and maintenance. Call (703) 420-5038.',
   phone: {
     display: '(703) 420-5038',
     href: 'tel:+17034205038',
@@ -39,8 +39,17 @@ export const site = {
   formAction: '#',
   // Google "write a review" page for the business
   reviewHref: 'https://g.page/r/CehQZc4BOKckEAE/review',
-  termsHref: '/terms/',
-  privacyHref: '/privacy-policy-682915/',
+  // Business address as published on the previous website
+  address: {
+    street: '8256 Laurel Heights Loop',
+    city: 'Lorton',
+    region: 'VA',
+    postalCode: '22079',
+    country: 'US',
+  },
+  // Set these once the pages exist, e.g. '/terms/'. Until then the labels show without a link.
+  termsHref: undefined as string | undefined,
+  privacyHref: undefined as string | undefined,
 } as const;
 
 export const socialLinks: SocialLink[] = [

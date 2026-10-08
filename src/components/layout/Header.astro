@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import logo from '../../assets/images/brand/logo.png';
 import { site } from '../../data/site';
-import { getOrdered, getServiceGroups } from '../../lib/content';
+import { categoryPath, getOrdered, getServiceGroups, servicePath } from '../../lib/content';
 import Button from '../ui/Button.astro';
 import Icon from '../ui/Icon.astro';
 import SocialLinks from '../ui/SocialLinks.astro';
@@ -11,9 +11,9 @@ interface NavLink {
   label: string;
   href: string;
   /** Sub-links shown in a dropdown. */
-  children?: SubLink[];
+  children?: MaybeLink[];
   /** Sub-links shown in a dropdown, one headed column per group. */
-  groups?: { label: string; children: SubLink[] }[];
+  groups?: (SubLink & { children: MaybeLink[] })[];
   toggleLabel?: string;
   /** Lays the dropdown out in columns. */
   columns?: boolean;
@@ -23,6 +23,9 @@ interface SubLink {
   label: string;
   href: string;
 }
+
+/** A sub-link without an `href` has no page yet and is shown as plain text. */
+type MaybeLink = Omit<SubLink, 'href'> & { href?: string };
 
 const serviceGroups = await getServiceGroups();
 const areas = await getOrdered('areas');
@@ -34,10 +37,10 @@ const navLinks: NavLink[] = [
     label: 'Services',
     href: '/services/',
     toggleLabel: 'Show services',
-    // The main services have no page of their own, so they are headings, not links.
     groups: serviceGroups.map(({ category, services }) => ({
       label: category.data.title,
-      children: services.map((service) => ({ label: service.data.title, href: `/${service.id}/` })),
+      href: categoryPath(category),
+      children: services.map((service) => ({ label: service.data.title, href: servicePath(category, service) })),
     })),
   },
   {
@@ -45,27 +48,30 @@ const navLinks: NavLink[] = [
     href: '/#areas',
     toggleLabel: 'Show service areas',
     columns: true,
-    children: areas.map((area) => ({ label: area.data.name, href: `/${area.id}/` })),
+    // Area pages don't exist yet; add an `href` here once they do.
+    children: areas.map((area) => ({ label: area.data.name })),
   },
-  { label: 'Gallery', href: '/gallery/' },
+  { label: 'Gallery', href: '/#gallery' },
   { label: 'Contact', href: '#contact' },
 ];
 
 const { pathname } = Astro.url;
-const isCurrent = (href: string) => href === pathname;
+const isCurrent = (href?: string) => href === pathname;
 /** True when the link, or any link in its dropdown, is the current page. */
 const isActive = (link: NavLink) =>
   isCurrent(link.href) ||
   (link.children ?? []).some((child) => isCurrent(child.href)) ||
-  (link.groups ?? []).some((group) => group.children.some((child) => isCurrent(child.href)));
-const current = (href: string) => (isCurrent(href) ? 'page' : undefined);
+  (link.groups ?? []).some((group) => isCurrent(group.href) || group.children.some((child) => isCurrent(child.href)));
+const current = (href?: string) => (isCurrent(href) ? 'page' : undefined);
 
 const linkClass =
   'rounded-xl px-3.5 py-3 text-[15px] font-semibold text-ink transition-colors duration-200 hover:bg-brand-soft hover:text-brand md:rounded-full md:px-2.5 md:py-2 md:whitespace-nowrap lg:px-3.5';
 const subLinkClass =
   'block rounded-[10px] px-3 py-2.25 text-[14.5px] font-medium text-ink transition-colors duration-200 hover:bg-brand-soft hover:text-brand aria-[current=page]:bg-brand-soft aria-[current=page]:text-brand md:px-2.5 md:py-2 md:text-[15px] md:font-semibold md:whitespace-nowrap lg:px-3.5';
-const groupLabelClass =
-  'block px-3 py-2.25 text-[14.5px] font-extrabold tracking-[0.04em] text-brand uppercase md:px-2.5 md:py-2 md:text-[15px] md:whitespace-nowrap lg:px-3.5';
+const subLabelClass =
+  'block px-3 py-2.25 text-[14.5px] font-medium text-body md:px-2.5 md:py-2 md:text-[15px] md:font-semibold md:whitespace-nowrap lg:px-3.5';
+const groupLinkClass =
+  'block rounded-[10px] px-3 py-2.25 text-[14.5px] font-extrabold tracking-[0.04em] text-brand uppercase transition-colors duration-200 hover:bg-brand-soft aria-[current=page]:bg-brand-soft md:px-2.5 md:py-2 md:text-[15px] md:whitespace-nowrap lg:px-3.5';
 const contactClass = 'group/contact flex items-center gap-2.5 p-1 text-[13px] font-semibold text-ink wrap-anywhere';
 const contactIconClass =
   'grid size-7 flex-none place-items-center rounded-full bg-soft text-ink transition-colors duration-200 group-hover/contact:bg-accent group-hover/contact:text-white';
@@ -173,19 +179,29 @@ const contactIconClass =
                 >
                   {link.groups?.map((group) => (
                     <div class="max-md:pb-1.5">
-                      <span class={groupLabelClass}>{group.label}</span>
-                      {group.children.map((child) => (
-                        <a href={child.href} aria-current={current(child.href)} class={subLinkClass}>
-                          {child.label}
-                        </a>
-                      ))}
+                      <a href={group.href} aria-current={current(group.href)} class={groupLinkClass}>
+                        {group.label}
+                      </a>
+                      {group.children.map((child) =>
+                        child.href ? (
+                          <a href={child.href} aria-current={current(child.href)} class={subLinkClass}>
+                            {child.label}
+                          </a>
+                        ) : (
+                          <span class={subLabelClass}>{child.label}</span>
+                        )
+                      )}
                     </div>
                   ))}
-                  {link.children?.map((child) => (
-                    <a href={child.href} aria-current={current(child.href)} class={subLinkClass}>
-                      {child.label}
-                    </a>
-                  ))}
+                  {link.children?.map((child) =>
+                    child.href ? (
+                      <a href={child.href} aria-current={current(child.href)} class={subLinkClass}>
+                        {child.label}
+                      </a>
+                    ) : (
+                      <span class={subLabelClass}>{child.label}</span>
+                    )
+                  )}
                 </div>
               </div>
             </div>
