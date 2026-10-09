@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import logo from '../../assets/images/brand/logo.png';
 import { site } from '../../data/site';
-import { categoryPath, getOrdered, getServiceGroups, servicePath } from '../../lib/content';
+import { areaPath, categoryPath, getOrdered, getServiceGroups, servicePath } from '../../lib/content';
 import Button from '../ui/Button.astro';
 import Icon from '../ui/Icon.astro';
 import SocialLinks from '../ui/SocialLinks.astro';
@@ -45,14 +45,13 @@ const navLinks: NavLink[] = [
   },
   {
     label: 'Service Areas',
-    href: '/#areas',
+    href: '/service-areas/',
     toggleLabel: 'Show service areas',
     columns: true,
-    // Area pages don't exist yet; add an `href` here once they do.
-    children: areas.map((area) => ({ label: area.data.name })),
+    children: areas.map((area) => ({ label: area.data.name, href: areaPath(area) })),
   },
-  { label: 'Gallery', href: '/#gallery' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Gallery', href: '/gallery/' },
+  { label: 'Contact', href: '/contact-us/' },
 ];
 
 const { pathname } = Astro.url;

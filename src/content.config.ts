@@ -61,9 +61,26 @@ const gallery = defineCollection({
 });
 
 const areas = defineCollection({
-  loader: file('src/content/areas.json'),
+  // One file per area. An area gets its own page once its file has text below the front matter.
+  loader: glob({ pattern: '*.md', base: './src/content/areas' }),
   schema: z.object({
     name: z.string(),
+    order: z.number(),
+    // The fields below are only used by areas that have their own page.
+    county: z.string().optional(),
+    seoTitle: z.string().optional(),
+    seoDescription: z.string().optional(),
+    neighborhoods: z.array(z.string()).optional(),
+    zipCodes: z.array(z.string()).optional(),
+  }),
+});
+
+// Legal documents; each file becomes a page at /<file name>/.
+const legal = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/legal' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
     order: z.number(),
   }),
 });
@@ -91,4 +108,4 @@ const reviews = defineCollection({
   }),
 });
 
-export const collections = { serviceCategories, services, gallery, areas, faqs, reviews };
+export const collections = { serviceCategories, services, gallery, areas, legal, faqs, reviews };

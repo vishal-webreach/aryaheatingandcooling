@@ -21,6 +21,8 @@ interface Props {
   imageAlt?: string;
   /** Keeps the page out of search results. */
   noindex?: boolean;
+  /** City the page is about. Only set on area pages. */
+  placename?: string;
   /** schema.org type of the page, e.g. AboutPage or ContactPage. Defaults to WebPage. */
   pageType?: string;
   /** `@id` of the thing the page is mainly about, e.g. a Service in the business catalogue. */
@@ -35,6 +37,7 @@ const {
   image = heroImage,
   imageAlt = `${site.name} technician servicing an HVAC system`,
   noindex = false,
+  placename,
   pageType,
   mainEntity,
   schema,
@@ -57,7 +60,7 @@ const robots = noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview
     <meta name="robots" content={robots} />
     <meta name="author" content={site.name} />
     <meta name="geo.region" content="US-VA" />
-    <meta name="geo.placename" content="Ashburn" />
+    {placename && <meta name="geo.placename" content={placename} />}
     <meta name="theme-color" content="#0b1f33" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 

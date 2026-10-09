@@ -1,0 +1,152 @@
+---
+import { Image } from 'astro:assets';
+import { render } from 'astro:content';
+import aboutImage from '../../assets/images/about/about.png';
+import Contact from '../../components/sections/Contact.astro';
+import CtaBanner from '../../components/sections/CtaBanner.astro';
+import Faq from '../../components/sections/Faq.astro';
+import PageHero from '../../components/sections/PageHero.astro';
+import Process from '../../components/sections/Process.astro';
+import Reviews from '../../components/sections/Reviews.astro';
+import ServiceAreas from '../../components/sections/ServiceAreas.astro';
+import Services from '../../components/sections/Services.astro';
+import Button from '../../components/ui/Button.astro';
+import Eyebrow from '../../components/ui/Eyebrow.astro';
+import Icon from '../../components/ui/Icon.astro';
+import SectionHeading from '../../components/ui/SectionHeading.astro';
+import Layout from '../../layouts/Layout.astro';
+import { site } from '../../data/site';
+import { areaPath, areaSlug, getFaqs, getOrdered } from '../../lib/content';
+import { breadcrumbSchema, faqSchema } from '../../lib/seo';
+
+// One page per area that has page content, at /service-areas/<area id>-va/.
+export async function getStaticPaths() {
+  const areas = await getOrdered('areas');
+  return areas.filter((area) => areaPath(area)).map((area) => ({ params: { area: areaSlug(area) }, props: { area } }));
+}
+
+const { area } = Astro.props;
+const { Content } = await render(area);
+const place = `${area.data.name}, VA`;
+
+const title = area.data.seoTitle ?? `HVAC Services in ${place} | ${site.name}`;
+const description = area.data.seoDescription ?? site.description;
+const imageAlt = `ARYA Heating & Cooling technician working in ${place}`;
+
+const trail = [
+  { name: 'Home', href: '/' },
+  { name: 'Service Areas', href: '/service-areas/' },
+  { name: area.data.name, href: Astro.url.pathname },
+];
+
+// Each area has its own questions, stored under the area's id.
+const faqs = await getFaqs(area.id);
+const origin = new URL('/', Astro.site).href;
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+const serviceId = `${pageUrl}#service`;
+const schema = [
+  breadcrumbSchema(
+    trail.map((item) => ({ name: item.name, url: new URL(item.href, Astro.site).href })),
+    pageUrl
+  ),
+  faqSchema(faqs, pageUrl),
+  {
+    '@type': 'Service',
+    '@id': serviceId,
+    name: `HVAC Services in ${place}`,
+    description,
+    serviceType: 'Heating and cooling repair, maintenance and installation',
+    url: pageUrl,
+    provider: { '@id': `${origin}#business` },
+    areaServed: {
+      '@type': 'City',
+      name: place,
+      ...(area.data.county && {
+        containedInPlace: { '@type': 'AdministrativeArea', name: `${area.data.county}, VA` },
+      }),
+    },
+  },
+];
+---
+
+<Layout
+  title={title}
+  description={description}
+  image={aboutImage}
+  imageAlt={imageAlt}
+  placename={area.data.name}
+  mainEntity={serviceId}
+  schema={schema}
+>
+  <PageHero
+    title={`HVAC Services in ${place}`}
+    description={`Heating and cooling repair, maintenance and installation in ${area.data.name}, 24 hours a day, 7 days a week.`}
+    trail={trail}
+  />
+
+  <section class="py-17 md:py-24" id="overview">
+    <div class="wrap grid items-center gap-10 md:grid-cols-2 md:gap-18">
+      <div>
+        <Eyebrow>{area.data.county ?? 'Service Area'}</Eyebrow>
+        <div class="[&_h2]:mb-3.5 [&_p]:mb-3.5">
+          <Content />
+        </div>
+        <div class="mt-7.5 flex flex-wrap gap-3">
+          <Button href="#contact">Get Free Quote <Icon name="arrow" /></Button>
+          <Button href={site.phone.href} variant="dark"><Icon name="phone" /> Call {site.phone.display}</Button>
+        </div>
+      </div>
+
+      <div class="relative pr-7 pb-7">
+        <div
+          class="absolute right-0 bottom-0 h-[70%] w-[62%] rounded-3xl bg-linear-135 from-brand to-navy-light"
+          aria-hidden="true"
+        >
+        </div>
+        <Image
+          src={aboutImage}
+          alt={imageAlt}
+          widths={[320, aboutImage.width]}
+          sizes="(min-width: 901px) 520px, 100vw"
+          loading="eager"
+          class="relative aspect-[4/3.4] w-full rounded-3xl object-cover"
+        />
+      </div>
+    </div>
+  </section>
+
+  {
+    area.data.neighborhoods && (
+      <section class="bg-soft py-17 md:py-24" id="neighborhoods">
+        <div class="wrap">
+          <SectionHeading
+            eyebrow="Local Coverage"
+            title={`Neighborhoods We Serve in ${area.data.name}`}
+            description={
+              area.data.zipCodes && `Covering ${area.data.name} ZIP codes ${area.data.zipCodes.join(' and ')}.`
+            }
+          />
+          <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+            {area.data.neighborhoods.map((neighborhood) => (
+              <li class="flex items-center gap-3 rounded-[14px] border border-line bg-white px-4 py-3.5 text-[15px] font-semibold text-ink">
+                <Icon name="pin" class="size-4.5 flex-none text-brand" />
+                {neighborhood}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
+
+  <Services
+    title={`Our HVAC Services in ${area.data.name}`}
+    description={`Residential and commercial heating and cooling service for ${area.data.name} homes and businesses.`}
+  />
+  <Process />
+  <Reviews />
+  <ServiceAreas />
+  <Faq faqs={faqs} />
+  <Contact />
+  <CtaBanner />
+</Layout>

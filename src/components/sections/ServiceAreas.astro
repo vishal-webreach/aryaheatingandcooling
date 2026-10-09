@@ -1,6 +1,6 @@
 ---
 import { site } from '../../data/site';
-import { getOrdered } from '../../lib/content';
+import { areaPath, getOrdered } from '../../lib/content';
 import Eyebrow from '../ui/Eyebrow.astro';
 import Icon from '../ui/Icon.astro';
 
@@ -26,10 +26,20 @@ const areas = await getOrdered('areas');
       {
         areas.map((area) => (
           <li>
-            <span class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/4 px-4 py-2.25 text-[14.5px] font-semibold text-white">
-              <span class="size-1.75 rounded-full bg-accent" />
-              {area.data.name}
-            </span>
+            {areaPath(area) ? (
+              <a
+                href={areaPath(area)}
+                class="group inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/4 px-4 py-2.25 text-[14.5px] font-semibold text-white transition-colors duration-200 hover:border-accent hover:bg-accent"
+              >
+                <span class="size-1.75 rounded-full bg-accent transition-colors duration-200 group-hover:bg-white" />
+                {area.data.name}
+              </a>
+            ) : (
+              <span class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/4 px-4 py-2.25 text-[14.5px] font-semibold text-white">
+                <span class="size-1.75 rounded-full bg-accent" />
+                {area.data.name}
+              </span>
+            )}
           </li>
         ))
       }

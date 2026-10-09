@@ -3,12 +3,12 @@ title: AC Repair
 summary: Professional AC repair to quickly restore cool, comfortable air. Fast diagnostics and reliable fixes for all major systems.
 category: residential-hvac
 image: ../../assets/images/services/ac-repair.png
-imageAlt: AC repair in Ashburn, VA
+imageAlt: AC repair in Northern Virginia
 order: 2
 pageSlug: ac-repair
 heading: AC Repair
-seoTitle: AC Repair in Ashburn, VA | ARYA Heating & Cooling
-seoDescription: AC not cooling? Master Licensed technicians repair all major air conditioner brands in Ashburn and Northern Virginia. Open 24/7. Call (703) 420-5038.
+seoTitle: AC Repair in Northern Virginia | ARYA Heating & Cooling
+seoDescription: AC not cooling? Master Licensed technicians repair all major air conditioner brands in Northern Virginia. Open 24/7. Call (703) 420-5038.
 includesTitle: AC Problems We Repair
 includes:
   - AC running but not cooling

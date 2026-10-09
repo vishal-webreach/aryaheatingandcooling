@@ -7,8 +7,8 @@ imageAlt: HVAC system maintenance visit in Northern Virginia
 order: 1
 pageSlug: maintenance-plans
 heading: HVAC Maintenance Plans
-seoTitle: HVAC Maintenance Plans in Ashburn, VA | ARYA Heating & Cooling
-seoDescription: Scheduled HVAC tune-ups and inspections for homes and businesses in Ashburn and Northern Virginia. Keep your system efficient all year.
+seoTitle: HVAC Maintenance Plans | ARYA Heating & Cooling
+seoDescription: Scheduled HVAC tune-ups and inspections for homes and businesses in Northern Virginia. Keep your system efficient all year.
 includesTitle: What a Maintenance Plan Covers
 includes:
   - Scheduled tune-ups through the year

@@ -1,0 +1,53 @@
+---
+import { render } from 'astro:content';
+import Contact from '../components/sections/Contact.astro';
+import CtaBanner from '../components/sections/CtaBanner.astro';
+import Faq from '../components/sections/Faq.astro';
+import PageHero from '../components/sections/PageHero.astro';
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data/site';
+import { getFaqs, getOrdered } from '../lib/content';
+import { breadcrumbSchema, faqSchema } from '../lib/seo';
+
+// One page per file in src/content/legal, at /<file name>/ (e.g. /terms/, /privacy-policy/).
+export async function getStaticPaths() {
+  const documents = await getOrdered('legal');
+  return documents.map((document) => ({ params: { legal: document.id }, props: { document } }));
+}
+
+const { document } = Astro.props;
+const { Content } = await render(document);
+
+const title = `${document.data.title} | ${site.name}`;
+const trail = [
+  { name: 'Home', href: '/' },
+  { name: document.data.title, href: Astro.url.pathname },
+];
+
+// Each document has its own questions, stored under the file name.
+const faqs = await getFaqs(document.id);
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+const schema = [
+  breadcrumbSchema(
+    trail.map((item) => ({ name: item.name, url: new URL(item.href, Astro.site).href })),
+    pageUrl
+  ),
+  faqSchema(faqs, pageUrl),
+];
+---
+
+<Layout title={title} description={document.data.description} schema={schema}>
+  <PageHero title={document.data.title} description={site.name} trail={trail} />
+
+  <section class="py-17 md:py-24" id="document">
+    <div
+      class="wrap max-w-225 [&_a]:font-semibold [&_a]:text-brand [&_a]:underline [&_h2]:mt-11 [&_h2]:mb-3.5 [&_h2]:text-[clamp(24px,3vw,30px)] [&_h3]:mt-8 [&_h3]:mb-3 [&_h4]:mt-6 [&_h4]:mb-2.5 [&_h4]:text-[17px] [&_h4]:font-extrabold [&_h4]:text-ink [&_li]:mb-2 [&_p]:mb-3.5 [&_strong]:text-ink [&_ul]:mb-3.5 [&_ul]:list-disc [&_ul]:pl-5.5"
+    >
+      <Content />
+    </div>
+  </section>
+
+  <Faq faqs={faqs} />
+  <Contact />
+  <CtaBanner />
+</Layout>

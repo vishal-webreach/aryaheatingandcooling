@@ -7,8 +7,8 @@ imageAlt: Heating and cooling service in Northern Virginia
 order: 3
 pageSlug: heating-cooling-repair
 heading: Heating & Cooling
-seoTitle: Heating & Cooling Service in Ashburn | ARYA Heating & Cooling
-seoDescription: Year-round heating and cooling repair and maintenance for homes in Ashburn and Northern Virginia from Master Licensed technicians. Free estimates.
+seoTitle: Heating & Cooling in Northern Virginia | ARYA Heating & Cooling
+seoDescription: Year-round heating and cooling repair and maintenance for homes in Northern Virginia from Master Licensed technicians. Free estimates.
 includesTitle: Heating and Cooling Work We Do
 includes:
   - Furnace and heat pump repair

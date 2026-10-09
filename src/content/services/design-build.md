@@ -5,8 +5,8 @@ category: commercial-hvac
 order: 1
 pageSlug: design-build
 heading: Commercial HVAC Design Build
-seoTitle: Commercial HVAC Design Build, Ashburn | ARYA Heating & Cooling
-seoDescription: Commercial HVAC design and installation for new construction, build-outs and system replacements in Ashburn and Northern Virginia. Free estimates.
+seoTitle: Commercial HVAC Design Build Services | ARYA Heating & Cooling
+seoDescription: Commercial HVAC design and installation for new construction, build-outs and system replacements in Northern Virginia. Free estimates.
 includesTitle: Design Build Projects We Handle
 includes:
   - New construction

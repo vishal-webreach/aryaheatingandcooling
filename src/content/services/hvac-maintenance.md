@@ -3,12 +3,12 @@ title: HVAC Maintenance
 summary: Routine maintenance to keep your system running efficiently, prevent breakdowns and extend the life of your equipment.
 category: commercial-hvac
 image: ../../assets/images/services/hvac-maintenance.png
-imageAlt: HVAC maintenance in Ashburn, VA
+imageAlt: HVAC maintenance in Northern Virginia
 order: 3
 pageSlug: maintenance
 heading: Commercial HVAC Maintenance
-seoTitle: Commercial HVAC Maintenance, Ashburn | ARYA Heating & Cooling
-seoDescription: Routine commercial HVAC maintenance for offices, retail and other buildings in Ashburn and Northern Virginia. Prevent breakdowns. Free estimates.
+seoTitle: Commercial HVAC Maintenance Services | ARYA Heating & Cooling
+seoDescription: Routine commercial HVAC maintenance for offices, retail and other buildings in Northern Virginia. Prevent breakdowns. Free estimates.
 includesTitle: What a Maintenance Visit Covers
 includes:
   - Filter checks and replacement

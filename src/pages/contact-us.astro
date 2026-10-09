@@ -1,0 +1,108 @@
+---
+import Contact from '../components/sections/Contact.astro';
+import CtaBanner from '../components/sections/CtaBanner.astro';
+import Faq from '../components/sections/Faq.astro';
+import PageHero from '../components/sections/PageHero.astro';
+import ServiceAreas from '../components/sections/ServiceAreas.astro';
+import Icon from '../components/ui/Icon.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import Layout from '../layouts/Layout.astro';
+import { site, type IconName } from '../data/site';
+import { getFaqs } from '../lib/content';
+import { breadcrumbSchema, faqSchema } from '../lib/seo';
+
+const title = `Contact Us | ${site.name}`;
+const description =
+  'Contact ARYA Heating & Cooling for heating and cooling service in Northern Virginia. Call (703) 420-5038 any time or request a free quote online.';
+
+const trail = [
+  { name: 'Home', href: '/' },
+  { name: 'Contact', href: '/contact-us/' },
+];
+
+interface ContactMethod {
+  icon: IconName;
+  title: string;
+  text: string;
+  link: { label: string; href: string };
+}
+
+const methods: ContactMethod[] = [
+  {
+    icon: 'phone',
+    title: 'Call Us',
+    text: 'The fastest way to reach us, day or night.',
+    link: { label: site.phone.display, href: site.phone.href },
+  },
+  {
+    icon: 'mail',
+    title: 'Email Us',
+    text: 'Send us the details and we will get back to you.',
+    link: { label: site.email.display, href: site.email.href },
+  },
+  {
+    icon: 'clock',
+    title: 'Hours',
+    text: 'Open 24 hours a day, 7 days a week, including for emergencies.',
+    link: { label: 'Request a free quote', href: '#contact' },
+  },
+  {
+    icon: 'pin',
+    title: 'Service Area',
+    text: 'Homes and businesses across Northern Virginia.',
+    link: { label: 'View service areas', href: '/service-areas/' },
+  },
+];
+
+const faqs = await getFaqs('contact');
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+const schema = [
+  breadcrumbSchema(
+    trail.map((item) => ({ name: item.name, url: new URL(item.href, Astro.site).href })),
+    pageUrl
+  ),
+  faqSchema(faqs, pageUrl),
+];
+---
+
+<Layout
+  title={title}
+  description={description}
+  pageType="ContactPage"
+  mainEntity={`${new URL('/', Astro.site).href}#business`}
+  schema={schema}
+>
+  <PageHero
+    title="Contact Us"
+    description="Call us any time, or send a request and we will get back to you to schedule your free estimate."
+    trail={trail}
+  />
+
+  <section class="py-17 md:py-24" id="ways-to-reach-us">
+    <div class="wrap">
+      <SectionHeading eyebrow="Get In Touch" title="How to Reach ARYA Heating & Cooling" />
+      <ul class="grid gap-5.5 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          methods.map((method) => (
+            <li class="flex flex-col rounded-card border border-line bg-white p-6">
+              <Icon name={method.icon} class="mb-5 size-12 rounded-xl bg-brand-soft p-3 text-brand" />
+              <h3 class="mb-3">{method.title}</h3>
+              <p class="mb-3.5 flex-1 text-[15px]">{method.text}</p>
+              <a
+                href={method.link.href}
+                class="text-[15px] font-bold wrap-anywhere text-ink transition-colors duration-200 hover:text-brand"
+              >
+                {method.link.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <Contact />
+  <ServiceAreas />
+  <Faq faqs={faqs} />
+  <CtaBanner />
+</Layout>

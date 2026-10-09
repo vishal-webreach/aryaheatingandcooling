@@ -12,6 +12,16 @@ export async function getFaqs(page: string) {
   return faqs.filter((faq) => faq.data.page === page);
 }
 
+/** URL segment of an area's page: the area id plus the state, e.g. "ashburn-va". */
+export function areaSlug(area: CollectionEntry<'areas'>) {
+  return `${area.id}-va`;
+}
+
+/** Path of an area's own page, or undefined while it has none. */
+export function areaPath(area: CollectionEntry<'areas'>) {
+  return area.body?.trim() ? `/service-areas/${areaSlug(area)}/` : undefined;
+}
+
 /** Path of a main service's page, e.g. /services/residential-hvac/. */
 export function categoryPath(category: CollectionEntry<'serviceCategories'>) {
   return `/services/${category.data.slug}/`;

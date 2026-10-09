@@ -7,8 +7,8 @@ imageAlt: HVAC repair in progress on a priority service call
 order: 3
 pageSlug: priority-response
 heading: Priority Response
-seoTitle: Priority HVAC Response in Ashburn, VA | ARYA Heating & Cooling
-seoDescription: Priority response for HVAC contract customers in Ashburn and Northern Virginia. Move to the front of the line on urgent service calls.
+seoTitle: Priority HVAC Response | ARYA Heating & Cooling
+seoDescription: Priority response for HVAC contract customers in Northern Virginia. Move to the front of the line on urgent service calls.
 includesTitle: What Priority Response Gives You
 includes:
   - Front of the line on urgent calls

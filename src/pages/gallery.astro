@@ -1,0 +1,81 @@
+---
+import { Image, getImage } from 'astro:assets';
+import Contact from '../components/sections/Contact.astro';
+import CtaBanner from '../components/sections/CtaBanner.astro';
+import Faq from '../components/sections/Faq.astro';
+import PageHero from '../components/sections/PageHero.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import Layout from '../layouts/Layout.astro';
+import { site } from '../data/site';
+import { getFaqs, getOrdered } from '../lib/content';
+import { breadcrumbSchema, faqSchema } from '../lib/seo';
+
+const title = `Photo Gallery | ${site.name}`;
+const description =
+  'Photos of heating and cooling work by ARYA Heating & Cooling: HVAC repair, maintenance and installation for homes and businesses in Northern Virginia.';
+
+const trail = [
+  { name: 'Home', href: '/' },
+  { name: 'Gallery', href: '/gallery/' },
+];
+
+const photos = await getOrdered('gallery');
+const faqs = await getFaqs('gallery');
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+
+// Each photo is listed in the page's structured data with its full-size URL.
+const photoNodes = await Promise.all(
+  photos.map(async (photo) => {
+    const full = await getImage({ src: photo.data.image, width: photo.data.image.width });
+    return {
+      '@type': 'ImageObject',
+      '@id': `${pageUrl}#${photo.id}`,
+      contentUrl: new URL(full.src, Astro.site).href,
+      caption: photo.data.alt,
+    };
+  })
+);
+
+const schema = [
+  breadcrumbSchema(
+    trail.map((item) => ({ name: item.name, url: new URL(item.href, Astro.site).href })),
+    pageUrl
+  ),
+  faqSchema(faqs, pageUrl),
+  ...photoNodes,
+];
+---
+
+<Layout title={title} description={description} pageType="ImageGallery" schema={schema}>
+  <PageHero
+    title="Photo Gallery"
+    description="A look at our heating and cooling work for homes and businesses across Northern Virginia."
+    trail={trail}
+  />
+
+  <section class="py-17 md:py-24" id="photos">
+    <div class="wrap">
+      <SectionHeading eyebrow="Recent Work" title="Our Heating and Cooling Work" />
+      <ul class="grid grid-cols-2 gap-3.5 md:grid-cols-3 md:gap-5.5">
+        {
+          photos.map((photo, index) => (
+            <li class="overflow-hidden rounded-2xl">
+              <Image
+                src={photo.data.image}
+                alt={photo.data.alt}
+                widths={[320, photo.data.image.width]}
+                sizes="(min-width: 901px) 376px, 50vw"
+                loading={index < 3 ? 'eager' : 'lazy'}
+                class="aspect-4/3 size-full object-cover transition-transform duration-500 hover:scale-104"
+              />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <Faq faqs={faqs} />
+  <Contact />
+  <CtaBanner />
+</Layout>

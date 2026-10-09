@@ -24,9 +24,9 @@ export interface SocialLink {
 export const site = {
   name: 'ARYA Heating & Cooling',
   shortName: 'ARYA HVAC',
-  title: 'Ashburn HVAC Repair & Installation | ARYA Heating & Cooling',
+  title: 'HVAC Repair in Northern Virginia | ARYA Heating & Cooling',
   description:
-    'Master Licensed HVAC technicians serving Ashburn and Northern Virginia. 24/7 emergency HVAC, AC repair, heating and maintenance. Call (703) 420-5038.',
+    'Master Licensed HVAC technicians serving Northern Virginia. 24/7 emergency HVAC, AC repair, heating and maintenance. Call (703) 420-5038.',
   phone: {
     display: '(703) 420-5038',
     href: 'tel:+17034205038',
@@ -47,9 +47,8 @@ export const site = {
     postalCode: '22079',
     country: 'US',
   },
-  // Set these once the pages exist, e.g. '/terms/'. Until then the labels show without a link.
-  termsHref: undefined as string | undefined,
-  privacyHref: undefined as string | undefined,
+  termsHref: '/terms/',
+  privacyHref: '/privacy-policy/',
 } as const;
 
 export const socialLinks: SocialLink[] = [

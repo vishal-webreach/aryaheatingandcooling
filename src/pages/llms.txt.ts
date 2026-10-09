@@ -1,6 +1,6 @@
 import type { APIRoute } from 'astro';
 import { site } from '../data/site';
-import { categoryPath, getFaqs, getOrdered, getServiceGroups, servicePath } from '../lib/content';
+import { areaPath, categoryPath, getFaqs, getOrdered, getServiceGroups, servicePath } from '../lib/content';
 
 // Plain-text summary of the business for AI assistants and crawlers.
 export const GET: APIRoute = async ({ site: siteUrl }) => {
@@ -23,8 +23,17 @@ export const GET: APIRoute = async ({ site: siteUrl }) => {
     '## Pages',
     '',
     `- [Home](${home}): Services, service areas, FAQs and free quote request`,
+    `- [Service areas](${new URL('/service-areas/', siteUrl).href}): Every community we serve in Northern Virginia`,
+    ...areas.flatMap((area) => {
+      const path = areaPath(area);
+      return path ? [`- [HVAC in ${area.data.name}, VA](${new URL(path, siteUrl).href}): ${area.data.seoDescription}`] : [];
+    }),
     `- [About](${new URL('/about/', siteUrl).href}): Company background, what to expect and how the process works`,
     `- [Services](${new URL('/services/', siteUrl).href}): Residential and commercial HVAC services`,
+    `- [Gallery](${new URL('/gallery/', siteUrl).href}): Photos of heating and cooling work`,
+    `- [Contact](${new URL('/contact-us/', siteUrl).href}): Phone, email, hours and free quote request`,
+    `- [Privacy Policy](${new URL(site.privacyHref, siteUrl).href}): How personal information is collected and used`,
+    `- [Terms & Conditions](${new URL(site.termsHref, siteUrl).href}): Terms for SMS messaging`,
     `- [Sitemap](${new URL('/sitemap-index.xml', siteUrl).href}): All pages on the site`,
     '',
     '## Contact',

@@ -5,6 +5,16 @@ import Button from '../ui/Button.astro';
 import Icon from '../ui/Icon.astro';
 import SectionHeading from '../ui/SectionHeading.astro';
 
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Our Heating and Cooling Services',
+  description = 'Residential and commercial HVAC service, plus contracts that keep every system maintained.',
+} = Astro.props;
+
 const serviceGroups = await getServiceGroups();
 ---
 
@@ -12,8 +22,8 @@ const serviceGroups = await getServiceGroups();
   <div class="wrap">
     <SectionHeading
       eyebrow="What We Do"
-      title="Our Heating and Cooling Services"
-      description="Residential and commercial HVAC service, plus contracts that keep every system maintained."
+      title={title}
+      description={description}
     >
       <Button href="/services/" variant="dark">View Services</Button>
     </SectionHeading>

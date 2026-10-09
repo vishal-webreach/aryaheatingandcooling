@@ -7,8 +7,8 @@ imageAlt: Technician servicing an HVAC unit under a service agreement
 order: 2
 pageSlug: service-agreements
 heading: HVAC Service Agreements
-seoTitle: HVAC Service Agreements in Ashburn, VA | ARYA Heating & Cooling
-seoDescription: HVAC service agreements covering routine service and repairs for homes and businesses in Ashburn and Northern Virginia, with predictable costs.
+seoTitle: HVAC Service Agreements | ARYA Heating & Cooling
+seoDescription: HVAC service agreements covering routine service and repairs for homes and businesses in Northern Virginia, with predictable costs.
 includesTitle: What a Service Agreement Covers
 includes:
   - Routine service visits
