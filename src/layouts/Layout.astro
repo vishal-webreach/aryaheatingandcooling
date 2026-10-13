@@ -47,7 +47,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 
 const shareImage = await getImage({ src: image, width: 1200, height: 630, fit: 'cover', format: 'jpg' });
 const shareImageUrl = new URL(shareImage.src, Astro.site).href;
-const robots = noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
+const robots = noindex || site.preview ? 'noindex, nofollow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
 ---
 
 <!doctype html>

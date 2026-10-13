@@ -1,0 +1,56 @@
+# Temporary client preview on GitHub Pages:
+# https://vishal-webreach.github.io/aryaheatingandcooling/
+#
+# The preview build is kept out of search engines (PUBLIC_PREVIEW) and served from a
+# sub-path, so it never competes with the live domain. Delete this workflow, or turn
+# Pages off in the repository settings, once the site is live on its own domain.
+name: Deploy preview to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+env:
+  PREVIEW_ORIGIN: https://vishal-webreach.github.io
+  PREVIEW_BASE: /aryaheatingandcooling
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx astro check
+      - name: Build for the preview address
+        run: npx astro build --site "$PREVIEW_ORIGIN" --base "$PREVIEW_BASE"
+        env:
+          PUBLIC_PREVIEW: 'true'
+      - name: Point root-relative links at the preview sub-path
+        run: node .github/scripts/prefix-base.mjs dist "$PREVIEW_BASE"
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

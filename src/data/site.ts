@@ -35,6 +35,8 @@ export const site = {
     display: 'aryaheatingcooling@gmail.com',
     href: 'mailto:aryaheatingcooling@gmail.com',
   },
+  // True only for the client preview build; keeps every page out of search engines
+  preview: import.meta.env.PUBLIC_PREVIEW === 'true',
   // Point this at the CRM / form handler
   formAction: '#',
   // Google "write a review" page for the business
