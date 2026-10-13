@@ -6,6 +6,7 @@ import CtaBanner from '../../../components/sections/CtaBanner.astro';
 import Faq from '../../../components/sections/Faq.astro';
 import PageHero from '../../../components/sections/PageHero.astro';
 import Process from '../../../components/sections/Process.astro';
+import QuickQuote from '../../../components/sections/QuickQuote.astro';
 import Reviews from '../../../components/sections/Reviews.astro';
 import Button from '../../../components/ui/Button.astro';
 import Eyebrow from '../../../components/ui/Eyebrow.astro';
@@ -67,6 +68,7 @@ const schema = [
   schema={schema}
 >
   <PageHero title={heading} description={service.data.summary} trail={trail} />
+  <QuickQuote overlap={false} />
 
   <section class="py-17 md:py-24" id="overview">
     <div class="wrap grid items-center gap-10 md:grid-cols-2 md:gap-18">
@@ -76,7 +78,7 @@ const schema = [
           <Content />
         </div>
         <div class="mt-7.5 flex flex-wrap gap-3">
-          <Button href="#contact">Get Free Quote <Icon name="arrow" /></Button>
+          <Button quote>Get Free Quote <Icon name="arrow" /></Button>
           <Button href={site.phone.href} variant="dark"><Icon name="phone" /> Call {site.phone.display}</Button>
         </div>
       </div>

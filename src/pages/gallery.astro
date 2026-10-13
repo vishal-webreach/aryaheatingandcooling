@@ -4,6 +4,7 @@ import Contact from '../components/sections/Contact.astro';
 import CtaBanner from '../components/sections/CtaBanner.astro';
 import Faq from '../components/sections/Faq.astro';
 import PageHero from '../components/sections/PageHero.astro';
+import QuickQuote from '../components/sections/QuickQuote.astro';
 import SectionHeading from '../components/ui/SectionHeading.astro';
 import Layout from '../layouts/Layout.astro';
 import { site } from '../data/site';
@@ -52,6 +53,7 @@ const schema = [
     description="A look at our heating and cooling work for homes and businesses across Northern Virginia."
     trail={trail}
   />
+  <QuickQuote overlap={false} />
 
   <section class="py-17 md:py-24" id="photos">
     <div class="wrap">

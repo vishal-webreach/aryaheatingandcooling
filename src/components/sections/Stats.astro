@@ -9,14 +9,14 @@ const stats = [
 
 <section class="relative z-2 mt-6" aria-label="Company highlights">
   <div class="wrap">
-    <ul class="grid grid-cols-2 rounded-card border border-line bg-white shadow-card md:grid-cols-4">
+    <ul class="grid grid-cols-2 rounded-card bg-navy shadow-card md:grid-cols-4">
       {
         stats.map((stat) => (
-          <li class="border-line px-5 py-5.5 max-md:even:border-l max-md:nth-[n+3]:border-t md:px-7 md:py-7.5 md:not-first:border-l">
-            <strong class="block text-[28px] leading-[1.1] font-extrabold tracking-[-0.03em] text-ink md:text-[36px]">
+          <li class="border-white/12 px-5 py-5.5 max-md:even:border-l max-md:nth-[n+3]:border-t md:px-7 md:py-7.5 md:not-first:border-l">
+            <strong class="block text-[28px] leading-[1.1] font-extrabold tracking-[-0.03em] text-white md:text-[36px]">
               {stat.value}
             </strong>
-            <span class="text-[14.5px] font-semibold">{stat.label}</span>
+            <span class="text-[14.5px] font-semibold text-[#c3d1df]">{stat.label}</span>
           </li>
         ))
       }

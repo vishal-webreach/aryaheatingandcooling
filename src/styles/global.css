@@ -23,6 +23,15 @@
   --breakpoint-sm: 35.0625rem;
   --breakpoint-md: 56.3125rem;
   --breakpoint-lg: 67.5625rem;
+
+  /* Endless row: the content is rendered twice and slides left by one copy. */
+  --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
 }
 
 @layer base {

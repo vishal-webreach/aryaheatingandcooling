@@ -7,6 +7,7 @@ import CtaBanner from '../../components/sections/CtaBanner.astro';
 import Faq from '../../components/sections/Faq.astro';
 import PageHero from '../../components/sections/PageHero.astro';
 import Process from '../../components/sections/Process.astro';
+import QuickQuote from '../../components/sections/QuickQuote.astro';
 import Reviews from '../../components/sections/Reviews.astro';
 import ServiceAreas from '../../components/sections/ServiceAreas.astro';
 import Services from '../../components/sections/Services.astro';
@@ -83,6 +84,7 @@ const schema = [
     description={`Heating and cooling repair, maintenance and installation in ${area.data.name}, 24 hours a day, 7 days a week.`}
     trail={trail}
   />
+  <QuickQuote overlap={false} />
 
   <section class="py-17 md:py-24" id="overview">
     <div class="wrap grid items-center gap-10 md:grid-cols-2 md:gap-18">
@@ -92,7 +94,7 @@ const schema = [
           <Content />
         </div>
         <div class="mt-7.5 flex flex-wrap gap-3">
-          <Button href="#contact">Get Free Quote <Icon name="arrow" /></Button>
+          <Button quote>Get Free Quote <Icon name="arrow" /></Button>
           <Button href={site.phone.href} variant="dark"><Icon name="phone" /> Call {site.phone.display}</Button>
         </div>
       </div>

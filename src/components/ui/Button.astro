@@ -11,11 +11,13 @@ interface Props {
   href?: string;
   /** Opens the link in a new tab. */
   external?: boolean;
+  /** Opens the quote dialog. */
+  quote?: boolean;
   type?: HTMLAttributes<'button'>['type'];
   class?: string;
 }
 
-const { variant = 'primary', size = 'md', href, external = false, type = 'button', class: className } = Astro.props;
+const { variant = 'primary', size = 'md', href, external = false, quote = false, type = 'button', class: className } = Astro.props;
 
 const variants: Record<Variant, string> = {
   primary: 'bg-accent text-white shadow-cta hover:bg-accent-dark',
@@ -41,11 +43,16 @@ const classes = [
 
 {
   href ? (
-    <a href={href} target={external ? '_blank' : undefined} rel={external ? 'noopener' : undefined} class:list={classes}>
+    <a
+      href={href}
+      target={external ? '_blank' : undefined}
+      rel={external ? 'noopener' : undefined}
+      class:list={classes}
+    >
       <slot />
     </a>
   ) : (
-    <button type={type} class:list={classes}>
+    <button type={type} data-quote-open={quote} class:list={classes}>
       <slot />
     </button>
   )
