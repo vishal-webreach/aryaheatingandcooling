@@ -22,3 +22,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# deploy-prep output (upload folder and upload record)
+dist-changed/
+.deploy-manifest.json
