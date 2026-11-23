@@ -7,7 +7,7 @@ imageAlt: HVAC maintenance in Northern Virginia
 order: 3
 pageSlug: maintenance
 heading: Commercial HVAC Maintenance
-seoTitle: Commercial HVAC Maintenance Services | ARYA Heating & Cooling
+seoTitle: Commercial HVAC Maintenance Services | Pioneer Heating & Cooling
 seoDescription: Routine commercial HVAC maintenance for offices, retail and other buildings in Northern Virginia. Prevent breakdowns. Free estimates.
 includesTitle: What a Maintenance Visit Covers
 includes:
@@ -21,6 +21,6 @@ includes:
 
 ## Routine Maintenance for Commercial HVAC Systems
 
-Regular maintenance keeps a commercial HVAC system running efficiently, helps prevent breakdowns and extends the life of the equipment. ARYA Heating & Cooling maintains HVAC systems for offices, retail spaces and other commercial buildings in Ashburn and across Northern Virginia.
+Regular maintenance keeps a commercial HVAC system running efficiently, helps prevent breakdowns and extends the life of the equipment. Pioneer Heating & Cooling maintains HVAC systems for offices, retail spaces and other commercial buildings in Ashburn and across Northern Virginia.
 
 Our Master Licensed technicians work on all major brands and every type of unit. If a visit turns up a problem, we explain it and give you an estimate before any repair.

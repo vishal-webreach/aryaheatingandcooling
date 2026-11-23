@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://aryaheatingandcooling.com',
+  site: 'https://pioneerheatingcooling.com',
   // Every page URL ends with a slash, e.g. /about/
   trailingSlash: 'always',
   build: { format: 'directory' },

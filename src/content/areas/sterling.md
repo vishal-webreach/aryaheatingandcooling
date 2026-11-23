@@ -2,7 +2,7 @@
 name: Sterling
 order: 3
 county: Loudoun County
-seoTitle: HVAC Services in Sterling, VA | ARYA Heating & Cooling
+seoTitle: HVAC Services in Sterling, VA | Pioneer Heating & Cooling
 seoDescription: 24/7 heating and cooling repair, maintenance and installation in Sterling, VA. Master Licensed technicians, free estimates. Call (703) 420-5038.
 neighborhoods:
   - Sterling Park

@@ -7,7 +7,7 @@ imageAlt: Technician servicing an HVAC unit under a service agreement
 order: 2
 pageSlug: service-agreements
 heading: HVAC Service Agreements
-seoTitle: HVAC Service Agreements | ARYA Heating & Cooling
+seoTitle: HVAC Service Agreements | Pioneer Heating & Cooling
 seoDescription: HVAC service agreements covering routine service and repairs for homes and businesses in Northern Virginia, with predictable costs.
 includesTitle: What a Service Agreement Covers
 includes:
@@ -23,4 +23,4 @@ includes:
 
 A service agreement sets out in advance how your heating and cooling system will be serviced and repaired, so you know what to expect and what it will cost.
 
-ARYA Heating & Cooling offers service agreements for homes and commercial buildings in Ashburn and across Northern Virginia. Our Master Licensed technicians work on all major brands and every type of unit.
+Pioneer Heating & Cooling offers service agreements for homes and commercial buildings in Ashburn and across Northern Virginia. Our Master Licensed technicians work on all major brands and every type of unit.

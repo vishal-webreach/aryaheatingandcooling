@@ -15,7 +15,7 @@ const quickLinks: { label: string; href: string; external?: boolean }[] = [
   { label: 'Service Areas', href: '/service-areas/' },
   { label: 'Gallery', href: '/gallery/' },
   { label: 'Contact', href: '/contact-us/' },
-  { label: 'Review Us', href: site.reviewHref, external: true },
+  { label: 'Review Us', href: site.reviewHref, external: site.reviewHref !== '#' },
 ];
 
 const year = new Date().getFullYear();
@@ -30,15 +30,14 @@ const contactIconClass =
 <footer class="bg-[#07182a] pt-18 text-[15px] text-[#9fb0c2]">
   <div class="wrap grid gap-10 sm:grid-cols-2 md:grid-cols-[1.4fr_1fr_1fr_1.3fr]">
     <div>
-      <a href="/" class="mb-4.5 inline-block">
+      <a href="/" class="mb-4.5 inline-block rounded-xl bg-white px-3.5 py-2.5">
         <Image
           src={logo}
-          alt="ARYA Heating & Cooling"
-          width={161}
-          height={64}
+          alt="Pioneer Heating & Cooling"
+          height={52}
           densities={[1, 2]}
           loading="lazy"
-          class="h-16 w-auto"
+          class="h-13 w-auto"
         />
       </a>
       <p>Master Licensed HVAC experts serving Ashburn and Northern Virginia.</p>

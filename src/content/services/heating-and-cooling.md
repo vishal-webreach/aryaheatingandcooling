@@ -7,7 +7,7 @@ imageAlt: Heating and cooling service in Northern Virginia
 order: 3
 pageSlug: heating-cooling-repair
 heading: Heating & Cooling
-seoTitle: Heating & Cooling in Northern Virginia | ARYA Heating & Cooling
+seoTitle: Heating & Cooling in Northern Virginia | Pioneer Heating & Cooling
 seoDescription: Year-round heating and cooling repair and maintenance for homes in Northern Virginia from Master Licensed technicians. Free estimates.
 includesTitle: Heating and Cooling Work We Do
 includes:
@@ -21,6 +21,6 @@ includes:
 
 ## Year-Round Heating and Cooling for Your Home
 
-Your home relies on one system for comfort in every season. ARYA Heating & Cooling repairs and maintains heating and cooling systems for homes in Ashburn and across Northern Virginia.
+Your home relies on one system for comfort in every season. Pioneer Heating & Cooling repairs and maintains heating and cooling systems for homes in Ashburn and across Northern Virginia.
 
 Our Master Licensed technicians work on all major brands and every type of unit, and we are available 24 hours a day, 7 days a week when something goes wrong.

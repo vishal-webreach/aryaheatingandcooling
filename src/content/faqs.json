@@ -3,14 +3,14 @@
     "id": "services-offered",
     "page": "home",
     "question": "What types of services do you offer?",
-    "answer": "ARYA Heating & Cooling offers reliable solutions like Emergency HVAC, AC Repair, and HVAC Maintenance. With over 10 years of experience, our licensed team delivers quality work you can count on.",
+    "answer": "Pioneer Heating & Cooling offers reliable solutions like Emergency HVAC, AC Repair, and HVAC Maintenance. With over 10 years of experience, our licensed team delivers quality work you can count on.",
     "order": 1
   },
   {
     "id": "estimate-fee",
     "page": "home",
     "question": "Is there a fee for a consultation or estimate?",
-    "answer": "No. ARYA Heating & Cooling offers complimentary estimates to all prospective clients.",
+    "answer": "No. Pioneer Heating & Cooling offers complimentary estimates to all prospective clients.",
     "order": 2
   },
   {
@@ -30,8 +30,8 @@
   {
     "id": "about-years-in-business",
     "page": "about",
-    "question": "How long has ARYA Heating & Cooling been in business?",
-    "answer": "ARYA Heating & Cooling has been in business for over 10 years. In that time we have completed more than 10,000 jobs across Northern Virginia.",
+    "question": "How long has Pioneer Heating & Cooling been in business?",
+    "answer": "Pioneer Heating & Cooling has been in business for over 10 years. In that time we have completed more than 10,000 jobs across Northern Virginia.",
     "order": 1
   },
   {
@@ -1361,7 +1361,7 @@
     "id": "privacy-policy-faq-4",
     "page": "privacy-policy",
     "question": "How do I contact you about this Privacy Policy?",
-    "answer": "You can email us at aryaheatingcooling@gmail.com.",
+    "answer": "You can email us at pioneerheatingcooling@gmail.com.",
     "order": 4
   },
   {

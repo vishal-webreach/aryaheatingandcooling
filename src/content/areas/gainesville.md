@@ -2,7 +2,7 @@
 name: Gainesville
 order: 6
 county: Prince William County
-seoTitle: HVAC Services in Gainesville, VA | ARYA Heating & Cooling
+seoTitle: HVAC Services in Gainesville, VA | Pioneer Heating & Cooling
 seoDescription: 24/7 heating and cooling repair, maintenance and installation in Gainesville, VA. Master Licensed technicians, free estimates. Call (703) 420-5038.
 neighborhoods:
   - Heritage Hunt

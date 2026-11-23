@@ -7,7 +7,7 @@ imageAlt: HVAC repair in progress on a priority service call
 order: 3
 pageSlug: priority-response
 heading: Priority Response
-seoTitle: Priority HVAC Response | ARYA Heating & Cooling
+seoTitle: Priority HVAC Response | Pioneer Heating & Cooling
 seoDescription: Priority response for HVAC contract customers in Northern Virginia. Move to the front of the line on urgent service calls.
 includesTitle: What Priority Response Gives You
 includes:
@@ -23,4 +23,4 @@ includes:
 
 Priority response moves contract customers to the front of the line on urgent heating and cooling calls, so help reaches you sooner when something fails.
 
-ARYA Heating & Cooling is open 24 hours a day, 7 days a week, and serves homes and commercial buildings in Ashburn and across Northern Virginia. Our Master Licensed technicians work on all major brands and every type of unit.
+Pioneer Heating & Cooling is open 24 hours a day, 7 days a week, and serves homes and commercial buildings in Ashburn and across Northern Virginia. Our Master Licensed technicians work on all major brands and every type of unit.

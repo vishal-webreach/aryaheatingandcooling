@@ -22,9 +22,9 @@ export interface SocialLink {
 }
 
 export const site = {
-  name: 'ARYA Heating & Cooling',
-  shortName: 'ARYA HVAC',
-  title: 'HVAC Repair in Northern Virginia | ARYA Heating & Cooling',
+  name: 'Pioneer Heating & Cooling',
+  shortName: 'Pioneer HVAC',
+  title: 'HVAC Repair in Northern Virginia | Pioneer Heating & Cooling',
   description:
     'Master Licensed HVAC technicians serving Northern Virginia. 24/7 emergency HVAC, AC repair, heating and maintenance. Call (703) 420-5038.',
   phone: {
@@ -32,15 +32,16 @@ export const site = {
     href: 'tel:+17034205038',
   },
   email: {
-    display: 'aryaheatingcooling@gmail.com',
-    href: 'mailto:aryaheatingcooling@gmail.com',
+    display: 'pioneerheatingcooling@gmail.com',
+    href: 'mailto:pioneerheatingcooling@gmail.com',
   },
   // True only for the client preview build; keeps every page out of search engines
   preview: import.meta.env.PUBLIC_PREVIEW === 'true',
   // Point this at the CRM / form handler
   formAction: '#',
-  // Google "write a review" page for the business
-  reviewHref: 'https://g.page/r/CehQZc4BOKckEAE/review',
+  // Google "write a review" page for the business. Temporarily '#' until the renamed listing is ready.
+  // Previous link: https://g.page/r/CehQZc4BOKckEAE/review
+  reviewHref: '#' as string,
   // Business address as published on the previous website
   address: {
     street: '8256 Laurel Heights Loop',

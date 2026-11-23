@@ -1,18 +1,18 @@
 ---
 title: Terms & Conditions
-description: Terms and conditions for SMS messages sent and received as part of the messaging services provided by ARYA Heating & Cooling.
+description: Terms and conditions for SMS messages sent and received as part of the messaging services provided by Pioneer Heating & Cooling.
 order: 2
 ---
 
-These Terms and Conditions apply to all SMS messages sent and received as part of the A2P 10DLC messaging services provided by ARYA Heating & Cooling. Your use of this service constitutes acceptance of these terms.
+These Terms and Conditions apply to all SMS messages sent and received as part of the A2P 10DLC messaging services provided by Pioneer Heating & Cooling. Your use of this service constitutes acceptance of these terms.
 
 ## Messaging Consent
 
-As a user, you must explicitly consent to receive messages from ARYA Heating & Cooling. Consent can be given through various channels including, but not limited to, our website sign-up forms, paper forms, or verbally through customer service interactions.
+As a user, you must explicitly consent to receive messages from Pioneer Heating & Cooling. Consent can be given through various channels including, but not limited to, our website sign-up forms, paper forms, or verbally through customer service interactions.
 
 ## Message Types and Frequency
 
-Messages sent by ARYA Heating & Cooling may include alerts, reminders, promotional offers, updates, and other relevant communications. The frequency of these messages will depend on your interaction with our services and your preferences.
+Messages sent by Pioneer Heating & Cooling may include alerts, reminders, promotional offers, updates, and other relevant communications. The frequency of these messages will depend on your interaction with our services and your preferences.
 
 ## Data Rates and Charges
 
@@ -20,7 +20,7 @@ Standard message and data rates may apply to any messages you send or receive as
 
 ## Opt-Out Instructions
 
-To discontinue receiving messages from ARYA Heating & Cooling, you can reply "STOP" to any of our messages at any time. This will unsubscribe you from our SMS communications.
+To discontinue receiving messages from Pioneer Heating & Cooling, you can reply "STOP" to any of our messages at any time. This will unsubscribe you from our SMS communications.
 
 ## Privacy Policy
 
@@ -28,7 +28,7 @@ Our [Privacy Policy](/privacy-policy/) outlines how we collect, use, and protect
 
 ## Message Delivery
 
-ARYA Heating & Cooling does not guarantee that messages will be delivered without delays or failures. Such issues can occur due to factors outside our control, such as network problems or device compatibility.
+Pioneer Heating & Cooling does not guarantee that messages will be delivered without delays or failures. Such issues can occur due to factors outside our control, such as network problems or device compatibility.
 
 ## User Obligations
 
@@ -40,8 +40,8 @@ You acknowledge that the messaging service must be used in compliance with all r
 
 ## Changes to Terms and Conditions
 
-ARYA Heating & Cooling reserves the right to change these Terms and Conditions at any time. Changes will be communicated through our website or direct communications where feasible.
+Pioneer Heating & Cooling reserves the right to change these Terms and Conditions at any time. Changes will be communicated through our website or direct communications where feasible.
 
 ## Contact Information
 
-For any queries or concerns regarding these Terms and Conditions, please contact ARYA Heating & Cooling at [aryaheatingcooling@gmail.com](mailto:aryaheatingcooling@gmail.com).
+For any queries or concerns regarding these Terms and Conditions, please contact Pioneer Heating & Cooling at [pioneerheatingcooling@gmail.com](mailto:pioneerheatingcooling@gmail.com).

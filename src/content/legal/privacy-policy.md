@@ -1,6 +1,6 @@
 ---
 title: Privacy Policy
-description: How ARYA Heating & Cooling collects, uses, shares and protects your personal information, and the privacy rights you have.
+description: How Pioneer Heating & Cooling collects, uses, shares and protects your personal information, and the privacy rights you have.
 order: 1
 ---
 
@@ -16,7 +16,7 @@ The words of which the initial letter is capitalized have meanings defined under
 
 For the purposes of this Privacy Policy:
 
-- **Company** (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to ARYA Heating & Cooling.
+- **Company** (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to Pioneer Heating & Cooling.
 - **Device** means any device that can access the Service such as a computer, a cellphone or a digital tablet.
 - **Personal Data** is any information that relates to an identified or identifiable individual.
 - **Service** refers to the advertisement, website, or application.
@@ -105,4 +105,4 @@ This Privacy Policy was last updated on April 3, 2024.
 
 ## Contact Us
 
-If you have any questions about this Privacy Policy, You can contact us via email at [aryaheatingcooling@gmail.com](mailto:aryaheatingcooling@gmail.com).
+If you have any questions about this Privacy Policy, You can contact us via email at [pioneerheatingcooling@gmail.com](mailto:pioneerheatingcooling@gmail.com).

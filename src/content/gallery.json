@@ -1,5 +1,5 @@
 [
-  { "id": "gallery-1", "image": "../assets/images/gallery/gallery-1.png", "alt": "HVAC project by ARYA Heating & Cooling", "order": 1 },
+  { "id": "gallery-1", "image": "../assets/images/gallery/gallery-1.png", "alt": "HVAC project by Pioneer Heating & Cooling", "order": 1 },
   { "id": "gallery-2", "image": "../assets/images/gallery/gallery-2.png", "alt": "Air conditioning service in Northern Virginia", "order": 2 },
   { "id": "gallery-3", "image": "../assets/images/gallery/gallery-3.png", "alt": "Heating system service", "order": 3 },
   { "id": "gallery-4", "image": "../assets/images/gallery/gallery-4.png", "alt": "HVAC installation work", "order": 4 },
