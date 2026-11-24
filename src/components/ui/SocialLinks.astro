@@ -2,7 +2,7 @@
 import { socialLinks } from '../../data/site';
 import Icon from './Icon.astro';
 
-type Variant = 'topbar' | 'nav' | 'footer';
+type Variant = 'nav' | 'footer';
 
 interface Props {
   variant: Variant;
@@ -12,15 +12,14 @@ interface Props {
 const { variant, class: className } = Astro.props;
 
 const linkStyles: Record<Variant, string> = {
-  topbar: 'size-7.5 bg-white/10 text-white hover:bg-accent',
-  nav: 'size-7.5 bg-soft text-ink hover:bg-accent hover:text-white',
-  footer: 'size-9.5 bg-white/10 text-white hover:bg-accent',
+  nav: 'size-8.5 bg-soft text-navy hover:bg-accent hover:text-white',
+  footer: 'size-10 border border-line bg-white text-navy hover:border-navy hover:bg-navy hover:text-white',
 };
 
-const iconSize = variant === 'footer' ? 'size-4.5' : 'size-3.75';
+const iconSize = variant === 'footer' ? 'size-4.5' : 'size-4';
 ---
 
-<div class:list={['flex items-center gap-2', className]}>
+<div class:list={['flex items-center gap-2.5', className]}>
   {
     socialLinks.map((link) => (
       <a
@@ -28,7 +27,7 @@ const iconSize = variant === 'footer' ? 'size-4.5' : 'size-3.75';
         target="_blank"
         rel="noopener"
         aria-label={link.label}
-        class:list={['grid place-items-center rounded-full transition-colors duration-200', linkStyles[variant]]}
+        class:list={['grid place-items-center rounded-card transition-colors duration-200', linkStyles[variant]]}
       >
         <Icon name={link.icon} class={iconSize} />
       </a>

@@ -13,7 +13,9 @@ export type IconName =
   | 'linkedin'
   | 'menu'
   | 'chevron'
-  | 'close';
+  | 'close'
+  | 'flame'
+  | 'snow';
 
 export interface SocialLink {
   label: string;

@@ -18,14 +18,25 @@ export default defineConfig({
     }),
   ],
   fonts: [
+    // Body text
     {
       provider: fontProviders.google(),
-      name: 'Manrope',
-      cssVariable: '--font-manrope',
-      weights: ['400 800'],
+      name: 'Barlow',
+      cssVariable: '--font-barlow',
+      weights: [400, 500, 600, 700],
       styles: ['normal'],
       subsets: ['latin'],
       fallbacks: ['Arial', 'sans-serif'],
+    },
+    // Headings, buttons and labels
+    {
+      provider: fontProviders.google(),
+      name: 'Barlow Condensed',
+      cssVariable: '--font-barlow-condensed',
+      weights: [600, 700, 800],
+      styles: ['normal'],
+      subsets: ['latin'],
+      fallbacks: ['Arial Narrow', 'Arial', 'sans-serif'],
     },
   ],
   vite: {

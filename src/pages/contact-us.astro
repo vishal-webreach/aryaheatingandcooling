@@ -78,19 +78,19 @@ const schema = [
     trail={trail}
   />
 
-  <section class="py-17 md:py-24" id="ways-to-reach-us">
+  <section class="bg-soft py-18 md:py-24" id="ways-to-reach-us">
     <div class="wrap">
       <SectionHeading eyebrow="Get In Touch" title="How to Reach Pioneer Heating & Cooling" />
       <ul class="grid gap-5.5 sm:grid-cols-2 lg:grid-cols-4">
         {
           methods.map((method) => (
             <li class="flex flex-col rounded-card border border-line bg-white p-6">
-              <Icon name={method.icon} class="mb-5 size-12 rounded-xl bg-brand-soft p-3 text-brand" />
+              <Icon name={method.icon} class="mb-5 size-12 rounded-card bg-brand-soft p-3 text-brand" />
               <h3 class="mb-3">{method.title}</h3>
               <p class="mb-3.5 flex-1 text-[15px]">{method.text}</p>
               <a
                 href={method.link.href}
-                class="text-[15px] font-bold wrap-anywhere text-ink transition-colors duration-200 hover:text-brand"
+                class="text-[15px] font-bold wrap-anywhere text-ink transition-colors duration-200 hover:text-accent"
               >
                 {method.link.label}
               </a>

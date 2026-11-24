@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import logo from '../../assets/images/brand/logo.png';
-import { site } from '../../data/site';
+import { site, type IconName } from '../../data/site';
 import { areaPath, categoryPath, getOrdered, getServiceGroups, servicePath } from '../../lib/content';
 import Button from '../ui/Button.astro';
 import Icon from '../ui/Icon.astro';
@@ -54,6 +54,20 @@ const navLinks: NavLink[] = [
   { label: 'Contact', href: '/contact-us/' },
 ];
 
+// Contact details in the white top row of the header
+const infoItems: { icon: IconName; label: string; value: string; href?: string; iconClass: string; class?: string }[] = [
+  { icon: 'phone', label: '24/7 Emergency', value: site.phone.display, href: site.phone.href, iconClass: 'bg-heat' },
+  { icon: 'clock', label: 'Open Hours', value: 'Mon – Sun · 24 Hours', iconClass: 'bg-cool' },
+  {
+    icon: 'mail',
+    label: 'Email Us',
+    value: site.email.display,
+    href: site.email.href,
+    iconClass: 'bg-linear-135 from-navy to-navy-deep',
+    class: 'max-lg:hidden',
+  },
+];
+
 const { pathname } = Astro.url;
 const isCurrent = (href?: string) => href === pathname;
 /** True when the link, or any link in its dropdown, is the current page. */
@@ -63,45 +77,75 @@ const isActive = (link: NavLink) =>
   (link.groups ?? []).some((group) => isCurrent(group.href) || group.children.some((child) => isCurrent(child.href)));
 const current = (href?: string) => (isCurrent(href) ? 'page' : undefined);
 
+// Phones: dark text in the white drawer. Desktop: light capitals on the navy bar with a red underline.
 const linkClass =
-  'rounded-xl px-3.5 py-3 text-[15px] font-semibold text-ink transition-colors duration-200 hover:bg-brand-soft hover:text-brand md:rounded-full md:px-2.5 md:py-2 md:whitespace-nowrap lg:px-3.5';
+  'relative rounded-card px-3.5 py-3 text-[15px] font-semibold text-ink transition-colors duration-200 hover:bg-soft hover:text-accent md:px-2.5 md:py-2.5 md:tracking-[0.06em] md:whitespace-nowrap md:text-[#d4e1ee] md:uppercase md:hover:bg-transparent md:hover:text-white md:after:absolute md:after:inset-x-2.5 md:after:bottom-1 md:after:h-0.5 md:after:origin-left md:after:scale-x-0 md:after:bg-accent md:after:transition-transform md:after:duration-250 md:hover:after:scale-x-100 lg:px-3.5 lg:after:inset-x-3.5';
 const subLinkClass =
-  'block rounded-[10px] px-3 py-2.25 text-[14.5px] font-medium text-ink transition-colors duration-200 hover:bg-brand-soft hover:text-brand aria-[current=page]:bg-brand-soft aria-[current=page]:text-brand md:px-2.5 md:py-2 md:text-[15px] md:font-semibold md:whitespace-nowrap lg:px-3.5';
+  'block rounded-card px-3 py-2.25 text-[14.5px] font-medium text-ink transition-colors duration-200 hover:bg-soft hover:text-accent aria-[current=page]:bg-soft aria-[current=page]:text-accent md:px-2.5 md:py-2 md:text-[15px] md:font-semibold md:whitespace-nowrap lg:px-3.5';
 const subLabelClass =
   'block px-3 py-2.25 text-[14.5px] font-medium text-body md:px-2.5 md:py-2 md:text-[15px] md:font-semibold md:whitespace-nowrap lg:px-3.5';
 const groupLinkClass =
-  'block rounded-[10px] px-3 py-2.25 text-[14.5px] font-extrabold tracking-[0.04em] text-brand uppercase transition-colors duration-200 hover:bg-brand-soft aria-[current=page]:bg-brand-soft md:px-2.5 md:py-2 md:text-[15px] md:whitespace-nowrap lg:px-3.5';
+  'block rounded-card px-3 py-2.25 font-display text-[16px] font-bold tracking-[0.06em] text-navy uppercase transition-colors duration-200 hover:bg-soft hover:text-accent aria-[current=page]:bg-soft aria-[current=page]:text-accent md:px-2.5 md:py-2 md:whitespace-nowrap lg:px-3.5';
 const contactClass = 'group/contact flex items-center gap-2.5 p-1 text-[13px] font-semibold text-ink wrap-anywhere';
 const contactIconClass =
   'grid size-7 flex-none place-items-center rounded-full bg-soft text-ink transition-colors duration-200 group-hover/contact:bg-accent group-hover/contact:text-white';
 ---
 
-<header class="sticky top-0 z-70 border-b border-line bg-white md:z-50 md:bg-white/92 md:backdrop-blur-md">
-  <div class="wrap flex flex-wrap items-center justify-between gap-6 py-3 md:h-19 md:flex-nowrap md:py-0">
+<!-- White top row: logo and contact details. On phones it stays at the top with the Menu button. -->
+<header class="relative bg-white max-md:sticky max-md:top-0 max-md:z-70 max-md:border-b max-md:border-line">
+  <div class="wrap flex h-19 items-center justify-between gap-6 md:h-24">
     <a href="/" class="flex-none">
       <Image
         src={logo}
         alt="Pioneer Heating & Cooling logo"
-        height={52}
+        height={60}
         densities={[1, 2]}
         loading="eager"
-        class="h-13 w-auto md:max-xl:h-11"
+        class="h-12 w-auto md:h-15"
       />
     </a>
+
+    <div class="flex items-center gap-7.5 max-md:hidden">
+      {
+        infoItems.map((item) => {
+          const Tag = item.href ? 'a' : 'span';
+          return (
+            <Tag
+              href={item.href}
+              class:list={['flex items-center gap-3 leading-tight font-bold text-ink', item.class]}
+            >
+              <span class:list={['grid size-11 flex-none place-items-center rounded-full text-white', item.iconClass]}>
+                <Icon name={item.icon} class="size-4.5" />
+              </span>
+              <span>
+                <small class="block text-xs font-semibold tracking-[0.08em] text-body uppercase">{item.label}</small>
+                {item.value}
+              </span>
+            </Tag>
+          );
+        })
+      }
+    </div>
 
     <button
       type="button"
       data-menu-btn
       aria-controls="nav"
       aria-expanded="false"
-      class="inline-flex cursor-pointer items-center gap-2 rounded-full bg-soft px-4 py-2.5 text-sm font-bold text-ink md:hidden"
+      class="inline-flex cursor-pointer items-center gap-2 rounded-card border-2 border-line bg-white px-3.5 py-2.5 text-[15px] font-bold text-ink transition-colors duration-200 aria-expanded:border-accent aria-expanded:text-accent md:hidden"
     >
       <Icon name="menu" />Menu
     </button>
+  </div>
+  <span class="absolute inset-x-0 -bottom-px h-0.75 bg-heat-cool md:hidden" aria-hidden="true"></span>
+</header>
 
+<!-- Navy menu bar. It sticks to the top on desktop; on phones only its drawer is used. -->
+<div class="max-md:contents md:sticky md:top-0 md:z-50 md:bg-navy md:shadow-[0_10px_24px_-18px_rgb(0_0_0/0.6)]">
+  <div class="wrap max-md:contents md:flex md:h-16 md:items-center md:justify-between md:gap-6">
     <div
       data-nav-overlay
-      class="invisible fixed inset-0 bg-navy/55 opacity-0 transition-[opacity,visibility] duration-300 data-open:visible data-open:opacity-100 md:hidden"
+      class="invisible fixed inset-0 z-75 bg-navy-deep/55 opacity-0 transition-[opacity,visibility] duration-300 data-open:visible data-open:opacity-100 md:hidden"
     >
     </div>
 
@@ -109,10 +153,10 @@ const contactIconClass =
       id="nav"
       data-nav
       aria-label="Main"
-      class="flex gap-0.5 max-md:invisible max-md:fixed max-md:inset-y-0 max-md:right-0 max-md:z-2 max-md:w-[min(86vw,340px)] max-md:translate-x-full max-md:flex-col max-md:overflow-y-auto max-md:overscroll-contain max-md:bg-white max-md:px-4 max-md:pb-7 max-md:shadow-[-18px_0_40px_-18px_rgb(11_31_51/0.4)] max-md:transition-[translate,visibility] max-md:duration-300 max-md:data-open:visible max-md:data-open:translate-x-0 lg:gap-1.5"
+      class="flex max-md:invisible max-md:fixed max-md:inset-y-0 max-md:right-0 max-md:z-80 max-md:w-[min(86vw,340px)] max-md:translate-x-full max-md:flex-col max-md:gap-0.5 max-md:overflow-y-auto max-md:overscroll-contain max-md:bg-white max-md:px-4 max-md:pb-7 max-md:shadow-[-18px_0_40px_-18px_rgb(12_35_64/0.4)] max-md:transition-[translate,visibility] max-md:duration-300 max-md:data-open:visible max-md:data-open:translate-x-0 md:-ml-2.5 md:items-center lg:-ml-3.5"
     >
       <div
-        class="sticky top-0 z-1 -mx-4 mb-2 flex items-center justify-between border-b border-line bg-white px-4 py-3.5 font-extrabold text-ink md:hidden"
+        class="sticky top-0 z-1 -mx-4 mb-2 flex items-center justify-between border-b border-line bg-white px-4 py-3.5 font-display text-[20px] font-extrabold text-ink uppercase md:hidden"
       >
         <span>Menu</span>
         <button
@@ -131,14 +175,14 @@ const contactIconClass =
             <div
               data-nav-item
               data-active={isActive(link) || undefined}
-              class="group/item relative flex items-center rounded-xl transition-colors duration-200 max-md:flex-wrap md:rounded-full md:hover:bg-brand-soft md:data-active:bg-brand-soft"
+              class="group/item relative flex items-center max-md:flex-wrap"
             >
               <a
                 href={link.href}
                 aria-current={current(link.href)}
                 class:list={[
                   linkClass,
-                  'group-data-active/item:text-brand max-md:flex-1 max-md:group-data-active/item:bg-brand-soft md:group-hover/item:text-brand',
+                  'max-md:flex-1 max-md:group-data-active/item:bg-soft max-md:group-data-active/item:text-accent md:pr-1.5 md:group-hover/item:text-white md:group-hover/item:after:scale-x-100 md:group-data-active/item:text-white md:group-data-active/item:after:scale-x-100 lg:pr-2',
                 ]}
               >
                 {link.label}
@@ -148,7 +192,7 @@ const contactIconClass =
                 data-nav-toggle
                 aria-expanded="false"
                 aria-label={link.toggleLabel}
-                class="grid cursor-pointer place-items-center text-ink max-md:size-11 max-md:rounded-xl max-md:bg-soft md:mr-2 md:-ml-1.5 md:h-8.5 md:w-6 md:group-hover/item:text-brand md:group-data-active/item:text-brand lg:-ml-2.5"
+                class="grid cursor-pointer place-items-center text-ink max-md:size-11 max-md:rounded-card max-md:bg-soft md:mr-1 md:h-8.5 md:w-5 md:text-[#d4e1ee] md:group-hover/item:text-white md:group-data-active/item:text-white"
               >
                 <Icon
                   name="chevron"
@@ -169,7 +213,7 @@ const contactIconClass =
                 <div
                   class:list={[
                     'max-md:invisible max-md:ml-3.5 max-md:min-h-0 max-md:overflow-hidden max-md:border-l-2 max-md:border-line max-md:pl-2 max-md:transition-[visibility] max-md:duration-300 max-md:group-data-open/item:visible',
-                    'md:grid md:rounded-2xl md:border md:border-line md:bg-white md:p-2 md:shadow-card',
+                    'md:grid md:rounded-card md:border md:border-t-3 md:border-line md:border-t-accent md:bg-white md:p-2 md:shadow-card',
                     link.columns && 'max-md:grid max-md:grid-cols-2 md:min-w-120 md:grid-cols-3',
                     link.groups && 'md:grid-cols-[repeat(3,max-content)] md:gap-x-2',
                     !link.columns && !link.groups && 'md:min-w-57.5',
@@ -207,7 +251,10 @@ const contactIconClass =
             <a
               href={link.href}
               aria-current={current(link.href)}
-              class:list={[linkClass, 'aria-[current=page]:bg-brand-soft aria-[current=page]:text-brand']}
+              class:list={[
+                linkClass,
+                'aria-[current=page]:bg-soft aria-[current=page]:text-accent md:aria-[current=page]:bg-transparent md:aria-[current=page]:text-white md:aria-[current=page]:after:scale-x-100',
+              ]}
             >
               {link.label}
             </a>
@@ -230,18 +277,16 @@ const contactIconClass =
       </div>
     </nav>
 
-    <div class="flex items-center gap-4.5 max-md:hidden">
-      <a href={site.phone.href} class="flex items-center gap-2.5 text-[15px] leading-[1.2] font-extrabold text-ink max-lg:hidden">
-        <Icon name="phone" class="size-9.5 rounded-full bg-brand-soft p-2.5 text-brand" />
-        <span>
-          <small class="block text-[11.5px] font-semibold tracking-[0.04em] text-body uppercase">Call 24/7</small>
-          {site.phone.display}
-        </span>
+    <div class="flex items-center gap-5 max-md:hidden">
+      <a href={site.phone.href} class="flex items-center gap-2 font-bold whitespace-nowrap text-white max-lg:hidden">
+        <Icon name="phone" class="size-4.5 text-glow" />
+        {site.phone.display}
       </a>
-      <Button quote size="sm">Get Free Quote</Button>
+      <Button quote size="sm" class="hover:translate-y-0">Get Free Quote</Button>
     </div>
   </div>
-</header>
+  <span class="absolute inset-x-0 bottom-0 h-0.75 bg-heat-cool max-md:hidden" aria-hidden="true"></span>
+</div>
 
 <script>
   import '../../scripts/nav.ts';

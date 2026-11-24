@@ -15,27 +15,31 @@ const steps = [
     text: 'After you approve the estimate, we schedule a date and complete the job.',
   },
 ];
+
+// Step circle colors, in turn: red, navy, blue
+const stepColors = ['border-accent text-accent', 'border-navy text-navy', 'border-brand text-brand'];
 ---
 
-<section class="bg-navy py-17 text-[#b9c7d6] md:py-24" id="process">
+<section class="py-18 md:py-24" id="process">
   <div class="wrap">
-    <SectionHeading eyebrow="How It Works" title="Our Simple 3 Step Process" dark />
+    <SectionHeading eyebrow="How It Works" title="Our Simple 3 Step Process" center />
 
-    <div class="grid gap-5.5 md:grid-cols-3">
+    <div class="relative grid gap-10 md:grid-cols-3">
+      <!-- Line joining the step circles -->
+      <div class="absolute inset-x-[12%] top-11 h-0.75 bg-heat-cool opacity-50 max-md:hidden" aria-hidden="true"></div>
       {
         steps.map((step, index) => (
-          <div class="relative rounded-card bg-white/4 px-7.5 py-8.5 inset-ring inset-ring-white/10">
-            <span class="mb-5.5 block text-[64px] leading-none font-extrabold tracking-[-0.04em] text-transparent [-webkit-text-stroke:1.5px_var(--color-glow)]">
+          <div class="relative text-center">
+            <div
+              class:list={[
+                'mx-auto mb-6 grid size-22 place-items-center rounded-full border-3 bg-white font-display text-[36px] font-extrabold',
+                stepColors[index % stepColors.length],
+              ]}
+            >
               {String(index + 1).padStart(2, '0')}
-            </span>
-            <h3 class="mb-3.5 text-white">{step.title}</h3>
-            <p class="text-[15px]">{step.text}</p>
-            {index < steps.length - 1 && (
-              <span
-                class="absolute top-16 -right-5.5 w-5.5 border-t-2 border-dashed border-white/28 max-md:hidden"
-                aria-hidden="true"
-              />
-            )}
+            </div>
+            <h3 class="mb-2.5">{step.title}</h3>
+            <p class="mx-auto max-w-80">{step.text}</p>
           </div>
         ))
       }

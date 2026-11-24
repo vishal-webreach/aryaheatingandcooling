@@ -6,7 +6,7 @@ import QuoteForm from '../ui/QuoteForm.astro';
 <dialog
   data-quote-modal
   aria-labelledby="quote-modal-title"
-  class="m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-180 overflow-y-auto rounded-card bg-white text-body shadow-card backdrop:bg-navy/70"
+  class="m-auto max-h-[calc(100dvh-2rem)] w-[calc(100%-2rem)] max-w-180 overflow-y-auto rounded-card border-t-4 border-t-accent bg-white text-body shadow-card backdrop:bg-navy-deep/70"
 >
   <div class="relative px-4.5 py-5.5 sm:px-7 sm:py-6.5">
     <button
@@ -19,8 +19,8 @@ import QuoteForm from '../ui/QuoteForm.astro';
     </button>
     <QuoteForm idPrefix="m" columns="sm:grid-cols-2">
       <div class="mb-4 pr-12">
-        <h2 id="quote-modal-title" class="text-[22px]">Get a Free Quote</h2>
-        <p class="text-[14.5px]">Free estimate. We call you back fast, 24/7.</p>
+        <h2 id="quote-modal-title" class="text-[30px]">Get a Free Quote</h2>
+        <p class="text-[15px]">Free estimate. We call you back fast, 24/7.</p>
       </div>
     </QuoteForm>
   </div>

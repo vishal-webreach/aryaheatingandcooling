@@ -7,7 +7,6 @@ import Footer from '../components/layout/Footer.astro';
 import Header from '../components/layout/Header.astro';
 import MobileCallBar from '../components/layout/MobileCallBar.astro';
 import QuoteModal from '../components/layout/QuoteModal.astro';
-import TopBar from '../components/layout/TopBar.astro';
 import StructuredData from '../components/seo/StructuredData.astro';
 import IconSprite from '../components/ui/IconSprite.astro';
 import { site } from '../data/site';
@@ -62,7 +61,7 @@ const robots = noindex || site.preview ? 'noindex, nofollow' : 'index, follow, m
     <meta name="author" content={site.name} />
     <meta name="geo.region" content="US-VA" />
     {placename && <meta name="geo.placename" content={placename} />}
-    <meta name="theme-color" content="#0b1f33" />
+    <meta name="theme-color" content="#14365f" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <meta property="og:type" content="website" />
@@ -98,12 +97,12 @@ const robots = noindex || site.preview ? 'noindex, nofollow' : 'index, follow, m
     <meta name="apple-mobile-web-app-title" content={site.shortName} />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <Font cssVariable="--font-manrope" preload />
+    <Font cssVariable="--font-barlow" preload={[{ weight: 400 }, { weight: 600 }]} />
+    <Font cssVariable="--font-barlow-condensed" preload={[{ weight: 800 }]} />
     <ClientRouter />
   </head>
-  <body class="bg-white font-sans leading-[1.7] text-body antialiased max-md:pb-16.5">
+  <body class="bg-white font-sans text-[17px] leading-[1.65] text-body antialiased max-md:pb-16">
     <IconSprite />
-    <TopBar />
     <Header />
     <main>
       <slot />

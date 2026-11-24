@@ -1,23 +1,28 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-manrope), Arial, sans-serif;
+  --font-sans: var(--font-barlow), Arial, sans-serif;
+  --font-display: var(--font-barlow-condensed), "Arial Narrow", Arial, sans-serif;
 
-  --color-brand: #1c75bc;
-  --color-brand-soft: #e8f2fa;
-  --color-glow: #6cc0f5;
-  --color-accent: #e0591a;
-  --color-accent-dark: #bf4710;
-  --color-navy: #0b1f33;
-  --color-navy-light: #11304d;
-  --color-ink: #0f1b2a;
-  --color-body: #55616f;
-  --color-line: #e3e9f0;
-  --color-soft: #f4f7fb;
+  /* Colors taken from the Pioneer logo */
+  --color-brand: #1e8ccc;
+  --color-brand-soft: #e8f3fa;
+  --color-glow: #36a9e1;
+  --color-accent: #d7262b;
+  --color-accent-dark: #b81d22;
+  --color-ember: #e04a1c;
+  --color-cobalt: #1d3f8a;
+  --color-navy: #14365f;
+  --color-navy-deep: #0c2340;
+  --color-navy-light: #10294a;
+  --color-ink: #0f1f33;
+  --color-body: #4f5d6e;
+  --color-line: #e2e8f0;
+  --color-soft: #f3f6fa;
 
-  --radius-card: 18px;
-  --shadow-card: 0 18px 40px -18px rgb(11 31 51 / 0.28);
-  --shadow-cta: 0 10px 22px -10px rgb(224 89 26 / 0.7);
+  --radius-card: 6px;
+  --shadow-card: 0 20px 44px -22px rgb(12 35 64 / 0.35);
+  --shadow-cta: 0 12px 24px -12px rgb(215 38 43 / 0.8);
 
   /* Breakpoints match the design: 561px, 901px, 1081px */
   --breakpoint-sm: 35.0625rem;
@@ -43,18 +48,26 @@
   h2,
   h3 {
     color: var(--color-ink);
+    line-height: 1.05;
+  }
+
+  /* Large headings use the condensed display face in capitals */
+  h1,
+  h2 {
+    font-family: var(--font-display);
     font-weight: 800;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    letter-spacing: 0.005em;
   }
 
   h2 {
-    font-size: clamp(28px, 3.6vw, 40px);
+    font-size: clamp(34px, 4.4vw, 52px);
   }
 
   h3 {
-    font-size: 19px;
-    letter-spacing: -0.01em;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1.25;
   }
 
   section[id] {
@@ -80,33 +93,55 @@
 /* Page container */
 @utility wrap {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1240px;
   margin-inline: auto;
-  padding-inline: 18px;
+  padding-inline: 20px;
 
   @variant sm {
-    padding-inline: 24px;
+    padding-inline: 28px;
   }
 }
 
-/* Layered backgrounds that have no utility equivalent */
-@utility bg-hero {
-  background:
-    radial-gradient(700px 420px at 88% 8%, rgb(28 117 188 / 0.5), transparent 70%),
-    radial-gradient(520px 380px at 4% 100%, rgb(224 89 26 / 0.24), transparent 70%),
-    var(--color-navy);
+/* The logo's heat and cool colors */
+@utility bg-heat {
+  background-image: linear-gradient(135deg, #b8202a 0%, #cf3d17 100%);
 }
 
-@utility bg-hero-grid {
-  background-image:
-    linear-gradient(rgb(255 255 255 / 0.045) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(255 255 255 / 0.045) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: linear-gradient(to bottom, #000, transparent 85%);
+@utility bg-cool {
+  background-image: linear-gradient(135deg, #1d3f8a 0%, #1877b5 100%);
 }
 
-@utility bg-contact {
-  background:
-    radial-gradient(520px 360px at 0 0, rgb(28 117 188 / 0.45), transparent 70%),
-    var(--color-navy);
+@utility bg-heat-cool {
+  background-image: linear-gradient(
+    90deg,
+    var(--color-accent) 0%,
+    var(--color-ember) 35%,
+    var(--color-glow) 65%,
+    var(--color-cobalt) 100%
+  );
+}
+
+/* Short red | blue bar used in front of eyebrow labels */
+@utility split-bar {
+  background-image: linear-gradient(90deg, var(--color-accent) 50%, var(--color-glow) 50%);
+}
+
+/* Faint ring decoration for dark sections */
+@utility dark-ring {
+  position: absolute;
+  width: 560px;
+  height: 560px;
+  border: 60px solid rgb(54 169 225 / 0.07);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Select with a navy chevron in place of the browser's own arrow */
+@utility select-chevron {
+  appearance: none;
+  padding-right: 42px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2314365f' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-position: right 14px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
 }

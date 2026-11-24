@@ -1,15 +1,16 @@
 ---
 interface Props {
-  tone?: 'accent' | 'glow';
+  /** `light` is for dark section backgrounds. */
+  tone?: 'navy' | 'light';
 }
 
-const { tone = 'accent' } = Astro.props;
+const { tone = 'navy' } = Astro.props;
 ---
 
 <span
   class:list={[
-    'mb-3.5 inline-flex items-center gap-2.5 text-[13px] font-extrabold tracking-[0.14em] uppercase before:h-0.5 before:w-7 before:bg-current',
-    tone === 'glow' ? 'text-glow' : 'text-accent',
+    'mb-3.5 inline-flex items-center gap-3 font-display text-[16px] font-bold tracking-[0.14em] uppercase before:h-1 before:w-9 before:flex-none before:split-bar',
+    tone === 'light' ? 'text-[#cfe0f2]' : 'text-navy',
   ]}
 >
   <slot />

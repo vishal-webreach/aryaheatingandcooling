@@ -14,26 +14,28 @@ const tileClass = (index: number): string | undefined => {
 };
 ---
 
-<section class="py-17 md:py-24" id="gallery">
+<section class="bg-soft py-18 md:py-24" id="gallery">
   <div class="wrap">
     <SectionHeading eyebrow="Recent Work" title="Photo Gallery" description="Some of our recent heating and cooling work.">
       <Button href="/gallery/" variant="dark">View Gallery</Button>
     </SectionHeading>
 
-    <div class="grid auto-rows-[160px] grid-cols-2 gap-3.5 md:auto-rows-[210px] md:grid-cols-4">
+    <div class="grid auto-rows-40 grid-cols-2 gap-3 md:auto-rows-55 md:grid-cols-4 md:gap-4">
       {
         photos.map((photo, index) => (
-          <Image
-            src={photo.data.image}
-            alt={photo.data.alt}
-            widths={[320, photo.data.image.width]}
-            sizes={
-              index === 0 || index === 5
-                ? '(min-width: 901px) 580px, 100vw'
-                : '(min-width: 901px) 280px, 50vw'
-            }
-            class:list={['size-full rounded-2xl object-cover', tileClass(index)]}
-          />
+          <div class:list={['group overflow-hidden rounded-card', tileClass(index)]}>
+            <Image
+              src={photo.data.image}
+              alt={photo.data.alt}
+              widths={[320, photo.data.image.width]}
+              sizes={
+                index === 0 || index === 5
+                  ? '(min-width: 901px) 600px, 100vw'
+                  : '(min-width: 901px) 290px, 50vw'
+              }
+              class="size-full object-cover transition-transform duration-500 group-hover:scale-106"
+            />
+          </div>
         ))
       }
     </div>

@@ -55,13 +55,13 @@ const schema = [
   />
   <QuickQuote overlap={false} />
 
-  <section class="py-17 md:py-24" id="photos">
+  <section class="py-18 md:py-24" id="photos">
     <div class="wrap">
       <SectionHeading eyebrow="Recent Work" title="Our Heating and Cooling Work" />
       <ul class="grid grid-cols-2 gap-3.5 md:grid-cols-3 md:gap-5.5">
         {
           photos.map((photo, index) => (
-            <li class="overflow-hidden rounded-2xl">
+            <li class="overflow-hidden rounded-card">
               <Image
                 src={photo.data.image}
                 alt={photo.data.alt}

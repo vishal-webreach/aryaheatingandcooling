@@ -27,21 +27,33 @@ const reasons: { icon: IconName; title: string; text: string }[] = [
 ];
 ---
 
-<section class="bg-soft py-17 md:py-24" id="why-us">
-  <div class="wrap">
+<section class="relative overflow-hidden bg-navy-deep py-18 text-[#b9c8da] md:py-24" id="why-us">
+  <div class="absolute inset-x-0 top-0 h-1 bg-heat-cool" aria-hidden="true"></div>
+  <div class="dark-ring -bottom-65 -left-40" aria-hidden="true"></div>
+
+  <div class="wrap relative">
     <SectionHeading
       eyebrow="Why Choose Us"
       title="What You Can Expect From Pioneer"
       description="The same standards on every job, whether it's an emergency call or a routine visit."
+      dark
     />
 
-    <ul class="grid gap-5.5 sm:grid-cols-2 lg:grid-cols-4">
+    <!-- The 2px gaps show the lighter background through as thin dividing lines -->
+    <ul class="grid gap-0.5 bg-white/8 sm:grid-cols-2 lg:grid-cols-4">
       {
-        reasons.map((reason) => (
-          <li class="rounded-card border border-line bg-white p-6">
-            <Icon name={reason.icon} class="mb-5 size-12 rounded-xl bg-brand-soft p-3 text-brand" />
-            <h3 class="mb-3">{reason.title}</h3>
-            <p class="text-[15px]">{reason.text}</p>
+        reasons.map((reason, index) => (
+          <li class="bg-navy-deep px-7 py-9 transition-colors duration-250 hover:bg-navy-light">
+            <span
+              class:list={[
+                'mb-5.5 grid size-14 place-items-center rounded-card border border-white/14 bg-white/6',
+                index % 2 === 0 ? 'text-glow' : 'text-[#ff7a45]',
+              ]}
+            >
+              <Icon name={reason.icon} class="size-6.5" />
+            </span>
+            <h3 class="mb-2.5 text-white">{reason.title}</h3>
+            <p>{reason.text}</p>
           </li>
         ))
       }

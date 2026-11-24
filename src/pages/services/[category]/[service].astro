@@ -70,7 +70,7 @@ const schema = [
   <PageHero title={heading} description={service.data.summary} trail={trail} />
   <QuickQuote overlap={false} />
 
-  <section class="py-17 md:py-24" id="overview">
+  <section class="py-18 md:py-24" id="overview">
     <div class="wrap grid items-center gap-10 md:grid-cols-2 md:gap-18">
       <div>
         <Eyebrow>{category.data.title}</Eyebrow>
@@ -85,7 +85,7 @@ const schema = [
 
       <div class="relative pr-7 pb-7">
         <div
-          class="absolute right-0 bottom-0 h-[70%] w-[62%] rounded-3xl bg-linear-135 from-brand to-navy-light"
+          class="absolute right-0 bottom-0 h-[70%] w-[62%] rounded-card bg-heat-cool"
           aria-hidden="true"
         >
         </div>
@@ -95,7 +95,7 @@ const schema = [
           widths={[320, image.width]}
           sizes="(min-width: 901px) 520px, 100vw"
           loading="eager"
-          class="relative aspect-[4/3.4] w-full rounded-3xl object-cover"
+          class="relative aspect-[4/3.4] w-full rounded-card object-cover"
         />
       </div>
     </div>
@@ -103,13 +103,13 @@ const schema = [
 
   {
     service.data.includes && (
-      <section class="bg-soft py-17 md:py-24" id="includes">
+      <section class="bg-soft py-18 md:py-24" id="includes">
         <div class="wrap">
           <SectionHeading eyebrow="What We Handle" title={service.data.includesTitle ?? `${heading} Includes`} />
           <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {service.data.includes.map((item) => (
-              <li class="flex items-start gap-3 rounded-[14px] border border-line bg-white px-4 py-3.5 text-[14.5px] leading-[1.45] font-semibold text-ink">
-                <Icon name="check" class="size-5.5 flex-none rounded-full bg-brand stroke-3 p-1 text-white" />
+              <li class="flex items-start gap-3 rounded-card border border-line bg-white px-4 py-3.5 text-[14.5px] leading-[1.45] font-semibold text-ink">
+                <Icon name="check" class="size-5.5 flex-none rounded-full bg-navy stroke-3 p-1 text-white" />
                 {item}
               </li>
             ))}

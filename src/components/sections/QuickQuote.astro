@@ -14,11 +14,11 @@ const { overlap = true } = Astro.props;
     <QuoteForm
       idPrefix="q"
       columns="sm:grid-cols-2 md:grid-cols-4"
-      class="rounded-card border border-line bg-white px-4.5 py-5.5 shadow-card sm:px-7 sm:py-6.5"
+      class="relative overflow-hidden rounded-card border border-line bg-white px-4.5 pt-6.5 pb-5.5 shadow-card before:absolute before:inset-x-0 before:top-0 before:h-1 before:bg-heat-cool sm:px-7 sm:pt-7.5 sm:pb-6.5"
     >
-      <div class="mb-4 flex flex-wrap items-baseline gap-x-3.5 gap-y-1">
-        <h2 class="text-[22px]">Get a Quick Quote</h2>
-        <p class="text-[14.5px]">Free estimate. We call you back fast, 24/7.</p>
+      <div class="mb-4 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+        <h2 class="text-[30px]">Get a Quick Quote</h2>
+        <p class="text-[15px]">Free estimate. We call you back fast, 24/7.</p>
       </div>
     </QuoteForm>
   </div>

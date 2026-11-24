@@ -86,7 +86,7 @@ const schema = [
   />
   <QuickQuote overlap={false} />
 
-  <section class="py-17 md:py-24" id="overview">
+  <section class="py-18 md:py-24" id="overview">
     <div class="wrap grid items-center gap-10 md:grid-cols-2 md:gap-18">
       <div>
         <Eyebrow>{area.data.county ?? 'Service Area'}</Eyebrow>
@@ -101,7 +101,7 @@ const schema = [
 
       <div class="relative pr-7 pb-7">
         <div
-          class="absolute right-0 bottom-0 h-[70%] w-[62%] rounded-3xl bg-linear-135 from-brand to-navy-light"
+          class="absolute right-0 bottom-0 h-[70%] w-[62%] rounded-card bg-heat-cool"
           aria-hidden="true"
         >
         </div>
@@ -111,7 +111,7 @@ const schema = [
           widths={[320, aboutImage.width]}
           sizes="(min-width: 901px) 520px, 100vw"
           loading="eager"
-          class="relative aspect-[4/3.4] w-full rounded-3xl object-cover"
+          class="relative aspect-[4/3.4] w-full rounded-card object-cover"
         />
       </div>
     </div>
@@ -119,7 +119,7 @@ const schema = [
 
   {
     area.data.neighborhoods && (
-      <section class="bg-soft py-17 md:py-24" id="neighborhoods">
+      <section class="bg-soft py-18 md:py-24" id="neighborhoods">
         <div class="wrap">
           <SectionHeading
             eyebrow="Local Coverage"
@@ -130,7 +130,7 @@ const schema = [
           />
           <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
             {area.data.neighborhoods.map((neighborhood) => (
-              <li class="flex items-center gap-3 rounded-[14px] border border-line bg-white px-4 py-3.5 text-[15px] font-semibold text-ink">
+              <li class="flex items-center gap-3 rounded-card border border-line bg-white px-4 py-3.5 text-[15px] font-semibold text-ink">
                 <Icon name="pin" class="size-4.5 flex-none text-brand" />
                 {neighborhood}
               </li>

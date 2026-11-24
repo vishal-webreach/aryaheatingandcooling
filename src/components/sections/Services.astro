@@ -16,9 +16,12 @@ const {
 } = Astro.props;
 
 const serviceGroups = await getServiceGroups();
+
+// Number tag colors, in turn: red, navy, blue
+const numberColors = ['bg-accent', 'bg-navy', 'bg-brand'];
 ---
 
-<section class="py-17 md:py-24" id="services">
+<section class="py-18 md:py-24" id="services">
   <div class="wrap">
     <SectionHeading
       eyebrow="What We Do"
@@ -28,48 +31,55 @@ const serviceGroups = await getServiceGroups();
       <Button href="/services/" variant="dark">View Services</Button>
     </SectionHeading>
 
-    <div class="grid gap-5.5 sm:grid-cols-2 lg:grid-cols-3">
+    <div class="grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
       {
         serviceGroups.map(({ category, services }, index) => (
-          <div class="group relative flex flex-col overflow-hidden rounded-card border border-line bg-white transition duration-250 hover:-translate-y-1.5 hover:border-transparent hover:shadow-card">
+          <div class="group relative flex flex-col overflow-hidden rounded-card border border-line bg-white transition duration-250 hover:-translate-y-1.5 hover:shadow-card">
             <div class="relative overflow-hidden">
               <Image
                 src={category.data.image}
                 alt={category.data.imageAlt}
                 widths={[320, category.data.image.width]}
-                sizes="(min-width: 1081px) 376px, (min-width: 561px) 50vw, 100vw"
-                class="aspect-4/3 w-full object-cover transition-transform duration-500 group-hover:scale-106"
+                sizes="(min-width: 1081px) 395px, (min-width: 561px) 50vw, 100vw"
+                class="aspect-16/10 w-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
-              <span class="absolute top-4 left-4 rounded-full bg-white px-3 py-1 text-[13px] font-extrabold text-ink">
+              <span
+                class:list={[
+                  'absolute bottom-0 left-0 px-4.5 py-2.5 font-display text-[22px] leading-none font-extrabold tracking-[0.04em] text-white',
+                  numberColors[index % numberColors.length],
+                ]}
+              >
                 {String(index + 1).padStart(2, '0')}
               </span>
             </div>
-            <div class="flex flex-1 flex-col p-6">
-              <h3 class="mb-3.5">{category.data.title}</h3>
-              <p class="mb-3.5 text-[15px]">{category.data.summary}</p>
-              <ul class="mb-4.5 flex-1">
-                {services.map((service) => (
-                  <li class="mb-1.5 flex items-center gap-2 text-[15px] font-semibold">
-                    <Icon name="check" class="size-4 flex-none text-brand" />
-                    {servicePath(category, service) ? (
+            <div class="flex flex-1 flex-col p-7">
+              <h3 class="font-display text-[30px] leading-none font-extrabold uppercase">{category.data.title}</h3>
+              <p class="mt-2.5">{category.data.summary}</p>
+              <ul class="mt-5 mb-6 border-t border-line">
+                {services.map((service) =>
+                  servicePath(category, service) ? (
+                    <li>
                       <a
                         href={servicePath(category, service)}
-                        class="relative z-1 text-ink transition-colors duration-200 hover:text-brand"
+                        class="relative z-1 flex items-center justify-between gap-3 border-b border-line py-3 font-semibold text-ink transition-colors duration-200 hover:text-accent"
                       >
                         {service.data.title}
+                        <Icon name="arrow" class="size-4.5 text-brand" />
                       </a>
-                    ) : (
-                      <span class="text-ink">{service.data.title}</span>
-                    )}
-                  </li>
-                ))}
+                    </li>
+                  ) : (
+                    <li class="flex items-center gap-3 border-b border-line py-3 font-semibold text-ink">
+                      {service.data.title}
+                    </li>
+                  )
+                )}
               </ul>
               <a
                 href={categoryPath(category)}
-                class="inline-flex items-center gap-2 text-[15px] font-bold text-ink transition-colors duration-200 after:absolute after:inset-0 hover:text-brand"
+                class="mt-auto inline-flex items-center gap-2 font-display text-[18px] font-bold tracking-[0.06em] text-accent uppercase after:absolute after:inset-0"
               >
                 Learn more<span class="sr-only"> about {category.data.title}</span>
-                <Icon name="arrow" class="size-4.5 transition-transform duration-200 group-hover:translate-x-1" />
+                <Icon name="arrow" class="size-5 transition-transform duration-200 group-hover:translate-x-1" />
               </a>
             </div>
           </div>

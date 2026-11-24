@@ -15,12 +15,18 @@ const repeats = Math.ceil(minCardsPerHalf / reviews.length);
 // The row is rendered in two equal halves so the marquee can loop without a gap; only the first pass is
 // exposed to assistive tech.
 const copies = Array.from({ length: repeats * 2 }, (_, index) => index > 0);
+
+// Colored top edge of each card, in turn: red, light blue, orange
+const edgeColors = ['border-t-accent', 'border-t-glow', 'border-t-[#ff7a45]'];
 ---
 
-<section class="bg-soft py-17 md:py-24" id="reviews">
-  <div class="wrap">
-    <SectionHeading eyebrow="Testimonials" title="What Our Customers Say About Us">
-      <Button href={site.reviewHref} external={site.reviewHref !== '#'} variant="dark">Review Us</Button>
+<section class="relative overflow-hidden bg-navy-deep py-18 md:py-24" id="reviews">
+  <div class="absolute inset-x-0 top-0 h-1 bg-heat-cool" aria-hidden="true"></div>
+  <div class="dark-ring -top-65 -right-40 border-[rgb(224_74_28/0.07)]" aria-hidden="true"></div>
+
+  <div class="wrap relative">
+    <SectionHeading eyebrow="Testimonials" title="What Our Customers Say About Us" dark>
+      <Button href={site.reviewHref} external={site.reviewHref !== '#'} variant="ghost">Review Us</Button>
     </SectionHeading>
   </div>
 
@@ -28,19 +34,25 @@ const copies = Array.from({ length: repeats * 2 }, (_, index) => index > 0);
     Moves with a CSS transform only; pauses on hover or keyboard focus. Touch screens have no hover,
     so there it pauses while a review is open. With reduced motion it is a plain scrolling row.
   -->
-  <div class="overflow-hidden motion-reduce:overflow-x-auto">
+  <div class="relative overflow-hidden motion-reduce:overflow-x-auto">
     <div
       class="flex w-max animate-marquee will-change-transform hover:[animation-play-state:paused] has-focus-visible:[animation-play-state:paused] [@media(hover:none)]:has-data-expanded:[animation-play-state:paused] motion-reduce:animate-none motion-reduce:pl-5.5"
       style={`--marquee-duration: ${reviews.length * repeats * 8}s`}
     >
       {
         copies.map((copy) =>
-          reviews.map((review) => (
+          reviews.map((review, index) => (
             <div
               class:list={['flex w-[min(84vw,380px)] flex-none pr-5.5', copy && 'motion-reduce:hidden']}
               aria-hidden={copy ? 'true' : undefined}
             >
-              <div class="flex w-full flex-col rounded-card border border-line bg-white p-7.5">
+              <div
+                class:list={[
+                  'relative flex w-full flex-col rounded-card border-t-4 bg-white px-7.5 pt-8.5 pb-7',
+                  edgeColors[index % edgeColors.length],
+                ]}
+              >
+                <span class="absolute top-4.5 right-6 font-serif text-[80px] leading-none text-line" aria-hidden="true">&ldquo;</span>
                 <div
                   class="mb-3.5 text-[18px] tracking-[3px] text-[#f5a623]"
                   role="img"
@@ -58,15 +70,15 @@ const copies = Array.from({ length: repeats * 2 }, (_, index) => index > 0);
                     aria-expanded="false"
                     tabindex={copy ? -1 : undefined}
                     hidden
-                    class="mt-1.5 cursor-pointer text-[15px] font-bold text-brand hover:underline"
+                    class="mt-1.5 cursor-pointer text-[15px] font-bold text-accent hover:underline"
                   >
                     More
                   </button>
                 </div>
                 <div class="flex items-center gap-3 border-t border-line pt-4.5 text-sm leading-[1.35]">
-                  <Icon name="user" class="size-10.5 rounded-full bg-brand-soft p-2.75 text-brand" />
+                  <Icon name="user" class="size-11 rounded-full bg-navy p-2.75 text-white" />
                   <span class="flex-1">
-                    <strong class="block text-[15px] text-ink">{review.data.author}</strong>
+                    <strong class="block text-[16px] text-ink">{review.data.author}</strong>
                     Google review
                   </span>
                   <svg viewBox="0 0 48 48" class="size-6 flex-none" role="img" aria-label="Google">

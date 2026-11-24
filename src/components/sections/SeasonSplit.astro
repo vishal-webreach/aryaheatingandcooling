@@ -1,0 +1,48 @@
+---
+import type { IconName } from '../../data/site';
+import Icon from '../ui/Icon.astro';
+
+// Heating | cooling band in the two colors of the logo.
+const halves: { icon: IconName; title: string; text: string; link: string; class: string }[] = [
+  {
+    icon: 'flame',
+    title: 'Heating',
+    text: 'No heat on a cold night? We repair, maintain and replace heating systems for homes and businesses, on every type of unit and all major brands.',
+    link: 'Heating service',
+    class: 'bg-heat md:pr-14 md:pl-[max(28px,calc((100vw_-_1240px)/2_+_28px))]',
+  },
+  {
+    icon: 'snow',
+    title: 'Cooling',
+    text: 'AC stopped keeping up? Our Master Licensed technicians diagnose and fix air conditioning fast, so your home or building stays comfortable all summer.',
+    link: 'Cooling service',
+    class: 'bg-cool md:pr-[max(28px,calc((100vw_-_1240px)/2_+_28px))] md:pl-14',
+  },
+];
+---
+
+<section class="grid text-white md:grid-cols-2" aria-label="Heating and cooling">
+  {
+    halves.map((half) => (
+      <div class:list={['relative overflow-hidden px-5 py-11 sm:px-7 md:py-14', half.class]}>
+        <Icon
+          name={half.icon}
+          class="pointer-events-none absolute -right-7.5 -bottom-10 size-55 stroke-[1.2] text-white opacity-12"
+        />
+        <div class="relative mb-3 flex items-center gap-3.5">
+          <span class="grid size-13 flex-none place-items-center rounded-full border border-white/35 bg-white/16">
+            <Icon name={half.icon} class="size-6" />
+          </span>
+          <h2 class="text-[clamp(32px,3.6vw,44px)] text-white">{half.title}</h2>
+        </div>
+        <p class="relative max-w-117.5 text-white/92">{half.text}</p>
+        <a
+          href="/services/"
+          class="relative mt-4.5 inline-flex items-center gap-2 border-b-2 border-white/50 pb-0.5 font-display text-[18px] font-bold tracking-[0.06em] uppercase transition-colors duration-200 hover:border-white"
+        >
+          {half.link} <Icon name="arrow" class="size-5" />
+        </a>
+      </div>
+    ))
+  }
+</section>

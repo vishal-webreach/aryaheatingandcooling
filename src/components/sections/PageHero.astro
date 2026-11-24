@@ -1,4 +1,7 @@
 ---
+import { Picture } from 'astro:assets';
+import heroImage from '../../assets/images/hero/hero.png';
+
 interface Props {
   title: string;
   description?: string;
@@ -9,11 +12,26 @@ interface Props {
 const { title, description, trail } = Astro.props;
 ---
 
-<section class="bg-hero relative overflow-hidden py-14 text-white md:py-20">
-  <div class="bg-hero-grid absolute inset-0" aria-hidden="true"></div>
+<section class="relative overflow-hidden bg-navy-deep py-14 md:py-20">
+  <!-- Same photo as the home hero, behind a dark navy shade -->
+  <Picture
+    src={heroImage}
+    alt=""
+    formats={['avif', 'webp']}
+    fallbackFormat="jpg"
+    widths={[768, 1080, 1440, heroImage.width]}
+    sizes="100vw"
+    priority
+    class="absolute inset-0 size-full object-cover object-[70%_center]"
+  />
+  <div
+    class="absolute inset-0 bg-linear-to-r from-navy-deep/95 via-navy-deep/85 to-navy-deep/55 max-md:bg-none max-md:bg-navy-deep/85"
+    aria-hidden="true"
+  >
+  </div>
 
   <div class="wrap relative">
-    <nav aria-label="Breadcrumb" class="mb-5 text-[13.5px] font-semibold text-[#c3d1df]">
+    <nav aria-label="Breadcrumb" class="mb-5 text-[14.5px] font-semibold text-[#d5e0ec]">
       <ol class="flex flex-wrap items-center gap-2">
         {
           trail.map((item, index) =>
@@ -24,7 +42,7 @@ const { title, description, trail } = Astro.props;
                 </a>
               </li>
             ) : (
-              <li aria-current="page" class="text-white">
+              <li aria-current="page" class="text-glow">
                 {item.name}
               </li>
             )
@@ -32,7 +50,7 @@ const { title, description, trail } = Astro.props;
         }
       </ol>
     </nav>
-    <h1 class="text-[clamp(32px,4.4vw,52px)] leading-[1.08] text-white">{title}</h1>
-    {description && <p class="mt-4.5 max-w-155 text-[18px] text-[#c3d1df]">{description}</p>}
+    <h1 class="text-[clamp(40px,5.4vw,68px)] leading-[0.98] text-white">{title}</h1>
+    {description && <p class="mt-4.5 max-w-155 text-[19px] text-[#d5e0ec]">{description}</p>}
   </div>
 </section>

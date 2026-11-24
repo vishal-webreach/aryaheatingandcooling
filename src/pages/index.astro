@@ -8,9 +8,11 @@ import Hero from '../components/sections/Hero.astro';
 import Process from '../components/sections/Process.astro';
 import QuickQuote from '../components/sections/QuickQuote.astro';
 import Reviews from '../components/sections/Reviews.astro';
+import SeasonSplit from '../components/sections/SeasonSplit.astro';
 import ServiceAreas from '../components/sections/ServiceAreas.astro';
 import Services from '../components/sections/Services.astro';
 import Stats from '../components/sections/Stats.astro';
+import WhyChooseUs from '../components/sections/WhyChooseUs.astro';
 import Layout from '../layouts/Layout.astro';
 import { getFaqs } from '../lib/content';
 import { faqSchema } from '../lib/seo';
@@ -24,8 +26,10 @@ const schema = [faqSchema(faqs, pageUrl)];
   <Hero />
   <QuickQuote />
   <Stats />
+  <SeasonSplit />
   <Services />
   <About />
+  <WhyChooseUs />
   <Process />
   <Gallery />
   <Reviews />

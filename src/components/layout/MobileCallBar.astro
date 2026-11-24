@@ -1,12 +1,13 @@
 ---
 import { site } from '../../data/site';
-import Button from '../ui/Button.astro';
 import Icon from '../ui/Icon.astro';
+
+const barClass =
+  'flex h-16 cursor-pointer items-center justify-center gap-2 font-display text-[18px] font-bold tracking-[0.06em] text-white uppercase';
 ---
 
-<div
-  class="fixed inset-x-0 bottom-0 z-60 grid grid-cols-2 gap-2.5 border-t border-line bg-white px-3.5 py-2.5 shadow-[0_-10px_24px_-14px_rgb(11_31_51/0.3)] md:hidden"
->
-  <Button href={site.phone.href} variant="dark" size="bar"><Icon name="phone" /> Call Now</Button>
-  <Button quote size="bar">Free Quote</Button>
+<!-- Phones only: call and quote buttons fixed to the bottom of the screen -->
+<div class="fixed inset-x-0 bottom-0 z-60 grid grid-cols-2 md:hidden">
+  <a href={site.phone.href} class:list={[barClass, 'bg-navy']}><Icon name="phone" /> Call Now</a>
+  <button type="button" data-quote-open class:list={[barClass, 'bg-accent']}>Free Quote</button>
 </div>
